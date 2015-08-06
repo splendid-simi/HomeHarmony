@@ -11,3 +11,5 @@ var taskSchema = new Schema({
   repeat: { type: Number, default: -1 },
   completed: { type: Boolean, default: false }
 });
+
+var Task = mongoose.model('Task', schema);

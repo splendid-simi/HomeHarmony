@@ -7,3 +7,5 @@ var communicationSchema = new Schema({
   text: String,
   date: { type: Date, default: Date.now }
 });
+
+var Communication = mongoose.model('Communication', schema);

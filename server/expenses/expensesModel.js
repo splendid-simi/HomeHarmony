@@ -9,3 +9,5 @@ var expenseSchema = new Schema({
   dueDate: Date,
   repeat: { type: Number, default: -1 }
 });
+
+var Expense = mongoose.model('Expense', schema);

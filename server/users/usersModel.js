@@ -22,3 +22,5 @@ var userSchema = new Schema({
    */
   tasks: [{task: Number}], // array of task id's
 });
+
+var User = mongoose.model('User', schema);

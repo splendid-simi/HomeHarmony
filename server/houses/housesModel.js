@@ -9,3 +9,5 @@ var houseSchema = new Schema({
   messages: [{communication: Number}], // array of communication id's
   expenses: [{expense: Number}], // array of expense id's
 });
+
+var House = mongoose.model('House', schema);
