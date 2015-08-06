@@ -10,4 +10,4 @@ var expenseSchema = new Schema({
   repeat: { type: Number, default: -1 }
 });
 
-var Expense = mongoose.model('Expense', schema);
+module.exports = mongoose.model('Expense', schema);

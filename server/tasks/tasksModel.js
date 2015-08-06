@@ -12,4 +12,4 @@ var taskSchema = new Schema({
   completed: { type: Boolean, default: false }
 });
 
-var Task = mongoose.model('Task', schema);
+module.exports = mongoose.model('Task', schema);

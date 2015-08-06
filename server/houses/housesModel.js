@@ -10,4 +10,4 @@ var houseSchema = new Schema({
   expenses: [{expense: Number}], // array of expense id's
 });
 
-var House = mongoose.model('House', schema);
+module.exports = mongoose.model('House', schema);
