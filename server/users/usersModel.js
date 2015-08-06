@@ -23,4 +23,7 @@ var userSchema = new Schema({
   tasks: [{task: Number}], // array of task id's
 });
 
-var User = mongoose.model('User', schema);
+// Authentication methods go here
+// userSchema.methods.?
+
+module.exports = mongoose.model('User', schema);

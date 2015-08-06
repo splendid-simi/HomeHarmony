@@ -8,4 +8,4 @@ var communicationSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-var Communication = mongoose.model('Communication', schema);
+module.exports = mongoose.model('Communication', schema);
