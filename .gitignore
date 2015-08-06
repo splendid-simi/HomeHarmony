@@ -1,0 +1,13 @@
+# hidden files
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
+
+# Dependencies
+client/bower_components/
+node_modules/
+spec/
+
