@@ -7,32 +7,38 @@ angular.module('homeHarmony')
 ])
 .factory('UserAuth',['Auth',
   function (Auth){
-    auth = Auth;
     return {
       newUser: function (userEmail,userPassword){
-        auth.createUser({
+        console.log(Auth.$createUser);
+        Auth.$createUser({
           email    : userEmail,
           password : userPassword
-        }, function (error, userData){
-          if (error) { retern console.error(error); }
-          console.log("Welcome to HomeHarmony user #"+userData.uid);
-          //redirect
-          $state.go('login');
-        })
+        }).then(function(userData){
+          console.log("new user created");
+          console.log(userData);
+
+          return Auth.$authWithPassword({
+            email    : userEmail,
+            password : userPassword
+          });
+        }).then(function(authData){
+          console.log("Logged in as:",authData.uid);
+        }).catch(function(error){
+          console.error("Error:",error);
+        });
       },
       login: function (userEmail,attemptedPassword){
-        auth.authWithPassword({
+        Auth.$authWithPassword({
           email    : userEmail,
           password : attemptedPassword
-        }, function (error, authData){
-          if (error){return console.error(error);}
-          console.log("Authenticated successfully with payload:", authData);
-          //redirect
-          $state.go('/'); // different state?
+        }).then(function(authData){
+          console.log("Logged in as: ",authData.uid);
+        }).catch(function(error){
+          console.error("Error:",error);
         });
       },
       logout: function (){
-        auth.unauth();
+        Auth.unauth();
         //redirect
         $state.go('login');
       }

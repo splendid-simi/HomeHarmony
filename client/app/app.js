@@ -1,5 +1,8 @@
-angular.module('homeHarmony', ['ui.router', 'homeHarmony.newUser'])
-.config(function($stateProvider, $urlRouterProvider) {
+angular.module('homeHarmony', [
+  'ui.router',
+  'homeHarmony.newUser',
+  'homeHarmony.login'
+]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
     .state('login', {
@@ -9,11 +12,11 @@ angular.module('homeHarmony', ['ui.router', 'homeHarmony.newUser'])
       controllerAs: 'login',
       //Firebase authentication - resolve - before go to this route
       //we require authentication
-      resolve: {
-        'currentUser' : ["Auth", function(Auth) {
-          return Auth.$requireAuth(); //a promise
-        }]
-      }
+      // resolve: {
+      //   'currentUser' : ["Auth", function(Auth) {
+      //     return Auth.$requireAuth(); //a promise
+      //   }]
+      // }
     })
     .state('newUser', {
       url: "/newUser",
