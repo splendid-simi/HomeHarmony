@@ -6,14 +6,14 @@ angular.module('homeHarmony', ['ui.router'])
       url: "/login",
       templateUrl: "./app/auth/login.html",
       controller: 'LoginCtrl',
-      controllerAs: 'login'/*,
+      controllerAs: 'login',
       //Firebase authentication - resolve - before go to this route
       //we require authentication
       resolve: {
         'currentUser' : ["Auth", function(Auth) {
           return Auth.$requireAuth(); //a promise
         }]
-      }*/
+      }
     })
     .state('newUser', {
       url: "/newuser",
