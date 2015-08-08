@@ -1,5 +1,6 @@
 angular.module('homeHarmony', [
   'ui.router',
+  'homeHarmony.auth',
   'homeHarmony.newUser',
   'homeHarmony.login'
 ]).config(function($stateProvider, $urlRouterProvider) {
