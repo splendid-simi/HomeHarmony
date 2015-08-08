@@ -16,7 +16,7 @@
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
   <!-- Main App Script Files -->
   <script src="./app/app.js"></script>
-  <script src="./app/dash/dash.html"></script>
+  <script src="./app/dash/dash.js"></script>
   <script src="./app/auth/auth.js"></script>
   <script src="./app/auth/loginController.js"></script>
   <script src="./app/auth/newUserController.js"></script>
@@ -29,15 +29,6 @@
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a ui-sref="login">Login User</a></li>
-        <li><a ui-sref="newUser">New User</a></li>
-      </ul>
-    </div>
-  </nav>
   <div ui-view></div>
 </body>
 
