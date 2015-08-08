@@ -28,15 +28,17 @@
   <title>Home Harmony</title>
 </head>
 
-<body class="container">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <ul class='nav'>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a ui-sref="login">Login User</a></li>
         <li><a ui-sref="newUser">New User</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
   <div ui-view></div>
 </body>
+
 </html>
