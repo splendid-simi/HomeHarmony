@@ -2,7 +2,8 @@ angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login'
+  'homeHarmony.login',
+  'homeHarmony.dash'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
@@ -38,7 +39,7 @@ angular.module('homeHarmony', [
     .state('dash', {
       url: "/dash",
       templateUrl: "app/dash/dash.html",
-      // controller: "dashCtrl"
+      controller: "dashCtrl"
     })
     // nested views for dash
     .state('dash.default', {

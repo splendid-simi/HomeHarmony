@@ -23,6 +23,7 @@ angular.module('homeHarmony.auth',[])
           });
         }).then(function(authData){
           console.log("Logged in as:",authData.uid);
+          // $state.go('dash');
         }).catch(function(error){
           console.error("Error:",error);
         });
@@ -33,6 +34,7 @@ angular.module('homeHarmony.auth',[])
           password : attemptedPassword
         }).then(function(authData){
           console.log("Logged in as: ",authData.uid);
+          // $state.go('dash');
         }).catch(function(error){
           console.error("Error:",error);
         });
