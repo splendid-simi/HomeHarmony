@@ -8,8 +8,8 @@ angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login',
-  'homeHarmony.newHouse'
+  'homeHarmony.login'
+  // 'homeHarmony.newHouse'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
