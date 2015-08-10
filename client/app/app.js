@@ -8,8 +8,8 @@ angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login'
-  // 'homeHarmony.newHouse'
+  'homeHarmony.login',
+  'homeHarmony.newHouse'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
@@ -76,7 +76,7 @@ angular.module('homeHarmony', [
     .state('dash.newHouse', {
       url: "/:newHouse",
       templateUrl: "./app/dash/partials/newHouse.html",
-      // controller: "newHouseCtrl"
+      controller: "newHouseCtrl"
     })
 
   // For any unmatched url, redirect to /

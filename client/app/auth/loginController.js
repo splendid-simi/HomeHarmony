@@ -6,6 +6,8 @@ angular.module('homeHarmony.login',['firebase'])
 
   $scope.logInUser = function(){
     console.log(UserAuth);
+    $('#loginEmailField').val('');
+    $('#loginPasswordField').val('');
     UserAuth.login($scope.email, $scope.password, function (userEmail){
 
       //try to factor this out as a separate named function "later"
