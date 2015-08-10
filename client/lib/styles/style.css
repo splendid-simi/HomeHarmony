@@ -1,0 +1,187 @@
+/* browser reset default styles */ 
+
+html {
+	color: #000;
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+a {
+  text-decoration: none;
+  color:#000;
+}
+
+/* icons */ 
+
+.chart {
+	width:70%;
+	height:auto;
+}
+
+.list-icon {
+	width:35px;
+	height:35px;
+	text-align: left;
+}
+
+.nav-icon {
+	width:50px;
+	height:auto;
+	padding:0 10px;
+}
+
+/* dashboard */ 
+
+.feature-boxes .feature {
+  display: inline-block;
+  height:inherit;
+  min-width:200px;
+  min-height: 400px;
+  text-align: center;
+  width:24%;	
+  text-align: center;
+  border:1px solid grey;
+}
+
+.feature-boxes img {
+  margin:5px;
+}
+
+.feature-boxes .tasks, 
+.feature-boxes .issues {
+  text-align: left;
+  padding:0 20px;
+}
+
+.task-list ul,
+.issues-list ul {
+  list-style-type: none;
+  margin: 0 0 50px 0 ;
+  padding-left:10px;
+}
+
+.task-list li,
+.issues-list li {
+  vertical-align: top;
+}
+
+.issues-list li {
+  border-bottom: 1px solid #d3d3d3; 
+}
+
+.issues-list img {
+  display:inline-block;
+  width:20%;
+  vertical-align: top;
+}
+
+.issues-list span {
+  display:inline-block;
+  width:65%;
+}
+
+.joinHouse, 
+.newHouse {
+  display: inline-block;
+  min-width:200px;
+  vertical-align: top;
+  margin:20px;
+}
+
+.joinHouse h1, 
+.newHouse h1 {
+  font-size: 30px;
+}
+
+.houseForm input {
+  display:block;
+  width:200px;
+  height:20px;
+  margin:5px;
+}
+
+.houseForm button {
+  margin:10px;
+}
+
+/*
+[progress] will be uncommented when users are formatted in dash.html
+
+.roommates {
+	margin:0 auto;
+}
+
+.roommates div {
+	border:1px solid green;
+	min-width:150px;
+}
+
+.roommates img {
+	display:block;
+	width:150px;
+	margin:10px auto;
+}*/
+
+
+footer {
+ display: flex;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  margin:0 auto;
+}
+
+/* helper classes */ 
+
+.center-content {
+	text-align: center;
+}
+
+.align-left {
+	text-align: left;
+}

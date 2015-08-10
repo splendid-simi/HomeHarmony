@@ -28,13 +28,16 @@ angular.module('homeHarmony.auth',[])
           console.error("Error:",error);
         });
       },
-      login: function (userEmail,attemptedPassword){
+      login: function (userEmail,attemptedPassword, cb){
         Auth.$authWithPassword({
           email    : userEmail,
           password : attemptedPassword
         }).then(function(authData){
           console.log("Logged in as: ",authData.uid);
           // $state.go('dash');
+          currentUser = authData.password.email;
+          console.log('currentUser =', currentUser)
+          cb(authData.password.email);
         }).catch(function(error){
           console.error("Error:",error);
         });
