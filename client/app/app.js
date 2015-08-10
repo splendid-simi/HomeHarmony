@@ -2,7 +2,8 @@ angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login'
+  'homeHarmony.login',
+  'homeHarmony.dash'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
@@ -34,26 +35,26 @@ angular.module('homeHarmony', [
       });
     })
      */
+    .state('tasks', {
+      url: "/tasks",
+      templateUrl: "./app/tasks/tasks.html",
+      // controller: "tasksCtrl"
+    })
+    .state('issues', {
+      url: "/issues",
+      templateUrl: "./app/issues/issues.html",
+      // controller: "issuesCtrl"
+    })
+    .state('expenses', {
+      url: "/expenses",
+      templateUrl: "./app/expenses/expenses.html",
+      // controller: "expensesCtrl"
+    })
      // start of changes 
-    .state('task', {
-      url: "/task",
-      templateUrl: "./app/task/task.html",
-      // controller: "taskCtrl"
-    })
-    .state('chat', {
-      url: "/chat",
-      templateUrl: "./app/chat/chat.html",
-      // controller: "chatCtrl"
-    })
-    .state('budget', {
-      url: "/budget",
-      templateUrl: "./app/budget/budget.html",
-      // controller: "budgetCtrl"
-    })
     .state('dash', {
       url: "/dash",
       templateUrl: "./app/dash/dash.html",
-      // controller: "dashCtrl"
+      controller: "dashCtrl"
     })
     // nested views for dash
     .state('dash.default', {
