@@ -3,7 +3,7 @@
     <div class="joinHouse houseForm">
       <h1>Join a house</h1>
       <form name="joinHouseForm" ng-submit='joinHouse()'>
-        <input type='text'ng-model='string' placeholder='enter house key'>
+        <input id="joinHouseID" type='text'ng-model='string' placeholder='enter house key' required>
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Join House</button>
       </form>
     </div>
@@ -13,9 +13,9 @@
   <div class="mdl-cell mdl-cell-5-col">
     <div class="newHouse houseForm">
       <h1>Create a house</h1>
-      <form name="newHouseForm" ng-submit='newHouse()'>
-        <input type='text'ng-model='email1' placeholder="enter roommate's email">
-        <input type='text'ng-model='email2' placeholder="enter roommate's email">
+      <form name="newHouseForm" ng-submit='newHouseReg()'>
+        <input id="newEmail1" type='text'ng-model='email1' placeholder="enter roommate's email" required>
+        <input id="newEmail2" type='text'ng-model='email2' placeholder="enter roommate's email" required>
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create House</button>
       </form>
     </div>

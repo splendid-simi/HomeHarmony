@@ -4,11 +4,18 @@ angular.module('homeHarmony.newHouse',['firebase'])
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
+  $scope.joinHouse = function(){
+    $('#joinHouseID').val('');
+  }
+
   $scope.newHouseReg = function(){
-    console.log(  )
-    var houseMembers = [currentUser,
-                        $scope.email1,
-                        $scope.email2]
+    $('#newEmail1').val('');
+    $('#newEmail2').val('');
+    var houseMembers = [
+      currentUser,
+      $scope.email1,
+      $scope.email2
+    ];
     var houseObj = {
       houseMembers: houseMembers,
 

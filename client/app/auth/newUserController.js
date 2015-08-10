@@ -5,6 +5,10 @@ angular.module('homeHarmony.newUser', ['firebase'])
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
   $scope.addUser = function(){
+    $('#newPasswordField').val('');
+    $('#newFirstNameField').val('');
+    $('#newLastNameField').val('');
+    $('#newHouseID').val('');
     var userObj = {
       firstname: $scope.firstname,
       lastname: $scope.lastname,
