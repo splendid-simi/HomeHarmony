@@ -2,8 +2,7 @@ angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login',
-  'homeHarmony.dash'
+  'homeHarmony.login'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
@@ -51,10 +50,25 @@ angular.module('homeHarmony', [
       // controller: "expensesCtrl"
     })
      // start of changes 
+    .state('task', {
+      url: "/task",
+      templateUrl: "./app/task/task.html",
+      // controller: "taskCtrl"
+    })
+    .state('chat', {
+      url: "/chat",
+      templateUrl: "./app/chat/chat.html",
+      // controller: "chatCtrl"
+    })
+    .state('budget', {
+      url: "/budget",
+      templateUrl: "./app/budget/budget.html",
+      // controller: "budgetCtrl"
+    })
     .state('dash', {
       url: "/dash",
       templateUrl: "./app/dash/dash.html",
-      controller: "dashCtrl"
+      // controller: "dashCtrl"
     })
     // nested views for dash
     .state('dash.default', {
