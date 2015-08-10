@@ -1,42 +1,77 @@
-<div class="row header">
-  <div class="col s10 offset-s2">
-    <img src="assets/home.png" class="nav-icon" alt="house icon">
-    <span>House name</span>
-    <span>Logout</span>
-  </div>
-</div>
-  
-<div class="row">
-  <div class="vertical-nav col s1">
-    <ul>
-      <li><a href="/"><img src="assets/home.png" class="nav-icon" alt="home icon"></a></li>
-      <li><a href="#/task"><img src="assets/list.png" class="nav-icon" alt="list icon"></a></li>
-      <li><a href="#/budget"><img src="assets/expense.png" class="nav-icon" alt="expense icon"></a></li>
-      <li><a href="#/chat"><img src="assets/chat.png" class="nav-icon" alt="chat icon"></a></li>
-    </ul>
-  </div>
- 
-    <div class="col s11">
-      <div class="center-content" ui-view></div>
+
+<!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+.layout-transparent {
+  background: url('assets/header.jpg') center / cover;
+}
+
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+.mdl-layout__content {
+  display: -webkit-flex;
+  display: flex;
+    -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+</style>
+
+
+<!-- <div class="layout-transparent mdl-layout mdl-js-layout"> -->
+<div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
+<!--   <header class="mdl-layout__header mdl-layout__header--transparent">  -->
+  <header class="mdl-layout__header mdl-layout__header--scroll">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Home Harmony</span>
+<!--       Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Logout</a>
+      </nav>
+
     </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="#"><img src="assets/home.png" class="nav-icon" alt="home icon">Home</a>
+      <a class="mdl-navigation__link" href="#/task"><img src="assets/list.png" class="nav-icon" alt="list icon">To-Do</a>
+      <a class="mdl-navigation__link" href=""><img src="assets/expense.png" class="nav-icon" alt="expense icon">Expenses</a>
+      <a class="mdl-navigation__link" href="#/chat"><img src="assets/chat.png" class="nav-icon" alt="chat icon">Concerns</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+
+    <div class="center-content" ui-view></div>
+      <section>
+        <a ui-sref="dash.default">State 1</a>
+        <a ui-sref="dash.newHouse">State 2</a>
+      </section>
+    </div>
+
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer__middle-section">
+          <div class="mdl-grid">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
+                <ul class="mdl-mini-footer__link-list">
+                  <div class="mdl-logo">© 2015 Designed and Developed By</div>
+                  <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu | </a></li>
+                  <li><a href="https://github.com/MetaEvan" target="_blank"> Evan Mencke | </a></li>
+                  <li><a href="https://github.com/tgreenhalgh" target="_blank"> Thomas Greenhalgh | </a><li>
+                  <li><a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </footer>    
+  </main>
 </div>
 
-<div class="center-content">
-  <section>
-  	<a ui-sref="dash.default">State 1</a>
-  	<a ui-sref="dash.newHouse">State 2</a>
-  </section>
-</div>
-
-  <footer>
-    <div class="row col s12">
-      <img class="logo" src="lib/assets/HHlogo.png" alt="HomeHarmony Logo">
-      <span>© 2015 Designed and Developed By</span>
-      <a href="https://github.com/femi-saliu" target="_blank">Femi Saliu | </a> 
-      <a href="https://github.com/MetaEvan" target="_blank">Evan Mencke | </a> 
-      <a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh | </a>
-      <a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki</a>
-    </div>
-  </footer>
-</div>
-            

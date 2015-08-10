@@ -69,86 +69,88 @@ a {
 	text-align: left;
 }
 
-.top-icon {
-	width:40px;
-	height:40px;
-	color:#fff;
-}
-
 .nav-icon {
 	width:50px;
 	height:auto;
-	margin:10px;
+	padding:0 10px;
 }
 
 /* dashboard */ 
 
-.vertical-nav {
-	border-right:1px solid #000;
-	position:absolute;
-	min-width:100px;
-	top:0;
-	height:81%;
-}
-
-.vertical-nav ul {
-	padding-top:50px;
-	text-align: left;
-}
-
-.header {
-	text-align: right;
-	background-color: grey;
-}
-
-.header img {
-	width:30px;
-}
-
-.header span {
-	padding:20px;
-}
-
-.feature-boxes {
-	width:100%;
-	background-color: pink; 
-	margin-top: 100px;
-}
-
 .feature-boxes .feature {
-	display: inline-block;
+  display: inline-block;
   height:inherit;
   min-width:200px;
   min-height: 400px;
-  width:24%;
-	vertical-align: top;
-	text-align: center;
-	border:1px solid grey;
-}
-
-.feature-boxes h2 {
-	font-size: 22px;
+  text-align: center;
+  width:24%;	
+  text-align: center;
+  border:1px solid grey;
 }
 
 .feature-boxes img {
-	margin:10px;
+  margin:5px;
 }
 
-.feature-boxes .tasks {
-	text-align: left;
-	padding:0 20px;
+.feature-boxes .tasks, 
+.feature-boxes .issues {
+  text-align: left;
+  padding:0 20px;
 }
 
-#joinHouse, #newHouse {
-	display: inline-block;
-	min-width:200px;
-	vertical-align: top;
-	margin:20px;
+.task-list ul,
+.issues-list ul {
+  list-style-type: none;
+  margin: 0 0 50px 0 ;
+  padding-left:10px;
 }
 
-#joinHouse h1, #newHouse h1 {
-	font-size: 30px;
+.task-list li,
+.issues-list li {
+  vertical-align: top;
 }
+
+.issues-list li {
+  border-bottom: 1px solid #d3d3d3; 
+}
+
+.issues-list img {
+  display:inline-block;
+  width:20%;
+  vertical-align: top;
+}
+
+.issues-list span {
+  display:inline-block;
+  width:65%;
+}
+
+.joinHouse, 
+.newHouse {
+  display: inline-block;
+  min-width:200px;
+  vertical-align: top;
+  margin:20px;
+}
+
+.joinHouse h1, 
+.newHouse h1 {
+  font-size: 30px;
+}
+
+.houseForm input {
+  display:block;
+  width:200px;
+  height:20px;
+  margin:5px;
+}
+
+.houseForm button {
+  margin:10px;
+}
+
+/*
+[progress] will be uncommented when users are formatted in dash.html
 
 .roommates {
 	margin:0 auto;
@@ -163,32 +165,23 @@ a {
 	display:block;
 	width:150px;
 	margin:10px auto;
-}
+}*/
 
-
-/* footer */ 
 
 footer {
-	position:absolute;
-	bottom:0;
-	padding:20px;
-	width:100%;
-	min-width: 70%;
-	text-align: center;
-	border-top:1px solid grey;
+ display: flex;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  margin:0 auto;
 }
-
-footer img {
-	display: block;
-	margin:10px auto;
-	width:50px;
-	height:50px;
-}
-
-
 
 /* helper classes */ 
 
 .center-content {
 	text-align: center;
+}
+
+.align-left {
+	text-align: left;
 }
