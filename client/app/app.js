@@ -64,7 +64,7 @@ angular.module('homeHarmony', [
     })
     .state('dash', {
       url: "/dash",
-      templateUrl: "app/dash/dash.html",
+      templateUrl: "./app/dash/dash.html",
       // controller: "dashCtrl"
     })
     // nested views for dash
