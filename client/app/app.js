@@ -26,6 +26,12 @@ angular.module('homeHarmony', [
       //   }]
       // }
     })
+    .state('landing', {
+      url: "/landing",
+      templateUrl: "./app/landing/landing.html",
+      // controller: 'LandingCtrl',
+      // controllerAs: 'landing',
+    })
     .state('newUser', {
       url: "/newUser",
       templateUrl: "./app/auth/newUser.html",
