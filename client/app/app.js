@@ -1,8 +1,15 @@
+var totalDb = {};
+var userDb = {};
+var currentUser = 'notI';
+var currentUserId = 'notThisNumber';
+var currentHouseId = 'notHere';
+
 angular.module('homeHarmony', [
   'ui.router',
   'homeHarmony.auth',
   'homeHarmony.newUser',
-  'homeHarmony.login'
+  'homeHarmony.login',
+  'homeHarmony.newHouse'
 ]).config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
