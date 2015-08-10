@@ -12,8 +12,10 @@ angular.module('homeHarmony.newUser', ['firebase'])
       // dateJoined: new Date()
       // house: houseId
     };
-    db.child('users').push(userObj);
-    UserAuth.newUser($scope.email, $scope.password);
+    UserAuth.newUser(userObj.email, $scope.password, function(userEmail){
+      currentUser = userEmail;
+      currentUserId = db.child('users').push(userObj);
+    });
   };
   console.log($scope)
 });
