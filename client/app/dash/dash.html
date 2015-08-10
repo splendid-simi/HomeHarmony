@@ -1,35 +1,42 @@
-<!-- <div class="header">
-<section>
-	<p> Use the links below to activiate the difference nested states </p>
-	<a ui-sref="dash.default">State 1</a>
-	<a ui-sref="dash.newHouse">State 2</a>
-	<p>Testing dash.html</p>
-</section>
- -->
-
- <div class="navbar-fixed ">
-     <nav>
-         <ul id="slide-out" class="side-nav fixed red lighten-2">
-           <li><!-- <i class="material-icons">home</i> -->Home</li>
-           <li><!-- <i class="material-icons">format_list_numbered</i> -->Tasks</li>
-           <li><!-- <i class="material-icons">warning</i> -->Issues</li>
-           <li><!-- <i class="material-icons">attach_money</i> -->Expenses</li>
-           <li>Users Name</li>
-           <li>Logout</li>
-         </ul>
-         <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-         <h5 class="center-align">HH</h5 >
-     </nav>
- </div>
-<div ui-view></div>
-
-<!-- <footer>
-  <img src="../../assets/home.png" alt="HomeHarmony Logo">
-  <div>
-    <small> Copyright &copy; 2015</small>
-     <a href="https://github.com/femi-saliu" target="_blank">Femi Saliu</a> 
-     <a href="https://github.com/MetaEvan" target="_blank">Evan Mencke</a> 
-     <a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh</a>
-     <a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki</a>
+<div class="row header">
+  <div class="col s10 offset-s2">
+    <img src="assets/home.png" class="nav-icon" alt="house icon">
+    <span>House name</span>
+    <span>Logout</span>
   </div>
-</footer> -->
+</div>
+  
+<div class="row">
+  <div class="vertical-nav col s1">
+    <ul>
+      <li><a href="/"><img src="assets/home.png" class="nav-icon" alt="home icon"></a></li>
+      <li><a href="#/task"><img src="assets/list.png" class="nav-icon" alt="list icon"></a></li>
+      <li><a href="#/budget"><img src="assets/expense.png" class="nav-icon" alt="expense icon"></a></li>
+      <li><a href="#/chat"><img src="assets/chat.png" class="nav-icon" alt="chat icon"></a></li>
+    </ul>
+  </div>
+ 
+    <div class="col s11">
+      <div class="center-content" ui-view></div>
+    </div>
+</div>
+
+<div class="center-content">
+  <section>
+  	<a ui-sref="dash.default">State 1</a>
+  	<a ui-sref="dash.newHouse">State 2</a>
+  </section>
+</div>
+
+  <footer> <!-- class="page-footer" -->
+    <div class="row col s12">
+      <img class="logo" src="lib/assets/HHlogo.png" alt="HomeHarmony Logo">
+      <span>© 2015 Designed and Developed By</span>
+      <a href="https://github.com/femi-saliu" target="_blank">Femi Saliu | </a> 
+      <a href="https://github.com/MetaEvan" target="_blank">Evan Mencke | </a> 
+      <a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh | </a>
+      <a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki</a>
+    </div>
+  </footer>
+</div>
+            

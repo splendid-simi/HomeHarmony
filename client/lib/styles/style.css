@@ -1,0 +1,194 @@
+/* browser reset default styles */ 
+
+html {
+	color: #000;
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+a {
+  text-decoration: none;
+  color:#000;
+}
+
+/* icons */ 
+
+.chart {
+	width:70%;
+	height:auto;
+}
+
+.list-icon {
+	width:35px;
+	height:35px;
+	text-align: left;
+}
+
+.top-icon {
+	width:40px;
+	height:40px;
+	color:#fff;
+}
+
+.nav-icon {
+	width:50px;
+	height:auto;
+	margin:10px;
+}
+
+/* dashboard */ 
+
+.vertical-nav {
+	border-right:1px solid #000;
+	position:absolute;
+	min-width:100px;
+	top:0;
+	height:81%;
+}
+
+.vertical-nav ul {
+	padding-top:50px;
+	text-align: left;
+}
+
+.header {
+	text-align: right;
+	background-color: grey;
+}
+
+.header img {
+	width:30px;
+}
+
+.header span {
+	padding:20px;
+}
+
+.feature-boxes {
+	width:100%;
+	background-color: pink; 
+	margin-top: 100px;
+}
+
+.feature-boxes .feature {
+	display: inline-block;
+  height:inherit;
+  min-width:200px;
+  min-height: 400px;
+  width:24%;
+	vertical-align: top;
+	text-align: center;
+	border:1px solid grey;
+}
+
+.feature-boxes h2 {
+	font-size: 22px;
+}
+
+.feature-boxes img {
+	margin:10px;
+}
+
+.feature-boxes .tasks {
+	text-align: left;
+	padding:0 20px;
+}
+
+#joinHouse, #newHouse {
+	display: inline-block;
+	min-width:200px;
+	vertical-align: top;
+	margin:20px;
+}
+
+#joinHouse h1, #newHouse h1 {
+	font-size: 30px;
+}
+
+.roommates {
+	margin:0 auto;
+}
+
+.roommates div {
+	border:1px solid green;
+	min-width:150px;
+}
+
+.roommates img {
+	display:block;
+	width:150px;
+	margin:10px auto;
+}
+
+
+/* footer */ 
+
+footer {
+	position:absolute;
+	bottom:0;
+	padding:20px;
+	width:100%;
+	min-width: 70%;
+	text-align: center;
+	border-top:1px solid grey;
+}
+
+footer img {
+	display: block;
+	margin:10px auto;
+	width:50px;
+	height:50px;
+}
+
+
+
+/* helper classes */ 
+
+.center-content {
+	text-align: center;
+}
