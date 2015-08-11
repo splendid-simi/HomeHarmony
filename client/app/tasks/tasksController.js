@@ -22,6 +22,7 @@ angular.module('homeHarmony.tasks', ['firebase'])
     db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
       taskId = snapshot.key();
       console.log(taskId);
+      $scope.taskArr = [];
       // get tasks
       $scope.taskArr.push(snapshot.val());
       console.log('tasks ', $scope.taskArr);
