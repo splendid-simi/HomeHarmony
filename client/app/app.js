@@ -103,8 +103,10 @@ angular.module('homeHarmony', [
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
-    if (needsHouseFor.indexOf(toState.name) >= 0){
-      $state.go('dash.newHouse');
+    if (currentHouseId === 'DEFAULT_HOUSE_ID'){
+      if (needsHouseFor.indexOf(toState.name) >= 0){
+        $state.go('dash.newHouse');
+      }
     }
   });
 
