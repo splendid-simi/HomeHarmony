@@ -43,16 +43,6 @@ angular.module('homeHarmony', [
       controller: 'NewUserCtrl',
       controllerAs: 'newUser'
     })
-    .state('issues', {
-      url: "/issues",
-      templateUrl: "./app/issues/issues.html",
-      controller: "issuesCtrl"
-    })
-    .state('expenses', {
-      url: "/expenses",
-      templateUrl: "./app/expenses/expenses.html",
-      controller: "expensesCtrl"
-    })
     .state('dash', {
       url: "/dash",
       templateUrl: "./app/dash/dash.html",
@@ -97,6 +87,16 @@ angular.module('homeHarmony', [
       url: "/:tasks",
       templateUrl: "./app/tasks/tasks.html",
       controller: "tasksCtrl"
+    })
+    .state('dash.issues', {
+      url: "/:issues",
+      templateUrl: "./app/issues/issues.html",
+      controller: "issuesCtrl"
+    })
+    .state('dash.expenses', {
+      url: "/:expenses",
+      templateUrl: "./app/expenses/expenses.html",
+      controller: "expensesCtrl"
     })
 
   // For any unmatched url, redirect to /
