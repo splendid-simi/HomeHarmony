@@ -18,7 +18,8 @@ angular.module('homeHarmony', [
   'homeHarmony.login',
   'homeHarmony.newHouse',
   'homeHarmony.dash',
-  'homeHarmony.expenses'
+  'homeHarmony.expenses',
+  'homeHarmony.tasks'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
@@ -90,8 +91,6 @@ angular.module('homeHarmony', [
           return Auth.$requireAuth();
         }]
       }
-
-
     })
     .state('dash.tasks', {
       url: "/:tasks",
