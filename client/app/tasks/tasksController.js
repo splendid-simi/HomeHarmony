@@ -4,6 +4,7 @@ angular.module('homeHarmony.tasks', ['firebase'])
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   $scope.taskArr = [];
+  $scope.compTaskArr = [];
   var taskDb = {};
 
   $scope.addTask = function() {
@@ -26,20 +27,24 @@ angular.module('homeHarmony.tasks', ['firebase'])
       // get tasks
       $scope.taskArr.push(snapshot.val());
       console.log('tasks ', $scope.taskArr);
+      $scope.getTasks();
     })
-    
   };
 
   $scope.getTasks = function() {
-    db.on('value', function(snapshot){
-      var temp = snapshot.val()
+    db.once('value', function(snapshot){
+      var temp = snapshot.val(); 
       console.log(temp, 'temp');
       console.log(currentHouseId, 'CHID in getTasks');
-      var temp2= temp.houses[currentHouseId];
-      console.log('temp2 ', temp2)
-      taskDb = temp2.tasks;  //check later
+      var temp2 = temp.houses[currentHouseId];
+      taskDb = temp2.tasks;  
+      $scope.taskArr = [];
       for (prop in taskDb) {
-        $scope.taskArr.push(taskDb[prop]);
+        if (taskDb[prop].completed) { 
+          $scope.compTaskArr.push(taskDb[prop]);
+        } else { 
+          $scope.taskArr.push(taskDb[prop]); 
+        }
         console.log('gotten tasks ', $scope.taskArr)
       }
       // $scope.tasks = taskArr;
