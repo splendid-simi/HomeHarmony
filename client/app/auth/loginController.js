@@ -11,7 +11,7 @@ angular.module('homeHarmony.login',['firebase'])
 
       //try to factor this out as a separate named function "later"
 
-      db.on("value", function(snapshot) {
+      db.once("value", function(snapshot) {
         totalDb = snapshot.val();
         userDb = totalDb.users;
         console.log(userDb)

@@ -38,7 +38,6 @@ angular.module('homeHarmony.auth',[])
       },
       logout: function (){
         Auth.$unauth();
-        //redirect
         $state.go('landing');
       }
     };

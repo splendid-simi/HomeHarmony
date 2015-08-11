@@ -19,7 +19,8 @@ angular.module('homeHarmony', [
   'homeHarmony.newHouse',
   'homeHarmony.dash',
   'homeHarmony.expenses',
-  'homeHarmony.tasks'
+  'homeHarmony.tasks',
+  'homeHarmony.issues'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
@@ -45,7 +46,7 @@ angular.module('homeHarmony', [
     .state('issues', {
       url: "/issues",
       templateUrl: "./app/issues/issues.html",
-      // controller: "issuesCtrl"
+      controller: "issuesCtrl"
     })
     .state('expenses', {
       url: "/expenses",
