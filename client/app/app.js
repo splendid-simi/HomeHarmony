@@ -101,7 +101,7 @@ angular.module('homeHarmony', [
   // For any unmatched url, redirect to /
   $urlRouterProvider.otherwise("/landing");
 })
-.run(["$rootScope", "$state", function($rootScope, $state) {  console.log('currentHouseID', currentHouseId);
+.run(["$rootScope", "$state", function($rootScope, $state) {
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
     if (needsHouseFor.indexOf(toState.name) >= 0){
       $state.go('dash.newHouse');
