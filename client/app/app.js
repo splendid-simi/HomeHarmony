@@ -11,7 +11,8 @@ angular.module('homeHarmony', [
   'homeHarmony.login',
   'homeHarmony.newHouse',
   'homeHarmony.dash'
-]).config(function($stateProvider, $urlRouterProvider) {
+])
+.config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
   $stateProvider
     .state('login', {
@@ -31,11 +32,6 @@ angular.module('homeHarmony', [
       templateUrl: "./app/auth/newUser.html",
       controller: 'NewUserCtrl',
       controllerAs: 'newUser'
-    })
-    .state('tasks', {
-      url: "/tasks",
-      templateUrl: "./app/tasks/tasks.html",
-      // controller: "tasksCtrl"
     })
     .state('issues', {
       url: "/issues",
@@ -89,21 +85,24 @@ angular.module('homeHarmony', [
 
 
     })
+    .state('dash.tasks', {
+      url: "/:tasks",
+      templateUrl: "./app/tasks/tasks.html",
+      controller: "tasksCtrl"
+    })
 
   // For any unmatched url, redirect to /
   $urlRouterProvider.otherwise("/landing");
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
 
-$rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-  event.preventDefault();
-  // We can catch the error thrown when the $requireAuth promise is rejected
-  // and redirect the user back to the home page
-  if (error === "AUTH_REQUIRED") {
-    $state.go("login");
-  }
-});
+  $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+    event.preventDefault();
+    // We can catch the error thrown when the $requireAuth promise is rejected
+    // and redirect the user back to the home page
+    if (error === "AUTH_REQUIRED") {
+      $state.go("login");
+    }
+  });
 }]);
-
-
 
