@@ -7,7 +7,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
   $scope.joinHouse = function(){
     $('#joinHouseID').val('');
     db.child('users').child(currentUserId).update({
-      'house': currentHouseId
+      'house': $scope.chosenHouse
     });
   }
 
