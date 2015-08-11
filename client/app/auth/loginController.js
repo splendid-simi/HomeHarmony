@@ -19,6 +19,8 @@ angular.module('homeHarmony.login',['firebase'])
         for (var prop in userDb){
           if (userDb[prop].email === userEmail) {
             currentUserId = prop;
+            currentHouseId = userDb[prop].house;
+            console.log('CHID ', currentHouseId);
           }
         }
         console.log(currentUserId, 'CUID')
