@@ -5,25 +5,20 @@ angular.module('homeHarmony.auth',[])
     return $firebaseAuth(ref);
   }
 ])
-.factory('UserAuth',['Auth',
-  function (Auth){
+.factory('UserAuth',['$state','Auth',
+  function ($state, Auth){
     return {
       newUser: function (userEmail,userPassword){
-        console.log(Auth.$createUser);
         Auth.$createUser({
           email    : userEmail,
           password : userPassword
         }).then(function(userData){
-          console.log("new user created");
-          console.log(userData);
-
           return Auth.$authWithPassword({
             email    : userEmail,
             password : userPassword
           });
         }).then(function(authData){
-          console.log("Logged in as:",authData.uid);
-          // $state.go('dash');
+          $state.go('dash');
         }).catch(function(error){
           console.error("Error:",error);
         });
@@ -33,10 +28,7 @@ angular.module('homeHarmony.auth',[])
           email    : userEmail,
           password : attemptedPassword
         }).then(function(authData){
-          console.log("Logged in as: ",authData.uid);
-          // $state.go('dash');
-          currentUser = authData.password.email;
-          console.log('currentUser =', currentUser)
+          $state.go('dash');
           cb(authData.password.email);
         }).catch(function(error){
           console.error("Error:",error);
