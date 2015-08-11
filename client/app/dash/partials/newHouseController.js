@@ -26,7 +26,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
     }
     db.child('houses').push(houseObj);
 
-    db.child('houses').on('child_added', function(snapshot){
+    db.child('houses').once('child_added', function(snapshot){
       currentHouseId = snapshot.key();
     //email users
 

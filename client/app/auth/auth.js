@@ -8,7 +8,7 @@ angular.module('homeHarmony.auth',[])
 .factory('UserAuth',['$state','Auth',
   function ($state, Auth){
     return {
-      newUser: function (userEmail,userPassword){
+      newUser: function (userEmail,userPassword, cb){
         Auth.$createUser({
           email    : userEmail,
           password : userPassword
@@ -18,6 +18,8 @@ angular.module('homeHarmony.auth',[])
             password : userPassword
           });
         }).then(function(authData){
+          console.log('newuser func ', userEmail)
+          cb(userEmail);
           $state.go('dash');
         }).catch(function(error){
           console.error("Error:",error);
