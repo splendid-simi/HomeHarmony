@@ -7,14 +7,14 @@ console.log("In expensesCtrl");
   var dataArr;
   var dataObj;
   //hard coded for now, should be set from the app
-  currentHouseId = "-JwPcwYMViRlKqSZmnOw";
+  var currentHouse = "-JwPcwYMViRlKqSZmnOw";
 
   // Attach an asynchronous callback to read the data at our posts reference
   db.once("value", function(snapshot) {
     // make sure dataArr is blank
     dataArr = [];
     // load the expenses for the current house
-    expensesArr = snapshot.val().houses[currentHouseId].expenses;
+    expensesArr = snapshot.val().houses[currentHouse].expenses;
     for (var i = 0; i < expensesArr.length; i++) {
       // clear the dataObj
       dataObj = {};
