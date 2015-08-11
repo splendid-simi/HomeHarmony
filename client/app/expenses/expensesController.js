@@ -28,6 +28,19 @@ console.log("In expensesCtrl");
     console.log("The read failed: " + errorObject.code);
   });
 
+  $scope.newExpense = function(){
+    console.log('new Expense called');
+    $('#expenseName').val('');
+    $('#expenseCost').val('');
+    $('#expenseDate').val('');
+    db.child('houses').child(currentHouseId).child('expenses')
+    .push({
+      expenseName: $scope.expenseName,
+      dueDate: $('#expenseDate').val(), // We need to parse the date when it comes from the db because of this
+      cost: $scope.expenseCost,
+      paid: false
+    });
+  };
 
   var drawPie = function () {
     $('#container').highcharts( {
@@ -40,27 +53,27 @@ console.log("In expensesCtrl");
       title: {
         text: 'Monthly Expenses'
       },
-        tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: true,
-              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-              style: {
-                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-              }
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            style: {
+              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
             }
           }
-        },
-        series: [{
-          name: "Expenses",
-          colorByPoint: true,
-          data: dataArr
-        }]
-      });
-    };
+        }
+      },
+      series: [{
+        name: "Expenses",
+        colorByPoint: true,
+        data: dataArr
+      }]
+    });
+  };
 });
