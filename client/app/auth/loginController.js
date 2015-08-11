@@ -5,7 +5,6 @@ angular.module('homeHarmony.login',['firebase'])
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
   $scope.logInUser = function(){
-    console.log(UserAuth);
     $('#loginEmailField').val('');
     $('#loginPasswordField').val('');
     UserAuth.login($scope.email, $scope.password, function (userEmail){
