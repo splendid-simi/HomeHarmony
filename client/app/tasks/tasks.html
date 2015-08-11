@@ -4,22 +4,24 @@
       <!-- Column 1 start -->
       <h2>Create a new task</h2>
       <form name="tasksForm" ng-submit='addTask()'>
-        <input type='text'ng-model='newTask' placeholder='Enter the new task'>
+        <input type='text'ng-model='newTask' ng-validate="" maxLength="20" placeholder='Enter the new task'>
         <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer'>
         <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due'>
         <button>Create!</button>
       </form>
-      <input type="checkbox" ng-model="string" name="task1" value="task1">wash dishes<br>
       <!-- Column 1 end -->
     </div>
     <div class="col2">
       <!-- Column 2 start -->
-      <h2>Done Task list</h2>
+      <h2>House Tasks</h2>
       <ul>
-        <li ng-repeat="task in taskArr">
-          {{task.doer}} {{task.description}} {{task.dueDate}}
+        <li ng-repeat="task in compTaskArr">
+          <input type="checkbox" name="task"> {{task.doer}} {{task.description}} {{task.dueDate}}
         </li>
-        <li ng-if="results.length == 0">
+        <li ng-repeat="task in taskArr">
+          <input type="checkbox" name="task"> {{task.doer}} {{task.description}} {{task.dueDate}}
+        </li>
+        <li ng-if="taskArr.length == 0">
           <strong>No current tasks</strong>
         </li>
       </ul>
@@ -29,36 +31,7 @@
 </div>
 
 <style media="screen" type="text/css">
-/* General styles */
-  body {
-    margin:0;
-    padding:0;
-    border:0;     /* This removes the border around the viewport in old versions of IE */
-    width:100%;
-    background:#fff;
-    min-width:600px;      /* Minimum width of layout - remove line if not required */
-            /* The min-width property does not work in old versions of Internet Explorer */
-    font-size:90%;
-  }
-  a {
-    color:#369;
-  }
-  a:hover {
-    color:#fff;
-    background:#369;
-    text-decoration:none;
-  }
-  h1, h2, h3 {
-    margin:.8em 0 .2em 0;
-    padding:0;
-  }
-  p {
-    margin:.4em 0 .8em 0;
-    padding:0;
-  }
-  img {
-    margin:10px 0 5px;
-  }
+
   /* Header styles */
   #header {
     clear:both;
@@ -162,16 +135,5 @@
     width:46%;      /* right column content width (column width minus left and right padding) */
     left:56%;     /* (right column width) plus (left column left and right padding) plus (right column left padding) */
   }
-  /* Footer styles */
-  #footer {
-    clear:both;
-    float:left;
-    width:100%;
-    border-top:1px solid #000;
-  }
-  #footer p {
-    padding:10px;
-    margin:0;
-  }
-  /* --> */
+
   </style>
