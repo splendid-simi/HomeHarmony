@@ -4,15 +4,16 @@
       <!-- Column 1 start -->
       <h2>Create a new task</h2>
       <form name="tasksForm" ng-submit='addTask()'>
-        <input type='text'ng-model='newTask' ng-validate="" maxLength="20" placeholder='Enter the new task'>
-        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer'>
-        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due'>
+        <label for="newTask">Task:</label>
+        <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer' required>
+        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
+        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
         <button>Create!</button>
       </form>
-      <!-- Column 1 end -->
+      Column 1 end
     </div>
     <div class="col2">
-      <!-- Column 2 start -->
       <h2>House Tasks</h2>
       <ul>
         <li ng-repeat="task in compTaskArr">
@@ -25,12 +26,17 @@
           <strong>No current tasks</strong>
         </li>
       </ul>
-      <!-- Column 2 end -->
     </div>
   </div>
 </div>
 
-<style media="screen" type="text/css">
+<div role="alert">
+  <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
+  <span class="error" ng-show="tasksForm.newTask.$error.email">
+    That is not a valid email</span>
+</div>
+
+<style>
 
   /* Header styles */
   #header {
