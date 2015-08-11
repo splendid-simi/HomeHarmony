@@ -35,9 +35,9 @@ angular.module('homeHarmony.auth',[])
         });
       },
       logout: function (){
-        Auth.unauth();
+        Auth.$unauth();
         //redirect
-        $state.go('login');
+        $state.go('landing');
       }
     };
   }
