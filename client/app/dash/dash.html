@@ -21,23 +21,20 @@
 
 </style>
 
-
-<!-- <div class="layout-transparent mdl-layout mdl-js-layout"> -->
-<div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
-<!--   <header class="mdl-layout__header mdl-layout__header--transparent">  -->
-  <header class="mdl-layout__header mdl-layout__header--scroll">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Home Harmony</span>
-<!--       Add spacer, to align navigation to the right -->
+      <span class="mdl-layout-title">Home Harmony</span> 
+      <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="#/landing">Logout</a>
       </nav>
-
     </div>
   </header>
+
   <div class="mdl-layout__drawer">
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#/dash"><img src="assets/home.png" class="nav-icon" alt="home icon">Home</a>
@@ -46,6 +43,7 @@
       <a class="mdl-navigation__link" href="#/issues"><img src="assets/chat.png" class="nav-icon" alt="chat icon">Issues</a>
     </nav>
   </div>
+
   <main class="mdl-layout__content">
 
     <div class="center-content" ui-view></div>
