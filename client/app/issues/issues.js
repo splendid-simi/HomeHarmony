@@ -23,6 +23,8 @@ angular.module('homeHarmony.issues',['firebase'])
       console.log("All issues:", $scope.allIssues);
     });
   };
+
+  $scope.getIssues();
 });
 
 
