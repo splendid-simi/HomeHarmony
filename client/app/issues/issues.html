@@ -3,11 +3,17 @@
     <input type='text' name="userIssue" ng-model='issueText' placeholder='enter issue here' required>
     <button>submit</button>
 </form>
-<form name="issuesForm" ng-submit='getIssues()'>
+<form name="printForm" ng-submit='getIssues()'>
     <button>PrintIssues</button>
 </form>
 <!-- read from the database to populate issues -->
 
-<li>Dude, you washed the dishes!  Thanks</li>
-<li>The trash hasn't been taken out in weeks :(</li>
-<li>Our house looks looks great now!  Thanks Home Harmony!!</li>
+<h2>Current Issues</h2>
+<ul>
+  <li ng-repeat="issue in allIssues track by $index">
+    {{issue}}
+  </li>
+  <li ng-if="allIssues.length === 0">
+    <strong>No Issues!</strong>
+  </li>
+</ul>
