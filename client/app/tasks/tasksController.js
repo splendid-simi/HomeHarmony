@@ -7,6 +7,7 @@ angular.module('homeHarmony.tasks', ['firebase'])
   var taskDb = {};
 
   $scope.addTask = function() {
+    console.log("addtask");
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
@@ -15,15 +16,17 @@ angular.module('homeHarmony.tasks', ['firebase'])
       completed: false,
       repeating: -1
     }
+    console.log(taskObj);
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
-    db.child('houses').child(currentHouseId).child('tasks').on('child_added', function(snapshot){
+    db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
       taskId = snapshot.key();
       console.log(taskId);
       // get tasks
       $scope.taskArr.push(snapshot.val());
       console.log('tasks ', $scope.taskArr);
     })
+    
   };
 
   $scope.getTasks = function() {

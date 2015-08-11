@@ -1,3 +1,28 @@
+<div class="colmask doublepage">
+  <div class="colleft">
+    <div class="col1">
+      <!-- Column 1 start -->
+      <h2>Create a new task</h2>
+      <form name="tasksForm" ng-submit='addTask()'>
+        <input type='text'ng-model='newTask' placeholder='Enter the new task'>
+        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer'>
+        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due'>
+        <button>Create!</button>
+      </form>
+      <input type="checkbox" ng-model="string" name="task1" value="task1">wash dishes<br>
+      <!-- Column 1 end -->
+    </div>
+    <div class="col2">
+      <!-- Column 2 start -->
+      <h2>Done Task list</h2>
+      <ul>
+        <li ng-repeat="task in taskArr"></li>
+      </ul>
+      <!-- Column 2 end -->
+    </div>
+  </div>
+</div>
+
 <style media="screen" type="text/css">
 /* General styles */
   body {
@@ -145,26 +170,3 @@
   }
   /* --> */
   </style>
-
-<div class="colmask doublepage">
-  <div class="colleft">
-    <div class="col1">
-      <!-- Column 1 start -->
-      <h2>Create a new task</h2>
-      <form name="tasksForm" ng-submit='taskSubmit()'>
-        <input type='text'ng-model='newTask' placeholder='Enter the new task'>
-        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer'>
-        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due'>
-        <button>Create!</button>
-      </form>
-      <input type="checkbox" ng-model="string" name="task1" value="task1">wash dishes<br>
-      <!-- Column 1 end -->
-    </div>
-    <div class="col2">
-      <!-- Column 2 start -->
-      <h2>Done Task list</h2>
-      laundry
-      <!-- Column 2 end -->
-    </div>
-  </div>
-</div>
