@@ -1,8 +1,15 @@
 var totalDb = {};
 var userDb = {};
-var currentUser = 'notI';
-var currentUserId = 'notThisNumber';
-var currentHouseId = 'notHere';
+var currentUser = 'DEFAULT_USER';
+var currentUserId = 'DEFAULT_USER_ID';
+var currentHouseId = 'DEFAULT_HOUSE_ID';
+var needsHouseFor = [
+  'dash',
+  'dash.default',
+  'issues',
+  'expenses',
+  'dash.tasks'
+];
 
 angular.module('homeHarmony', [
   'ui.router',
@@ -96,14 +103,20 @@ angular.module('homeHarmony', [
   $urlRouterProvider.otherwise("/landing");
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
+    if (currentHouseId === 'DEFAULT_HOUSE_ID'){
+      if (needsHouseFor.indexOf(toState.name) >= 0){
+        $state.go('dash.newHouse');
+      }
+    }
+  });
 
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     event.preventDefault();
-    // We can catch the error thrown when the $requireAuth promise is rejected
-    // and redirect the user back to the home page
     if (error === "AUTH_REQUIRED") {
       $state.go("login");
     }
   });
+
 }]);
 
