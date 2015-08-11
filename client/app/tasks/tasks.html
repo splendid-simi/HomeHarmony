@@ -16,7 +16,12 @@
       <!-- Column 2 start -->
       <h2>Done Task list</h2>
       <ul>
-        <li ng-repeat="task in taskArr"></li>
+        <li ng-repeat="task in taskArr">
+          {{task.doer}} {{task.description}} {{task.dueDate}}
+        </li>
+        <li ng-if="results.length == 0">
+          <strong>No current tasks</strong>
+        </li>
       </ul>
       <!-- Column 2 end -->
     </div>
