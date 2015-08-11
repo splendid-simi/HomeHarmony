@@ -1,9 +1,11 @@
 <h1>Compliments and Concerns</h1>
 <form name="issuesForm" ng-submit='addIssue()'>
-    <input type='text' name="userIssue" ng-model='string' placeholder='enter issue here' required>
+    <input type='text' name="userIssue" ng-model='issueText' placeholder='enter issue here' required>
     <button>submit</button>
 </form>
-
+<form name="issuesForm" ng-submit='getIssues()'>
+    <button>PrintIssues</button>
+</form>
 <!-- read from the database to populate issues -->
 
 <li>Dude, you washed the dishes!  Thanks</li>
