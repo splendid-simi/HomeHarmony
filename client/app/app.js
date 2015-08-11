@@ -103,13 +103,14 @@ angular.module('homeHarmony', [
   $urlRouterProvider.otherwise("/landing");
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
-  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
-    if (currentHouseId === 'DEFAULT_HOUSE_ID'){
-      if (needsHouseFor.indexOf(toState.name) >= 0){
-        $state.go('dash.newHouse');
-      }
-    }
-  });
+  
+  // $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
+  //   if (currentHouseId === 'DEFAULT_HOUSE_ID'){
+  //     if (needsHouseFor.indexOf(toState.name) >= 0){
+  //       $state.go('dash.newHouse');
+  //     }
+  //   }
+  // });
 
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     event.preventDefault();
