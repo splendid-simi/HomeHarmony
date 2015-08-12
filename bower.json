@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "~1.4.3",
     "firebase": "~2.2.9",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-messages": "~1.4.3"
   }
 }

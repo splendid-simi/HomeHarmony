@@ -1,4 +1,4 @@
-angular.module('homeHarmony.tasks', ['firebase'])
+angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
 .controller('tasksCtrl', function($scope, $firebaseObject){
 
@@ -8,7 +8,8 @@ angular.module('homeHarmony.tasks', ['firebase'])
   var taskDb = {};
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
-
+  $scope.currentDate = new Date();
+  myForm.myName.$error = {}
 
   $scope.addTask = function() {
     console.log("addtask");

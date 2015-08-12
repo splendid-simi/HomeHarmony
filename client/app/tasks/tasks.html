@@ -5,7 +5,18 @@
       <form name="tasksForm" class="tasksForm" ng-submit='addTask()'>
         <div>
           <label for="newTask">Task:</label>
-          <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+          <input type='text' id="newTask" name="task" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+     <!--      <div role="alert"> -->
+   <!--          <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
+            <span class="error" ng-show="tasksForm.newTask.$error.maxlength"> -->
+         <!--      Please enter a valid username</span> -->
+
+            <div ng-messages="tasksForm.newTask.$error" style="color:maroon" role="alert">
+              <div ng-message="required">You did not enter a task</div>
+              <div ng-message="maxlength">Your task is too long</div>
+            </div>
+
+          </div>
         </div>
         <div>
           <label for="newTaskDoer">Assignee:</label>
@@ -13,23 +24,13 @@
         </div>
         <div>
           <label for="newTaskDueDate">Due Date:</label>
-          <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
+          <input type="date" name="newTaskDueDate" ng-model='newTaskDueDate' min='{{currentDate | date:"yyyy-MM-dd"}}'placeholder='Enter the date due' required>
         </div>
         <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create!</button>
       </form>
     </div>
 
-    <div class="tasksList-container mdl-cell mdl-cell--6-col">
-      <form name="tasksForm" ng-submit='addTask()'>
-        <label for="newTask">Task:</label>
-        <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
-        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer' required>
-        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
-        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
-        <button>Create!</button>
-      </form>
-      Column 1 end
     </div>
     <div class="col2">
       <h2>House Tasks</h2>
@@ -59,10 +60,3 @@
   </div>
 </div>
 
-
-<!-- <div role="alert">
-  <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
-  <span class="error" ng-show="tasksForm.newTask.$error.email">
-    That is not a valid email</span>
-</div>
- -->
