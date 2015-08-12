@@ -1,68 +1,70 @@
-<!-- Square card -->
-<div class="mdl-grid feature-boxes">
-	<div class="feature">
-		<div class="mdl-card mdl-shadow--2dp demo-card-square tasks feature"> <!-- mdl-cell mdl-cell--3-col -->
-		  <div class="mdl-card__title mdl-card--expand">
-		    <h2 class="mdl-card__title-text">Upcoming Tasks</h2>
-		  </div>
-		  <div class="mdl-card__supporting-text task-list">
+
+<div class="android-more-section">
+  <div class="android-section-title mdl-typography--display-1-color-contrast">Welcome to your Home Dashboard</div>
+  <div class="android-card-container mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <img src="images/more-from-1.png">
+      </div>
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">Recent Events</h4>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span class="mdl-typography--font-light mdl-typography--subhead">
+        	<ul class="dash-recentTaskList">
+					  <li><img src="assets/list.png" class="list-icon" alt="task icon">
+					  	<span>Take out the trash</span>
+					  </li>
+					  <li>
+					  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
+					    <span>Pay the electricity bill</span>
+					  </li>
+					  <li><img src="assets/list.png" class="list-icon" alt="task icon">
+					  	<span>Mow the lawn</span>
+					  </li>
+					  <li>
+					  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
+					    <span>Pay the cable bill</span>
+				    </li>
+				   	<li>
+					  	<img src="assets/list.png" class="list-icon" alt="expense icon">
+					    <span>Buy more milk</span>
+				    </li>
+			    </ul>
+        </span>
+      </div>
+      <div class="mdl-card__actions">
+         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href=""> See more Tasks<i class="material-icons">chevron_right</i></a>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <img src="images/more-from-4.png">
+      </div>
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">Monthly Expenses</h4>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <img src="assets/template_graph.png" class="feature-chart">
+      </div>
+      <div class="mdl-card__actions">
+         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">See expenses due<i class="material-icons">chevron_right</i></a>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <img src="images/more-from-2.png">
+      </div>
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">Current House Issues</h4>
+      </div>
+      <div class="mdl-card__supporting-text issuesListContainer">
 		    <ul>
-			  <li><img src="assets/list.png" class="list-icon" alt="task icon">
-			  	<span>Take out the trash</span>
-			  </li>
-			  <li>
-			  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
-			    <span>Pay the electricity bill</span>
-			  </li>
-			  <li><img src="assets/list.png" class="list-icon" alt="task icon">
-			  	<span>Mow the lawn</span>
-			  </li>
-			  <li>
-			  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
-			    <span>Pay the cable bill</span>
-			  </li>
-			</ul>
-		  </div>
-		  <div class="mdl-card__actions mdl-card--border">
-		  	<a ui-sref="dash.tasks" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Tasks</a>
-		  </div>
-		</div> <!-- end of card 1  --> 
-
-		<div class="mdl-card mdl-shadow--2dp demo-card-square expenses feature">
-		  <div class="mdl-card__title mdl-card--expand">
-		    <h2 class="mdl-card__title-text">Monthly Expenses</h2>
-		  </div>
-		  <div class="mdl-card__supporting-text">
-			<img src="assets/template_graph.png" class="chart" alt="graph icon">
-		  </div>
-		  <div class="mdl-card__actions mdl-card--border">
-		    <a ui-sref="dash.expenses" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Expenses</a>
-		  </div>
-		</div> <!-- end of card 2 --> 
-	</div> <!-- end of row one -->  
-
-	<div class="mdl-cell mdl-cell--5-col">
-		<div class="mdl-card mdl-shadow--2dp demo-card-square feature">
-		  <div class="mdl-card__title mdl-card--expand">
-		    <h2 class="mdl-card__title-text">User Activity</h2>
-		  </div>
-		  <div class="mdl-card__supporting-text">
-		  	<img src="assets/template_chart.png" class="chart" alt="graph icon">
-		  </div>
-		  <div class="mdl-card__actions mdl-card--border">
-		    <a ui-sref="dash.tasks" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Activities</a>
-		  </div>
-		</div> <!-- end of card 3  --> 
-
-		<div class="mdl-card mdl-shadow--2dp demo-card-square feature">
-		  <div class="mdl-card__title mdl-card--expand">
-		    <h2 class="mdl-card__title-text">Current Issues</h2>
-		  </div>
-		  <div class="mdl-card__supporting-text issues-list">
-		  	<ul>
 				  <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
-				  	<span>Please label your food in the fridge</span>
-				  </li>
+					  <span>Please label your food in the fridge</span>
+					</li>
 				  <li>
 				  	<img src="assets/default_user.png" class="list-icon" alt="expense icon">
 				    <span>Thanks for taking out the trash, Maura!</span>
@@ -74,45 +76,61 @@
 				  	<img src="assets/default_user.png" class="list-icon" alt="expense icon">
 				    <span>Just wanted to let you guys know my mom will be visiting saturday.</span>
 				  </li>
-			  </ul>
-		  </div>
-		  <div class="mdl-card__actions mdl-card--border">
-		    <a ui-sref="dash.issues" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">View Issues</a>
-		  </div>
-		</div> <!-- end of card 4  --> 
-  <div> <!-- end of row two --> 
-</div> <!-- end of feature boxes  --> 
+				</ul>
+      </div>
+      <div class="mdl-card__actions">
+         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">View all issues<i class="material-icons">chevron_right</i></a>
+      </div>
+    </div>
 
-<!-- <section class="roommates">
-        <div class="row">
-          <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">current user</span>
-          </div>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <img src="images/more-from-3.png">
+      </div>
+      <div class="mdl-card__title">
+         <h4 class="mdl-card__title-text">House Summary</h4>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <span class="mdl-typography--font-light mdl-typography--subhead">Your roommates have completed ___ tasks. ___ Bills have been paid since you have last visited. ___ house issues have been addressed.</span>
+      </div>
+      <div class="mdl-card__actions">
+         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">Read full summary<i class="material-icons">chevron_right</i></a>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">roommate Name</span>
-          </div>
+<section class="roommates">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">current user</span>
+    </div>
 
-           <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">roommate Name</span>
-          </div>
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">roommate Name</span>
+    </div>
 
-          <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">roommate Name</span>
-          </div>
-          
-           <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">roommate Name</span> 
-          </div>
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">roommate Name</span>
+    </div>
 
-          <div class="col s2">
-            <img src="../../../assets/default_user.png" alt="user photo">
-            <span class="roommateName">roommate Name</span>
-          </div>
-        </div>
-    </section> -->  
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">roommate Name</span>
+    </div>
+    
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">roommate Name</span> 
+    </div>
+
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <img src="assets/default_user.png" alt="user photo">
+      <span class="roommateName">roommate Name</span>
+    </div>
+	</section>  
+ </div>
+<div>
