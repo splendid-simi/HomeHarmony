@@ -1,139 +1,68 @@
-<div class="colmask doublepage">
-  <div class="colleft">
-    <div class="col1">
-      <!-- Column 1 start -->
+<div class="tasks-container">
+  <div class="mdl-grid">
+    <div class="tasksForm-container mdl-cell mdl-cell--5-col">
       <h2>Create a new task</h2>
+      <form name="tasksForm" class="tasksForm" ng-submit='addTask()'>
+        <div>
+          <label for="newTask">Task:</label>
+          <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+        </div>
+        <div>
+          <label for="newTaskDoer">Assignee:</label>
+          <input type='text' ng-model='newTaskDoer' ng-maxlength='10' placeholder='Enter the task assignee' required>
+        </div>
+        <div>
+          <label for="newTaskDueDate">Due Date:</label>
+          <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
+        </div>
+        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create!</button>
+      </form>
+    </div>
+
+    <div class="tasksList-container mdl-cell mdl-cell--6-col">
       <form name="tasksForm" ng-submit='addTask()'>
-        <input type='text'ng-model='newTask' ng-validate="" maxLength="20" placeholder='Enter the new task'>
-        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer'>
-        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due'>
+        <label for="newTask">Task:</label>
+        <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer' required>
+        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
+        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
         <button>Create!</button>
       </form>
-      <!-- Column 1 end -->
+      Column 1 end
     </div>
     <div class="col2">
-      <!-- Column 2 start -->
       <h2>House Tasks</h2>
       <ul>
         <li ng-repeat="task in compTaskArr">
-          <input type="checkbox" name="task"> {{task.doer}} {{task.description}} {{task.dueDate}}
+          <input type="checkbox" name="task">
+          <div role="alert">
+            <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
+            <span class="error" ng-show="tasksForm.newTask.$error.email">
+              That is not a valid email</span>
+          </div>
+          <span class="assignee">{{task.doer}}</span> 
+          <span class="description">{{task.description}} </span>
+          <span class="dueDate">{{task.dueDate}}</span> 
         </li>
         <li ng-repeat="task in taskArr">
-          <input type="checkbox" name="task"> {{task.doer}} {{task.description}} {{task.dueDate}}
+          <input type="checkbox" name="task">
+          <span class="assignee">{{task.doer}}</span> 
+          <span class="description">{{task.description}} </span>
+          <span class="dueDate">{{task.dueDate}}</span> 
         </li>
         <li ng-if="taskArr.length == 0">
           <strong>No current tasks</strong>
         </li>
       </ul>
-      <!-- Column 2 end -->
     </div>
   </div>
 </div>
 
-<style media="screen" type="text/css">
 
-  /* Header styles */
-  #header {
-    clear:both;
-    float:left;
-    width:100%;
-  }
-  #header {
-    border-bottom:1px solid #000;
-  }
-  #header p,
-  #header h1,
-  #header h2 {
-    padding:.4em 15px 0 15px;
-    margin:0;
-  }
-  #header ul {
-    clear:left;
-    float:left;
-    width:100%;
-    list-style:none;
-    margin:10px 0 0 0;
-    padding:0;
-  }
-  #header ul li {
-    display:inline;
-    list-style:none;
-    margin:0;
-    padding:0;
-  }
-  #header ul li a {
-    display:block;
-    float:left;
-    margin:0 0 0 1px;
-    padding:3px 10px;
-    text-align:center;
-    background:#eee;
-    color:#000;
-    text-decoration:none;
-    position:relative;
-    left:15px;
-    line-height:1.3em;
-  }
-  #header ul li a:hover {
-    background:#369;
-    color:#fff;
-  }
-  #header ul li a.active,
-  #header ul li a.active:hover {
-    color:#fff;
-    background:#000;
-    font-weight:bold;
-  }
-  #header ul li a span {
-    display:block;
-  }
-  /* 'widths' sub menu */
-  #layoutdims {
-    clear:both;
-    background:#eee;
-    border-top:4px solid #000;
-    margin:0;
-    padding:6px 15px !important;
-    text-align:right;
-  }
-  /* column container */
-  .colmask {
-    clear:both;
-    float:left;
-    width:100%;     /* width of whole page */
-    overflow:hidden;    /* This chops off any overhanging divs */
-  }
-  /* common column settings */
-  .colright,
-  .colmid,
-  .colleft {
-    float:left;
-    width:100%;
-    position:relative;
-  }
-  .col1,
-  .col2,
-  .col3 {
-    float:left;
-    position:relative;
-    padding:0 0 1em 0;
-    overflow:hidden;
-  }
-  /* 2 Column (double page) settings */
-  .doublepage {
-    background:#eee;    /* right column background colour */
-  }
-  .doublepage .colleft {
-    right:50%;      /* right column width */
-    background:#fff;    /* left column background colour */
-  }
-  .doublepage .col1 {
-    width:46%;      /* left column content width (column width minus left and right padding) */
-    left:52%;     /* right column width plus left column left padding */
-  }
-  .doublepage .col2 {
-    width:46%;      /* right column content width (column width minus left and right padding) */
-    left:56%;     /* (right column width) plus (left column left and right padding) plus (right column left padding) */
-  }
-
-  </style>
+<!-- <div role="alert">
+  <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
+  <span class="error" ng-show="tasksForm.newTask.$error.email">
+    That is not a valid email</span>
+</div>
+ -->

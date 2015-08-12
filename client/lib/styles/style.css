@@ -56,6 +56,10 @@ a {
   color:#000;
 }
 
+li {
+  list-style-type: none;
+}
+
 /* icons */ 
 
 .chart {
@@ -77,15 +81,27 @@ a {
 
 /* dashboard */ 
 
+.feature-boxes {
+  background-color: yellow;
+}
+
+/* custom size for feature boxes */
+.demo-card-square.mdl-card {
+  width: 250px;
+  height: 250px;
+  vertical-align: top;
+}
+
 .feature-boxes .feature {
   display: inline-block;
   height:inherit;
-  min-width:200px;
+/*  min-width:120px;*/
   min-height: 400px;
   text-align: center;
-  width:24%;	
+  width:100px;	
   text-align: center;
   border:1px solid grey;
+  background-color: blue;
 }
 
 .feature-boxes img {
@@ -185,3 +201,98 @@ footer {
 .align-left {
 	text-align: left;
 }
+
+
+/* Tasks */
+
+.tasksForm-container,
+.tasksList-container {
+  display: inline-block;
+}
+
+.tasksForm-container h2,
+.tasksList-container h2 {
+  font-size: 26px;
+}
+
+.tasksForm div {
+  display: block;
+}
+
+.tasksForm input {
+  width:200px;
+  height:20px;
+  padding:2px;
+  margin:10px;
+}
+
+.tasksForm label {
+  display:inline-block;
+  width:70px;
+  height:20px;
+  text-align: left;
+}
+
+.tasksForm button {
+  margin:20px;
+}
+
+/*.task-list input[type="checkbox"] {
+  width:60px;
+  height:60px;
+}*/
+
+  /* Increases the size of the Checkboxes */
+input[type=checkbox] {
+  -ms-transform: scale(1.1); /* IE */
+  -moz-transform: scale(1.1); /* FF */
+  -webkit-transform: scale(1.1); /* Safari and Chrome */
+  -o-transform: scale(1.1); /* Opera */
+  padding: 10px;
+}
+
+.tasksList-container li {
+  display: block;
+  margin:5px;
+  min-width:600px;
+}
+
+.tasksList-container .assignee,
+.tasksList-container .dueDate,
+.tasksList-container .dueDate {
+  margin:5px;
+}
+
+.tasksList-container .assignee {
+  display:inline-block;
+  width:120px;
+  font-weight: bold;
+}
+
+.tasksList-container .dueDate {
+  display:inline-block;
+  width:100px;
+  font-style: italic;
+}
+
+.tasksList-container .description {
+  display:inline-block;
+  width:300px;
+}
+
+
+
+/*
+
+uncomment for dim 
+
+#layoutdims {
+  clear:both;
+  background:#eee;
+  border-top:4px solid #000;
+  margin:0;
+  padding:6px 15px !important;
+  text-align:right;
+}
+
+*/
