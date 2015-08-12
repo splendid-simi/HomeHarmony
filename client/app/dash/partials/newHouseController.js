@@ -16,8 +16,12 @@ angular.module('homeHarmony.newHouse',['firebase'])
         housesDb = totalDb.houses;
         console.log("houses!",housesDb)
         for (var prop in housesDb){
+          console.log(prop);
           if (prop === $scope.chosenHouse) {
-            // housesDb[prop].houseMembers.push("fix this"); // should push user email
+            console.log('join successful');
+            db.child('houses').child(prop).child('houseMembers').push(
+              localStorage.getItem("currentUserEmail")
+            );
           }
         }
       }, function (errorObject) {
