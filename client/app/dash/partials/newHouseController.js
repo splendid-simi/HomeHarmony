@@ -2,6 +2,8 @@ angular.module('homeHarmony.newHouse',['firebase'])
 
 .controller('newHouseCtrl', function ($scope, $location, $firebaseObject) {
 
+  currentUserId = localStorage.getItem("currentUserId");
+
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
   $scope.joinHouse = function(){
@@ -31,6 +33,8 @@ angular.module('homeHarmony.newHouse',['firebase'])
 
     db.child('houses').once('child_added', function(snapshot){
       currentHouseId = snapshot.key();
+      localStorage.setItem("currentHouseId", currentHouseId);
+
     //email users
 
       console.log(currentUserId, ' user, house ', currentHouseId)
