@@ -5,8 +5,8 @@ angular.module('homeHarmony.newHouse',['firebase'])
   currentUserId = localStorage.getItem("currentUserId");
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-
-  $scope.joinHouse = function(){
+  
+    $scope.joinHouse = function(){
     $('#joinHouseID').val('');
     db.child('users').child(currentUserId).update({
       'house': $scope.chosenHouse
