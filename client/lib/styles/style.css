@@ -84,8 +84,12 @@ li {
 .feature-boxes {
   background-color: yellow;
 }
-.feature {
-  background-color: pink;
+
+/* custom size for feature boxes */
+.demo-card-square.mdl-card {
+  width: 250px;
+  height: 250px;
+  vertical-align: top;
 }
 
 .feature-boxes .feature {
