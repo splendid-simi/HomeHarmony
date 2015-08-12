@@ -1,26 +1,27 @@
-angular.module('homeHarmony.tasks', ['firebase'])
+angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
 .controller('tasksCtrl', function($scope, $firebaseObject){
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   $scope.taskArr = [];
   $scope.compTaskArr = [];
+  $scope.currentDate = new Date();
+
   var taskDb = {};
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
-
 
   $scope.addTask = function() {
     console.log("addtask");
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
-      dueDate: $scope.newTaskDueDate,
+      dueDate: $scope.newTaskDueDate.toLocaleDateString(),
       dateCreated: new Date(),
       completed: false,
       repeating: -1
     }
-    console.log(taskObj);
+    console.log("task obj in addTask", taskObj);
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
     db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
@@ -32,6 +33,7 @@ angular.module('homeHarmony.tasks', ['firebase'])
       console.log('tasks ', $scope.taskArr);
       $scope.getTasks();
     })
+    $scope.clearTasksForm();
   };
 
   $scope.getTasks = function() {
@@ -58,11 +60,19 @@ angular.module('homeHarmony.tasks', ['firebase'])
 
   $scope.checkOffTask = function(taskID) {
     db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': true});
-  }
+  };
 
   $scope.checkOnTask = function(taskID) {
     db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': false});
-  }
+  };
+
+  $scope.clearTasksForm = function() {
+    $scope.newTask = '';
+    $scope.newTaskDoer = '';
+    $scope.newTaskDueDate = '';
+    // resets form to pristine to not trigger error validation when submitting
+    $scope.tasksForm.$setPristine();
+  };
 
   $scope.getTasks();
 })

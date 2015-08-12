@@ -4,65 +4,52 @@
       <h2>Create a new task</h2>
       <form name="tasksForm" class="tasksForm" ng-submit='addTask()'>
         <div>
-          <label for="newTask">Task:</label>
-          <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
-        </div>
-        <div>
-          <label for="newTaskDoer">Assignee:</label>
-          <input type='text' ng-model='newTaskDoer' ng-maxlength='10' placeholder='Enter the task assignee' required>
-        </div>
-        <div>
-          <label for="newTaskDueDate">Due Date:</label>
-          <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
-        </div>
-        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create!</button>
-      </form>
-    </div>
+          <label>Task:</label>
+          <input type='text' id="newTask" name="task" ng-model='newTask' ng-minlength='4' ng-maxlength='20' placeholder='Enter the new task' required>
 
-    <div class="tasksList-container mdl-cell mdl-cell--6-col">
-      <form name="tasksForm" ng-submit='addTask()'>
-        <label for="newTask">Task:</label>
-        <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
-        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer' required>
-        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
-        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
-        <button>Create!</button>
+            <div ng-messages="tasksForm.task.$error" role="alert" class="form-error-active">
+              <div ng-message="required">You did not enter a task</div>
+              <div ng-message-exp="['minlength', 'maxlength']">Your task must be between 4 and 20 characters</div>
+            </div>
+
+            <div>
+              <label for="newTaskDoer">Assignee:</label>
+              <input type='text' name="taskDoer" ng-model='newTaskDoer' ng-minlength='3' ng-maxlength='10' placeholder='Enter the task assignee' required>
+            </div>
+
+            <div ng-messages="tasksForm.taskDoer.$error" role="alert" class="form-error-active">
+              <div ng-message="required">You did not assign the task to someone</div>
+              <div ng-message-exp="['minlength', 'maxlength']"> The assignee's name must be between 3 and 10 characters</div>
+            </div>
+
+            <div>
+              <label for="newTaskDueDate">Due Date:</label>
+              <input type="date" name="newTaskDueDate" ng-model='newTaskDueDate' min='{{currentDate | date:"yyyy-MM-dd"}}'placeholder='Enter the date due' required>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create!</button>
       </form>
-      Column 1 end
     </div>
-    <div class="col2">
-      <h2>House Tasks</h2>
-      <ul>
-        <li ng-repeat="task in compTaskArr">
-          <input type="checkbox" name="task">
-          <div role="alert">
-            <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
-            <span class="error" ng-show="tasksForm.newTask.$error.email">
-              That is not a valid email</span>
-          </div>
-          <span class="assignee">{{task.doer}}</span> 
-          <span class="description">{{task.description}} </span>
-          <span class="dueDate">{{task.dueDate}}</span> 
-        </li>
-        <li ng-repeat="task in taskArr">
-          <input type="checkbox" name="task">
-          <span class="assignee">{{task.doer}}</span> 
-          <span class="description">{{task.description}} </span>
-          <span class="dueDate">{{task.dueDate}}</span> 
-        </li>
-        <li ng-if="taskArr.length == 0">
-          <strong>No current tasks</strong>
-        </li>
-      </ul>
-    </div>
+  </div>
+
+  <div class="tasksList-container">
+    <h2>House Tasks</h2>
+    <ul>
+      <li ng-repeat="task in compTaskArr">
+        <input type="checkbox" name="task">
+        <span class="assignee">{{task.doer}}</span> 
+        <span class="description">{{task.description}} </span>
+        <span class="dueDate">{{task.dueDate}}</span> 
+      </li>
+      <li ng-repeat="task in taskArr">
+        <input type="checkbox" name="task">
+        <span class="assignee">{{task.doer}}</span> 
+        <span class="description">{{task.description}} </span>
+        <span class="dueDate">{{task.dueDate}}</span> 
+      </li>
+      <li ng-if="taskArr.length == 0">
+        <strong>No current tasks</strong>
+      </li>
+    </ul>
   </div>
 </div>
 
-
-<!-- <div role="alert">
-  <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
-  <span class="error" ng-show="tasksForm.newTask.$error.email">
-    That is not a valid email</span>
-</div>
- -->

@@ -228,6 +228,14 @@ footer {
   height:60px;
 }*/
 
+
+.form-error-active {
+  font-size:12px;
+  font-weight: bold;
+  color:red;
+
+}
+
   /* Increases the size of the Checkboxes */
 input[type=checkbox] {
   -ms-transform: scale(1.1); /* IE */
