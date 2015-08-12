@@ -11,6 +11,18 @@ angular.module('homeHarmony.newHouse',['firebase'])
     db.child('users').child(currentUserId).update({
       'house': $scope.chosenHouse
     });
+    db.once("value", function(snapshot) {
+        totalDb = snapshot.val();
+        housesDb = totalDb.houses;
+        console.log("houses!",housesDb)
+        for (var prop in housesDb){
+          if (prop === $scope.chosenHouse) {
+            // housesDb[prop].houseMembers.push("fix this"); // should push user email
+          }
+        }
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
   }
 
   $scope.newHouseReg = function(){
