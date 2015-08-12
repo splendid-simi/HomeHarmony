@@ -6,6 +6,8 @@ console.log("In expensesCtrl");
   var expensesDb;
   $scope.expensesArr;
   var dataObj;
+  currentHouseId = localStorage.getItem('currentHouseId');
+  currentUserId = localStorage.getItem("currentUserId");
 
   // get the date so user can't enter an expense due before today
   $scope.currentDate = new Date();

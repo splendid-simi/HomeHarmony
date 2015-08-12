@@ -4,6 +4,8 @@ angular.module('homeHarmony.issues',['firebase'])
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   $scope.allIssues = [];
   var issuesDb = {};
+  currentHouseId = localStorage.getItem('currentHouseId');
+  currentUserId = localStorage.getItem("currentUserId");
   
 
   $scope.addIssue = function(){
