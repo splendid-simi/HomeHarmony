@@ -3,24 +3,22 @@ angular.module('homeHarmony.expenses', ['firebase'])
 .controller('expensesCtrl', function($scope, $firebaseObject){
 console.log("In expensesCtrl");
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-  var expensesArr = [];
-  var dataArr;
+  var expensesDb;
+  $scope.expensesArr;
   var dataObj;
-  //hard coded for now, should be set from the app
-  var currentHouse = "-JwPcwYMViRlKqSZmnOw";
 
   // Attach an asynchronous callback to read the data at our posts reference
   db.once("value", function(snapshot) {
     // make sure dataArr is blank
-    dataArr = [];
+    $scope.expensesArr = [];
     // load the expenses for the current house
-    expensesArr = snapshot.val().houses[currentHouse].expenses;
-    for (var i = 0; i < expensesArr.length; i++) {
-      // clear the dataObj
+    expensesDb = snapshot.val().houses[currentHouseId].expenses;
+    console.log("expenses",snapshot.val().houses[currentHouseId].expenses)
+    for (expense in expensesDb){
       dataObj = {};
-      dataObj.name = expensesArr[i].expenseName;
-      dataObj.y = expensesArr[i].cost;
-      dataArr.push(dataObj);
+      dataObj.name = expensesDb[expense].expenseName;
+      dataObj.y = expensesDb[expense].cost;
+      $scope.expensesArr.push(dataObj);
     }
     // show the cool pie chart
     drawPie();
@@ -72,7 +70,7 @@ console.log("In expensesCtrl");
       series: [{
         name: "Expenses",
         colorByPoint: true,
-        data: dataArr
+        data: $scope.expensesArr
       }]
     });
   };
