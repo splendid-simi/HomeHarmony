@@ -24,7 +24,7 @@ console.log("In expensesCtrl");
       $scope.expensesArr.push(dataObj);
     }
     // show the cool pie chart
-    drawPie();
+    $scope.drawPie();
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
@@ -43,7 +43,7 @@ console.log("In expensesCtrl");
     });
   };
 
-  var drawPie = function () {
+  $scope.drawPie = function () {
     $('#container').highcharts( {
       chart: {
         plotBackgroundColor: null,
