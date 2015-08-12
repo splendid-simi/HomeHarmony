@@ -6,6 +6,9 @@ angular.module('homeHarmony.tasks', ['firebase'])
   $scope.taskArr = [];
   $scope.compTaskArr = [];
   var taskDb = {};
+  currentHouseId = localStorage.getItem('currentHouseId');
+  currentUserId = localStorage.getItem("currentUserId");
+
 
   $scope.addTask = function() {
     console.log("addtask");
@@ -33,17 +36,17 @@ angular.module('homeHarmony.tasks', ['firebase'])
 
   $scope.getTasks = function() {
     db.once('value', function(snapshot){
-      var temp = snapshot.val(); 
+      var temp = snapshot.val();
       console.log(temp, 'temp');
       console.log(currentHouseId, 'CHID in getTasks');
       var temp2 = temp.houses[currentHouseId];
-      taskDb = temp2.tasks;  
+      taskDb = temp2.tasks;
       $scope.taskArr = [];
       for (prop in taskDb) {
-        if (taskDb[prop].completed) { 
+        if (taskDb[prop].completed) {
           $scope.compTaskArr.push(taskDb[prop]);
-        } else { 
-          $scope.taskArr.push(taskDb[prop]); 
+        } else {
+          $scope.taskArr.push(taskDb[prop]);
         }
         console.log('gotten tasks ', $scope.taskArr)
       }

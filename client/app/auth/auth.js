@@ -38,6 +38,8 @@ angular.module('homeHarmony.auth',[])
       },
       logout: function (){
         Auth.$unauth();
+        localStorage.setItem('currentUserId', 'DEFAULT_USER_ID')
+        localStorage.setItem('currentHouseId', 'DEFAULT_HOUSE_ID')
         $state.go('landing');
       }
     };

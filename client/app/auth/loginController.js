@@ -1,6 +1,6 @@
 angular.module('homeHarmony.login',['firebase'])
 
-.controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject) {
+.controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state) {
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
@@ -19,7 +19,13 @@ angular.module('homeHarmony.login',['firebase'])
         for (var prop in userDb){
           if (userDb[prop].email === userEmail) {
             currentUserId = prop;
-            currentHouseId = userDb[prop].house;
+            localStorage.setItem("currentUserId", currentUserId);
+            if (userDb[prop].house) {
+              currentHouseId = userDb[prop].house;
+              localStorage.setItem("currentHouseId", currentHouseId);
+            } else {
+              $state.go('dash.newHouse')
+            }
             console.log('CHID ', currentHouseId);
           }
         }
