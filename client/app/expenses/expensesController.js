@@ -7,6 +7,9 @@ console.log("In expensesCtrl");
   $scope.expensesArr;
   var dataObj;
 
+  // get the date so user can't enter an expense due before today
+  $scope.currentDate = new Date();
+
   // Attach an asynchronous callback to read the data at our posts reference
   db.once("value", function(snapshot) {
     // make sure dataArr is blank
