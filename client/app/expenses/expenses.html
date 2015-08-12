@@ -10,8 +10,15 @@
 
   <!-- read from the database to populate expenses -->
 
-  <li>Cable Bill, $123.50, 08/29/15</li>
-  <li>Electric Bill, $73.00, 08/27/15</li>
+      <ul>
+        <li ng-repeat="expense in expensesArr">
+           {{expense.name}} {{expense.y}}
+        </li>
+        
+        <li ng-if="expensesArr.length === 0">
+          <strong>No Expenses</strong>
+        </li>
+      </ul>
 </div>
 
 <!-- chart container -->
