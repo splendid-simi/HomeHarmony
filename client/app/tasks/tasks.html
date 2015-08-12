@@ -21,6 +21,17 @@
     </div>
 
     <div class="tasksList-container mdl-cell mdl-cell--6-col">
+      <form name="tasksForm" ng-submit='addTask()'>
+        <label for="newTask">Task:</label>
+        <input type='text' id="newTask" name="newTask" ng-model='newTask' ng-maxlength='20' placeholder='Enter the new task' required>
+        <input type='text'ng-model='newTaskDoer' placeholder='Enter the task doer' required>
+        <input type='text'ng-model='newTaskDueDate' placeholder='Enter the date due' required>
+        <!-- ng-class="{'error': countdownevent.event.$invalid && countdownevent.event.$dirty}"  -->
+        <button>Create!</button>
+      </form>
+      Column 1 end
+    </div>
+    <div class="col2">
       <h2>House Tasks</h2>
       <ul>
         <li ng-repeat="task in compTaskArr">
@@ -47,3 +58,11 @@
     </div>
   </div>
 </div>
+
+
+<!-- <div role="alert">
+  <span class="error" ng-show="tasksForm.newTask.$error.required"> Please enter a task </span>
+  <span class="error" ng-show="tasksForm.newTask.$error.email">
+    That is not a valid email</span>
+</div>
+ -->
