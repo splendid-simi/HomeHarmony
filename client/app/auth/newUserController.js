@@ -22,6 +22,7 @@ angular.module('homeHarmony.newUser', ['firebase'])
         for (var prop in temp){
           if(temp[prop].email === userEmail) {
             currentUserId = prop;
+            localStorage.setItem("currentUserId", currentUserId);
           }
         }
         console.log(currentUserId, 'userid newusercont');
