@@ -2,13 +2,13 @@
   <div class="mdl-grid">
     <div class="tasksForm-container mdl-cell mdl-cell--5-col">
       <h2>Create a new task</h2>
-      <form name="tasksForm" class="tasksForm" ng-submit='addTask()'>
+      <form name="tasksForm" class="tasksForm" ng-submit='tasks.addTask()'>
         <div>
           <label>Task:</label>
           <input type='text' id="newTask" name="task" ng-model='newTask' ng-minlength='4' ng-maxlength='20' placeholder='Enter the new task' required>
 
             <div ng-messages="tasksForm.task.$error" role="alert" class="form-error-active">
-              <div ng-message="required">You did not enter a task</div>
+              <div ng-message="required">enter a task</div>
               <div ng-message-exp="['minlength', 'maxlength']">Your task must be between 4 and 20 characters</div>
             </div>
 
@@ -18,35 +18,39 @@
             </div>
 
             <div ng-messages="tasksForm.taskDoer.$error" role="alert" class="form-error-active">
-              <div ng-message="required">You did not assign the task to someone</div>
+              <div ng-message="required">assign the task to someone</div>
               <div ng-message-exp="['minlength', 'maxlength']"> The assignee's name must be between 3 and 10 characters</div>
             </div>
 
             <div>
               <label for="newTaskDueDate">Due Date:</label>
-              <input type="date" name="newTaskDueDate" ng-model='newTaskDueDate' min='{{currentDate | date:"yyyy-MM-dd"}}'placeholder='Enter the date due' required>
+              <input type="date" name="TaskDueDate" ng-model='newTaskDueDate' min='{{tasks.currentDate | date:"yyyy-MM-dd"}}' required>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create!</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add Task</button>
       </form>
     </div>
   </div>
 
   <div class="tasksList-container">
     <h2>House Tasks</h2>
-    <ul>
-      <li ng-repeat="task in tasks.compTaskArr" class="strike">
-        {{task.doer}} {{task.description}} {{Date.parse(task.dueDate).toLocaleDateString()}}
-      </li>
-      <li ng-repeat="task in tasks.taskArr">
-        <input type="checkbox" name="task">
-        <span class="assignee">{{task.doer}}</span> 
-        <span class="description">{{task.description}} </span>
-        <span class="dueDate">{{Date.parse(task.dueDate).toLocaleDateString()}} cat </span> 
-      </li>
-      <li ng-if="taskArr.length == 0">
-        <strong>No current tasks</strong>
-      </li>
-    </ul>
+      <h3>Current Tasks:</h3>
+        <ul>
+          <li ng-repeat="task in tasks.taskArr">
+            <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
+            <span class="assignee">{{task.doer}}</span> 
+            <span class="description">{{task.description}} </span>
+            <span class="dueDate">{{task.dueDateFormat}} </span> 
+          </li>
+        </ul>
+      <h3>Completed Tasks:</h3>
+      <ul>
+        <li ng-repeat="task in tasks.compTaskArr" class="strike">
+          {{task.doer}} {{task.description}} {{task.dueDateFormat}}
+        </li>
+        <li ng-if="taskArr.length == 0">
+          <strong>No current tasks</strong>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 

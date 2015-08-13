@@ -7,6 +7,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   $scope.tasks = {};
   $scope.tasks.taskArr = [];
   $scope.tasks.compTaskArr = [];
+  $scope.tasks.sortCompTaskByDateArr = [];
   $scope.tasks.sortByDateArr = [];
   $scope.tasks.currentDate = new Date();
 
@@ -16,15 +17,14 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
   $scope.tasks.addTask = function() {
     taskObj = {
-      description: $scope.tasks.newTask,
-      doer: $scope.tasks.newTaskDoer,
-      // due date must be string to be stored in database 
-      dueDate: $scope.tasks.newTaskDueDate.toString(),  
+      description: $scope.newTask,
+      doer: $scope.newTaskDoer,
+      // date must be string to be stored in database 
+      dueDate: new Date($scope.newTaskDueDate).toString(),  
       dateCreated: new Date(),
       completed: false,
       repeating: -1
     }
-
     // pushes task into database 
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
@@ -51,42 +51,61 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
       // overrides current tasks in the array
       $scope.tasks.taskArr = [];
+      $scope.tasks.sortCompTaskByDateArr = [];
+
       for (prop in taskDb) {
-          // limits completed tasks that will appear on the page to 12
-        if (taskDb[prop].completed && $scope.tasks.compTaskArr.length <= 12) {
-          $scope.tasks.sortCompTaskByDate.push(taskDb[prop]);
-          $scope.tasks.compTaskArr = $scope.tasks.sortByDate(sortCompTaskByDate);
+        if (taskDb[prop].completed) {
+          $scope.tasks.sortCompTaskByDateArr.push(taskDb[prop]);
+          // displays 12 most recently completed tasks in descending order 
+          $scope.tasks.compTaskArr = $scope.tasks.sortByDate($scope.tasks.sortCompTaskByDateArr);
         } else if (!taskDb[prop].completed) {
           $scope.tasks.sortByDateArr.push(taskDb[prop]);
           // sorts and displays date in descending order 
           $scope.tasks.taskArr = $scope.tasks.sortByDate($scope.tasks.sortByDateArr);
         }
-        console.log('gotten tasks ', $scope.tasks.taskArr); 
       }
+        console.log('gotten tasks ', $scope.tasks.taskArr); 
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     })
   };
-
-  $scope.tasks.sortByDate = function(arr) {
-    var sortedArr = arr.sort(function(a,b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
-    return sortedArr;
+  
+  // creates readable format for dates to display in view 
+  $scope.tasks.parseDate = function(taskObj) {
+    for (task in taskObj) {
+      taskObj[task].dueDateFormat = new Date(taskObj[task].dueDate).toLocaleDateString();
+    }
+    return taskObj;
   }
 
-  $scope.tasks.checkOffTask = function(taskID) {
-    db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': true});
-  };
+  $scope.tasks.sortByDate = function(arr) {
+    if (arr.length > 1) {
+      var sortedArr = arr.sort(function(a,b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
+      return $scope.tasks.parseDate(sortedArr); 
+    } else {
+      return arr[0]; 
+    }
+  }
 
-  $scope.tasks.checkOnTask = function(taskID) {
-    db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': false});
+  $scope.tasks.checkTask = function(task) {
+    console.log("task obj", task);
+    console.log("check task was called");
+    if (task.completed === false) {
+      db.child('houses').child(currentHouseId).child('tasks').child(task.$$hashKey).set({'completed': true});
+    } else {
+      db.child('houses').child(currentHouseId).child('tasks').child(task.$$hashKey).set({'completed': false});
+    }
+    // re-render tasks so completed task will go to the bottom of the list
+    $scope.tasks.getTasks();
   };
 
   $scope.tasks.clearTasksForm = function() {
-    $scope.tasks.newTask = '';
-    $scope.tasks.newTaskDoer = '';
-    $scope.tasks.newTaskDueDate = '';
+    console.log("clear tasks fn called");
+    $scope.newTask = '';
+    $scope.newTaskDoer = '';
+    $scope.newTaskDueDate = '';
     // resets form to not trigger error validation after form has been submitted
-    $scope.tasks.tasksForm.$setPristine();
+    $scope.tasksForm.$setPristine();
   };
 
   $scope.tasks.getTasks();
