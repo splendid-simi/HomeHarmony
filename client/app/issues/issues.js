@@ -9,7 +9,11 @@ angular.module('homeHarmony.issues',['firebase'])
   
 
   $scope.addIssue = function(){
-    newIssue = $scope.issueText;
+    var now = new Date();
+    newIssue = {
+      date: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
+      text: $scope.issueText
+    };
     db.child('houses').child(currentHouseId).child('issues').push(newIssue);
   };
 
@@ -23,9 +27,23 @@ angular.module('homeHarmony.issues',['firebase'])
         allIssues.push(issuesDb[issue]);
       }
       $q.all(allIssues).then(function(){
-      $scope.allIssues = allIssues;
-    });
+        $scope.allIssues = allIssues;
+      });
       console.log("All issues:", $scope.allIssues);
+    });
+  };
+
+  $scope.removeIssue = function(issueText){
+    // console.log("issue index ",index);
+    db.on('value', function(snapshot){
+      issuesDb = snapshot.val().houses[currentHouseId].issues;
+      for (issue in issuesDb){
+        if (issuesDb[issue].text === issueText){
+          console.log('deleting issues with ', issueText);
+          db.child('houses').child(currentHouseId).child('issues').child(issue).remove();
+        }
+      }
+      
     });
   };
 

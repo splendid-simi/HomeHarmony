@@ -6,14 +6,19 @@
 <form name="printForm" ng-submit='getIssues()'>
     <button>PrintIssues</button>
 </form>
+
 <!-- read from the database to populate issues -->
 
 <h2>Current Issues</h2>
 <ul>
   <li ng-repeat="issue in allIssues track by $index">
-    {{issue}}
+    {{issue.date}} - {{issue.text}}
+    <form name="removeButton" ng-submit='removeIssue(issue.text)'>
+      <button>Resolved!</button>
+    </form>
   </li>
   <li ng-if="allIssues.length === 0">
     <strong>No Issues!</strong>
   </li>
+  
 </ul>
