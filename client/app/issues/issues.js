@@ -1,11 +1,11 @@
 angular.module('homeHarmony.issues',['firebase'])
 
-.controller('issuesCtrl', function ($scope){
+.controller('issuesCtrl', function ($scope, $q){
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-  $scope.allIssues = [];
-  var issuesDb = {};
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
+  var allIssues;
+  var issuesDb = {};
   
 
   $scope.addIssue = function(){
@@ -18,10 +18,13 @@ angular.module('homeHarmony.issues',['firebase'])
       var dbValues = snapshot.val();
       var thisHouse = dbValues.houses[currentHouseId];
       issuesDb = thisHouse.issues;
-      $scope.allIssues = [];
+      allIssues = [];
       for (issue in issuesDb){
-        $scope.allIssues.push(issuesDb[issue]);
+        allIssues.push(issuesDb[issue]);
       }
+      $q.all(allIssues).then(function(){
+      $scope.allIssues = allIssues;
+    });
       console.log("All issues:", $scope.allIssues);
     });
   };
