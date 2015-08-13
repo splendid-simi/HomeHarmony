@@ -3,76 +3,110 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 .controller('tasksCtrl', function($scope, $firebaseObject){
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-  $scope.taskArr = [];
-  $scope.compTaskArr = [];
-  $scope.currentDate = new Date();
 
-  var taskDb = {};
+  $scope.tasks = {};
+  $scope.tasks.taskArr = [];
+  $scope.tasks.compTaskArr = [];
+  $scope.tasks.sortCompTaskByDateArr = [];
+  $scope.tasks.sortByDateArr = [];
+  $scope.tasks.currentDate = new Date();
+
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
+  var taskDb = {};
 
-  $scope.addTask = function() {
-    console.log("addtask");
+  $scope.tasks.addTask = function() {
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
-      dueDate: $scope.newTaskDueDate.toLocaleDateString(),
+      // date must be string to be stored in database 
+      dueDate: new Date($scope.newTaskDueDate).toString(),  
       dateCreated: new Date(),
       completed: false,
       repeating: -1
     }
-    console.log("task obj in addTask", taskObj);
+    // pushes task into database 
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
     db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
       taskId = snapshot.key();
       console.log(taskId);
-      $scope.taskArr = [];
-      // get tasks
-      $scope.taskArr.push(snapshot.val());
-      console.log('tasks ', $scope.taskArr);
-      $scope.getTasks();
+      $scope.tasks.taskArr = [];
+
+      // updates view with new tasks
+      $scope.tasks.taskArr.push(snapshot.val());
+      $scope.tasks.getTasks();
     })
-    $scope.clearTasksForm();
+    $scope.tasks.clearTasksForm();
   };
 
-  $scope.getTasks = function() {
+  $scope.tasks.getTasks = function() {
+    // listen for a task to be added 
     db.once('value', function(snapshot){
       var temp = snapshot.val();
       console.log(temp, 'temp');
       console.log(currentHouseId, 'CHID in getTasks');
       var temp2 = temp.houses[currentHouseId];
       taskDb = temp2.tasks;
-      $scope.taskArr = [];
+
+      // overrides current tasks in the array
+      $scope.tasks.taskArr = [];
+      $scope.tasks.sortCompTaskByDateArr = [];
+
       for (prop in taskDb) {
         if (taskDb[prop].completed) {
-          $scope.compTaskArr.push(taskDb[prop]);
-        } else {
-          $scope.taskArr.push(taskDb[prop]);
+          $scope.tasks.sortCompTaskByDateArr.push(taskDb[prop]);
+          // displays 12 most recently completed tasks in descending order 
+          $scope.tasks.compTaskArr = $scope.tasks.sortByDate($scope.tasks.sortCompTaskByDateArr);
+        } else if (!taskDb[prop].completed) {
+          $scope.tasks.sortByDateArr.push(taskDb[prop]);
+          // sorts and displays date in descending order 
+          $scope.tasks.taskArr = $scope.tasks.sortByDate($scope.tasks.sortByDateArr);
         }
-        console.log('gotten tasks ', $scope.taskArr)
       }
-      // $scope.tasks = taskArr;
+        console.log('gotten tasks ', $scope.tasks.taskArr); 
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     })
   };
+  
+  // creates readable format for dates to display in view 
+  $scope.tasks.parseDate = function(taskObj) {
+    for (task in taskObj) {
+      taskObj[task].dueDateFormat = new Date(taskObj[task].dueDate).toLocaleDateString();
+    }
+    return taskObj;
+  }
 
-  $scope.checkOffTask = function(taskID) {
-    db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': true});
+  $scope.tasks.sortByDate = function(arr) {
+    if (arr.length > 1) {
+      var sortedArr = arr.sort(function(a,b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
+      return $scope.tasks.parseDate(sortedArr); 
+    } else {
+      return arr[0]; 
+    }
+  }
+
+  $scope.tasks.checkTask = function(task) {
+    console.log("task obj", task);
+    console.log("check task was called");
+    if (task.completed === false) {
+      db.child('houses').child(currentHouseId).child('tasks').child(task.$$hashKey).set({'completed': true});
+    } else {
+      db.child('houses').child(currentHouseId).child('tasks').child(task.$$hashKey).set({'completed': false});
+    }
+    // re-render tasks so completed task will go to the bottom of the list
+    $scope.tasks.getTasks();
   };
 
-  $scope.checkOnTask = function(taskID) {
-    db.child('houses').child(currentHouseId).child('tasks').child(taskID).set({'completed': false});
-  };
-
-  $scope.clearTasksForm = function() {
+  $scope.tasks.clearTasksForm = function() {
+    console.log("clear tasks fn called");
     $scope.newTask = '';
     $scope.newTaskDoer = '';
     $scope.newTaskDueDate = '';
-    // resets form to pristine to not trigger error validation when submitting
+    // resets form to not trigger error validation after form has been submitted
     $scope.tasksForm.$setPristine();
   };
 
-  $scope.getTasks();
+  $scope.tasks.getTasks();
 })
