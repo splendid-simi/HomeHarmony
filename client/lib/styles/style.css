@@ -7,6 +7,11 @@ html {
   background-color: #f5f5f5
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -22,7 +27,7 @@ hr {
   height: 1px;
   border: 0;
   border-top: 1px solid #ccc;
-  margin: 1em 0;
+  margin: 1em 0 20px 0;
   padding: 0;
 }
 
@@ -52,6 +57,8 @@ textarea {
   padding: 0.2em 0;
 }
 
+/* Typography */
+ 
 a {
   text-decoration: none;
   color:#000;
@@ -59,6 +66,89 @@ a {
 
 li {
   list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: 'Open Sans Condensed', sans-serif; 
+ font-weight: 300;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.tasksList-container h3 {
+  display: inline;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Forms */ 
+
+.hh-form-overlay {
+  margin-top: 60px;
+  background:rgba(255,255,255, 0.9);
+  border-radius: 5px;
+  width:500px;
+}
+
+.hh-offset {
+  padding-left:100px;
+}
+
+.hh-houseRegistration .hh-form-overlay {
+  height:80%;
+}
+
+.hh-form,
+.tasksForm-container,
+.tasksList-container {
+  padding-left: 20px;
+  text-align: left;
+}
+
+/* remove when grid can be used to offset */
+.tasksForm-container {
+  margin-left:20px;
+}
+
+.tasksList-container {
+  width:620px;
+}
+
+.hh-form input {
+  display: block;
+  width:200px;
+  height:20px;
+  padding:2px;
+  margin:5px;
+}
+
+/* to allow add roommate input and button to be on the same line on the form */
+.hh-houseRegistration .hh-form input,
+#hhform-AddRoommatebtn {
+  display: inline-block;
+}
+
+.hh-form button {
+  display: block;
+  margin:15px 10px;
+}
+
+.hh-form label {
+  display:inline-block;
+  font-weight: 400;
+  width:70px;
+  height:20px;
+  text-align: left;
+  margin: 3px;
+}
+
+.form-error-active {
+  font-size:12px;
+  font-weight: 400;
+  color:red;
 }
 
 /* icons */ 
@@ -130,24 +220,6 @@ li {
   margin:20px;
 }
 
-.joinHouse h1, 
-.newHouse h1 {
-  font-size: 30px;
-}
-
-.houseForm input {
-  display:block;
-  width:200px;
-  height:20px;
-  margin:5px;
-}
-
-.houseForm button {
-  margin:10px;
-}
-
-/* dashboard */
-
 .dash-recentTaskList li {
   text-align: left;
   margin-left:-20px;
@@ -169,6 +241,7 @@ li {
 	margin:10px auto;
 }
 
+/* footer */ 
 
 footer {
  display: flex;
@@ -176,16 +249,6 @@ footer {
   bottom:0;
   width:100%;
   margin:0 auto;
-}
-
-/* helper classes */ 
-
-.center-content {
-	text-align: center;
-}
-
-.align-left {
-	text-align: left;
 }
 
 /* Tasks */
@@ -196,53 +259,12 @@ footer {
 }
 
 .tasksList-container {
-  max-height:350px;
+  max-height:400px;
   overflow:auto;
-}
-
-.tasksForm-container h2,
-.tasksList-container h2 {
-  font-size: 26px;
-}
-
-.tasksList-container h3 {
-  display: inline;
-  font-size: 16px;
-  text-align: left;
 }
 
 .tasksForm div {
   display: block;
-}
-
-.tasksForm input {
-  width:200px;
-  height:20px;
-  padding:2px;
-  margin:10px;
-}
-
-.tasksForm label {
-  display:inline-block;
-  width:70px;
-  height:20px;
-  text-align: left;
-}
-
-.tasksForm button {
-  margin:20px;
-}
-
-/*.task-list input[type="checkbox"] {
-  width:60px;
-  height:60px;
-}*/
-
-
-.form-error-active {
-  font-size:12px;
-  font-weight: bold;
-  color:red;
 }
 
 .strike {
@@ -290,6 +312,17 @@ input[type=checkbox] {
   width:35px;
   height:35px;
 }
+
+/* helper classes */ 
+
+.center-content {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
 
 
 /* Dash.html styling */
