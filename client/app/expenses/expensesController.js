@@ -1,38 +1,33 @@
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject){
-console.log("In expensesCtrl");
+.controller('expensesCtrl', function($scope, $firebaseObject, $q){
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-  var expensesDb;
-  $scope.expensesArr;
-  var dataObj;
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
-
-  // get the date so user can't enter an expense due before today
   $scope.currentDate = new Date();
+  var expensesDb;
+  var expensesArr;
+  var dataObj;
 
-  // Attach an asynchronous callback to read the data at our posts reference
+
   db.once("value", function(snapshot) {
-    // make sure dataArr is blank
-    $scope.expensesArr = [];
-    // load the expenses for the current house
+    expensesArr = [];
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
-    console.log("expenses",snapshot.val().houses[currentHouseId].expenses)
     for (expense in expensesDb){
       dataObj = {};
       dataObj.name = expensesDb[expense].expenseName;
       dataObj.y = expensesDb[expense].cost;
-      $scope.expensesArr.push(dataObj);
+      expensesArr.push(dataObj);
     }
-    // show the cool pie chart
-    $scope.drawPie();
+    $q.all(expensesArr).then(function(){
+      $scope.expensesArr = expensesArr;
+      $scope.drawPie();
+    });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
 
   $scope.newExpense = function(){
-    console.log('new Expense called');
     $('#expenseName').val('');
     $('#expenseCost').val('');
     $('#expenseDate').val('');
@@ -54,7 +49,7 @@ console.log("In expensesCtrl");
         type: 'pie'
       },
       title: {
-        text: 'Monthly Expenses'
+        text: 'Expenses Analysis'
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
