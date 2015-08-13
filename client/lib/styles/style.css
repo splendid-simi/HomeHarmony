@@ -7,6 +7,11 @@ html {
   background-color: #f5f5f5
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -45,6 +50,10 @@ textarea {
   resize: vertical;
 }
 
+hr {
+  margin-bottom:20px;
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -52,6 +61,8 @@ textarea {
   padding: 0.2em 0;
 }
 
+/* Typography */
+ 
 a {
   text-decoration: none;
   color:#000;
@@ -60,6 +71,79 @@ a {
 li {
   list-style-type: none;
 }
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: 'Open Sans Condensed', sans-serif; 
+ font-weight: 300;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.tasksForm-container h2,
+.tasksList-container h2 {
+  font-size: 25px;
+}
+
+.tasksList-container h3 {
+  display: inline;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Forms */ 
+
+.hh-form-overlay {
+  margin-top: 60px;
+  background:rgba(255,255,255, 0.9);
+  border-radius: 5px;
+  width:500px;
+}
+
+.hh-offset {
+  padding-left:100px;
+}
+
+.hh-houseRegistration .hh-form-overlay {
+  height:80%;
+}
+
+.hh-form {
+  text-align: left;
+}
+
+.hh-form input {
+  display: block;
+  width:200px;
+  height:20px;
+  padding:2px;
+  margin:5px;
+}
+
+.hh-houseRegistration .hh-form input,
+#hhform-AddRoommatebtn {
+  display: inline-block;
+}
+
+.tasksForm button,
+.hh-form button {
+  display: block;
+  margin:15px 10px;
+}
+
+.hhform-AddRoommatebtn {
+
+}
+
+.tasksForm label {
+  display:inline-block;
+  width:70px;
+  height:20px;
+  text-align: left;
+}
+
 
 /* icons */ 
 
@@ -130,21 +214,6 @@ li {
   margin:20px;
 }
 
-.joinHouse h1, 
-.newHouse h1 {
-  font-size: 30px;
-}
-
-.houseForm input {
-  display:block;
-  width:200px;
-  height:20px;
-  margin:5px;
-}
-
-.houseForm button {
-  margin:10px;
-}
 
 /* dashboard */
 
@@ -200,43 +269,9 @@ footer {
   overflow:auto;
 }
 
-.tasksForm-container h2,
-.tasksList-container h2 {
-  font-size: 26px;
-}
-
-.tasksList-container h3 {
-  display: inline;
-  font-size: 16px;
-  text-align: left;
-}
-
 .tasksForm div {
   display: block;
 }
-
-.tasksForm input {
-  width:200px;
-  height:20px;
-  padding:2px;
-  margin:10px;
-}
-
-.tasksForm label {
-  display:inline-block;
-  width:70px;
-  height:20px;
-  text-align: left;
-}
-
-.tasksForm button {
-  margin:20px;
-}
-
-/*.task-list input[type="checkbox"] {
-  width:60px;
-  height:60px;
-}*/
 
 
 .form-error-active {
