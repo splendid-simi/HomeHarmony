@@ -1,6 +1,6 @@
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject, $q){
+.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie){
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
@@ -21,7 +21,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
     }
     $q.all(expensesArr).then(function(){
       $scope.expensesArr = expensesArr;
-      $scope.drawPie();
+      DrawPie.drawPie($scope, "Expense Analysis", true);
     });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
@@ -40,9 +40,13 @@ angular.module('homeHarmony.expenses', ['firebase'])
       paid: false
     });
   };
-
-  $scope.drawPie = function () {
-    $('#container').highcharts( {
+})
+.factory('DrawPie', function() {
+  return {
+    //showLabels true means each section has an arrow and description,
+    //false means the key is under the graph
+    drawPie : function($scope, title, showLabels) {
+      $('#expGraph').highcharts( {
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -50,7 +54,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
         type: 'pie'
       },
       title: {
-        text: 'Expenses Analysis'
+        text: title
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -60,12 +64,13 @@ angular.module('homeHarmony.expenses', ['firebase'])
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {
-            enabled: true,
+            enabled: showLabels,
             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
             style: {
               color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
             }
-          }
+          },
+          showInLegend: !showLabels
         }
       },
       series: [{
@@ -74,5 +79,6 @@ angular.module('homeHarmony.expenses', ['firebase'])
         data: $scope.expensesArr
       }]
     });
+    }
   };
 });

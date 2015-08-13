@@ -1,6 +1,6 @@
 angular.module('homeHarmony.default', ['firebase'])
 
-.controller('defaultCtrl', function($scope, $firebaseObject, $q){
+.controller('defaultCtrl', function($scope, $firebaseObject, $q, DrawPie){
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
@@ -21,41 +21,9 @@ angular.module('homeHarmony.default', ['firebase'])
     }
     $q.all(expensesArr).then(function(){
       $scope.expensesArr = expensesArr;
-      $scope.drawPie();
+      DrawPie.drawPie($scope, "", false);
     });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
-
-  $scope.drawPie = function () {
-    $('#expGraph').highcharts( {
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: ''
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: false
-          },
-          showInLegend: true
-        }
-      },
-      series: [{
-        name: "Expenses",
-        colorByPoint: true,
-        data: $scope.expensesArr
-      }]
-    });
-  };
 });
