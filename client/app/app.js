@@ -17,6 +17,7 @@ angular.module('homeHarmony', [
   'homeHarmony.auth',
   'homeHarmony.newUser',
   'homeHarmony.login',
+  'homeHarmony.default',
   'homeHarmony.newHouse',
   'homeHarmony.dash',
   'homeHarmony.expenses',
@@ -61,7 +62,7 @@ angular.module('homeHarmony', [
     .state('dash.default', {
       url: "/:default",
       templateUrl: "./app/dash/partials/default.html",
-      // controller: "defaultCtrl"
+      controller: "defaultCtrl",
       resolve: {
         // controller will not be loaded until $waitForAuth resolves
         // Auth refers to our $firebaseAuth wrapper in the example above
