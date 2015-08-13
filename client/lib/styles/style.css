@@ -188,7 +188,6 @@ footer {
 	text-align: left;
 }
 
-
 /* Tasks */
 
 .tasksForm-container,
@@ -196,9 +195,20 @@ footer {
   display: inline-block;
 }
 
+.tasksList-container {
+  max-height:350px;
+  overflow:auto;
+}
+
 .tasksForm-container h2,
 .tasksList-container h2 {
   font-size: 26px;
+}
+
+.tasksList-container h3 {
+  display: inline;
+  font-size: 16px;
+  text-align: left;
 }
 
 .tasksForm div {
@@ -233,7 +243,10 @@ footer {
   font-size:12px;
   font-weight: bold;
   color:red;
+}
 
+.strike {
+  text-decoration: line-through;
 }
 
   /* Increases the size of the Checkboxes */
@@ -249,12 +262,6 @@ input[type=checkbox] {
   display: block;
   margin:5px;
   min-width:600px;
-}
-
-.tasksList-container .assignee,
-.tasksList-container .dueDate,
-.tasksList-container .dueDate {
-  margin:5px;
 }
 
 .tasksList-container .assignee {
