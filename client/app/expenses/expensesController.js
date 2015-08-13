@@ -32,14 +32,25 @@ angular.module('homeHarmony.expenses', ['firebase'])
     $('#expenseName').val('');
     $('#expenseCost').val('');
     $('#expenseDate').val('');
-    db.child('houses').child(currentHouseId).child('expenses')
-    .push({
+    var expenseObj = {
       expenseName: $scope.expenseName,
       dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
       cost: $scope.expenseCost,
       paid: false
-    });
+    };
+    db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
+    $scope.splitExpense(expenseObj);
   };
+
+  $scope.splitExpense = function(expense){
+    console.log(expense);
+    db.once("value", function(snapshot) {
+      var houseMembers = snapshot.val().houses[currentHouseId].houseMembers;
+      // Still under construction
+    });
+
+  };
+
 })
 .factory('DrawPie', function() {
   return {
