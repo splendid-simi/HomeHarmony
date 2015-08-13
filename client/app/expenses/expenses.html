@@ -5,7 +5,7 @@
       <!-- need step='0.01' to get decimal numbers (otherwise only integers allowed) -->
       <input id="expenseCost" type='number' name="userExpenseAmount" ng-model='expenseCost' min='0.01' step='0.01' placeholder='enter amount' required>
       <!-- {{currentDate | date:"yyyy-MM-dd"}} parses the date into a str so can be used for min -->
-      <input id="expenseDate" type='date' name="userExpenseDueDate" ng-model='date' min='{{currentDate | date:"yyyy-MM-dd"}}' placeholder='enter due date' required>
+      <input id="expenseDate" type='date' name="userExpenseDueDate" ng-model='expenseDate' min='{{currentDate | date:"yyyy-MM-dd"}}' placeholder='enter due date' required>
       <button>submit</button>
   </form>
 
@@ -13,7 +13,7 @@
 
       <ul>
         <li ng-repeat="expense in expensesArr">
-           {{expense.name}} {{expense.y}}
+           {{expense.name}} {{expense.y | currency}}
         </li>
         
         <li ng-if="expensesArr.length === 0">
