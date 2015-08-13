@@ -14,14 +14,10 @@ angular.module('homeHarmony.newHouse',['firebase'])
     db.once("value", function(snapshot) {
         totalDb = snapshot.val();
         housesDb = totalDb.houses;
-        console.log("houses!",housesDb)
         for (var prop in housesDb){
-          console.log(prop);
           if (prop === $scope.chosenHouse) {
-            console.log('join successful');
             var memberList = housesDb[prop].houseMembers;
             memberList[currentUserId] = localStorage.getItem("currentUserEmail");
-            // newMember[currentUserId] = localStorage.getItem("currentUserEmail");
             db.child('houses').child(prop).child('houseMembers').set(memberList);
           }
         }
