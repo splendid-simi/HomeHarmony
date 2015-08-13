@@ -47,7 +47,9 @@
          <h4 class="mdl-card__title-text">Monthly Expenses</h4>
       </div>
       <div class="mdl-card__supporting-text">
-        <img src="assets/template_graph.png" class="feature-chart">
+        <div ng-controller="defaultCtrl">
+          <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto"></div>
+        </div>
       </div>
       <div class="mdl-card__actions">
          <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.expenses">See expenses due<i class="material-icons">chevron_right</i></a>
