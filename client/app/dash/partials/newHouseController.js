@@ -19,9 +19,10 @@ angular.module('homeHarmony.newHouse',['firebase'])
           console.log(prop);
           if (prop === $scope.chosenHouse) {
             console.log('join successful');
-            db.child('houses').child(prop).child('houseMembers').push(
-              localStorage.getItem("currentUserEmail")
-            );
+            var memberList = housesDb[prop].houseMembers;
+            memberList[currentUserId] = localStorage.getItem("currentUserEmail");
+            // newMember[currentUserId] = localStorage.getItem("currentUserEmail");
+            db.child('houses').child(prop).child('houseMembers').set(memberList);
           }
         }
       }, function (errorObject) {
