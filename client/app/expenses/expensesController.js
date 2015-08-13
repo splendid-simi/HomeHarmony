@@ -28,13 +28,14 @@ angular.module('homeHarmony.expenses', ['firebase'])
   });
 
   $scope.newExpense = function(){
+    var date = $scope.expenseDate;
     $('#expenseName').val('');
     $('#expenseCost').val('');
     $('#expenseDate').val('');
     db.child('houses').child(currentHouseId).child('expenses')
     .push({
       expenseName: $scope.expenseName,
-      dueDate: $('#expenseDate').val(), // We need to parse the date when it comes from the db because of this
+      dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
       cost: $scope.expenseCost,
       paid: false
     });
