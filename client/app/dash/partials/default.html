@@ -1,139 +1,119 @@
 
-<div class="android-more-section">
-  <div class="android-section-title mdl-typography--display-1-color-contrast">Welcome to your Home Dashboard</div>
-  <div class="android-card-container mdl-grid">
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <div class="mdl-card__media">
-    <!--     <img src="images/more-from-1.png"> -->
-      </div>
-      <div class="mdl-card__title">
-         <h4 class="mdl-card__title-text">Recent Events</h4>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span class="mdl-typography--font-light mdl-typography--subhead">
-        	<ul class="dash-recentTaskList">
-					  <li>
-              <img src="assets/list.png" class="list-icon" alt="task icon">
-					  	<span>Take out the trash</span>
-					  </li>
-					  <li>
-					  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
-					    <span>Pay the electricity bill</span>
-					  </li>
-					  <li><img src="assets/list.png" class="list-icon" alt="task icon">
-					  	<span>Mow the lawn</span>
-					  </li>
-					  <li>
-					  	<img src="assets/expense.png" class="list-icon" alt="expense icon">
-					    <span>Pay the cable bill</span>
-				    </li>
-				   	<li>
-					  	<img src="assets/list.png" class="list-icon" alt="expense icon">
-					    <span>Buy more milk</span>
-				    </li>
-			    </ul>
-        </span>
-      </div>
-      <div class="mdl-card__actions">
-         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.tasks"> See more Tasks<i class="material-icons">chevron_right</i></a>
-      </div>
-    </div>
-
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <div class="mdl-card__media">
- <!--        <img src="images/more-from-4.png"> -->
-      </div>
-      <div class="mdl-card__title">
-         <h4 class="mdl-card__title-text">Monthly Expenses</h4>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <div ng-controller="defaultCtrl">
-          <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto"></div>
+<div class="hh-dashboard-container">
+    <h1 class="greeting">Welcome home, <span>username.</span></h1>
+    <div class="hh-card-container mdl-grid featurebox-margin">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        <div class="mdl-card__media">
+          <div class="color-tip">&nbsp;</div>
+        </div>
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Recent Events</h4>
+        </div>
+        <div class="mdl-card__supporting-text hh-card-text">
+          <span class="mdl-typography--font-light mdl-typography--subhead">
+            <ul class="dash-recentTaskList">
+              <li>
+                <img src="assets/list.png" class="list-icon" alt="task icon">
+                <span>Take out the trash</span>
+              </li>
+              <li>
+                <img src="assets/expense.png" class="list-icon" alt="expense icon">
+                <span>Pay the electricity bill</span>
+              </li>
+              <li><img src="assets/list.png" class="list-icon" alt="task icon">
+                <span>Mow the lawn</span>
+              </li>
+              <li>
+                <img src="assets/expense.png" class="list-icon" alt="expense icon">
+                <span>Pay the cable bill</span>
+              </li>
+              <li>
+                <img src="assets/list.png" class="list-icon" alt="expense icon">
+                <span>Buy more milk</span>
+              </li>
+            </ul>
+          </span>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.tasks"> See more Tasks<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
         </div>
       </div>
-      <div class="mdl-card__actions">
-         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.expenses">See expenses due<i class="material-icons">chevron_right</i></a>
+      
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        <div class="mdl-card__media">
+          <div class="color-tip">&nbsp;</div>
+        </div>
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Monthly Expenses</h4>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div ng-controller="defaultCtrl">
+            <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto"></div>
+          </div>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.expenses">See expenses due<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+        </div>
       </div>
-    </div>
 
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <div class="mdl-card__media">
-<!--         <img src="images/more-from-2.png"> -->
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3diimg">
+        <div class="mdl-card__media">
+          <div class="color-tip">&nbsp;</div>
+          <!-- <img src="images/more-from-2.png"> -->
+        </div>
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Current House Issues</h4>
+        </div>
+        <div class="mdl-card__supporting-text issuesListContainer  hh-card-text">
+          <ul>
+            <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
+              <span>Please label your food in the fridge</span>
+            </li>
+            <li>
+              <img src="assets/default_user.png" class="list-icon" alt="expense icon">
+              <span>Thanks for taking out the trash, Maura!</span>
+            </li>
+            <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
+              <span>Let's keep it down after 11:00pm</span>
+            </li>
+            <li>
+              <img src="assets/default_user.png" class="list-icon" alt="expense icon">
+              <span>Just wanted to let you guys know my mom will be visiting saturday.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.issues">View all issues<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+        </div>
       </div>
-      <div class="mdl-card__title">
-         <h4 class="mdl-card__title-text">Current House Issues</h4>
-      </div>
-      <div class="mdl-card__supporting-text issuesListContainer">
-		    <ul>
-				  <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
-					  <span>Please label your food in the fridge</span>
-					</li>
-				  <li>
-				  	<img src="assets/default_user.png" class="list-icon" alt="expense icon">
-				    <span>Thanks for taking out the trash, Maura!</span>
-				  </li>
-				  <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
-				  	<span>Let's keep it down after 11:00pm</span>
-				  </li>
-				  <li>
-				  	<img src="assets/default_user.png" class="list-icon" alt="expense icon">
-				    <span>Just wanted to let you guys know my mom will be visiting saturday.</span>
-				  </li>
-				</ul>
-      </div>
-      <div class="mdl-card__actions">
-         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.issues">View all issues<i class="material-icons">chevron_right</i></a>
-      </div>
-    </div>
+      <div class="mdl-cell mdl-cell--1-col"></div>
 
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <div class="mdl-card__media">
-<!--         <img src="images/more-from-3.png"> -->
-      </div>
-      <div class="mdl-card__title">
-         <h4 class="mdl-card__title-text">House Summary</h4>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span class="mdl-typography--font-light mdl-typography--subhead">Your roommates have completed ___ tasks. ___ Bills have been paid since you have last visited. ___ house issues have been addressed.</span>
-      </div>
-      <div class="mdl-card__actions">
-         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase">Read full summary<i class="material-icons">chevron_right</i></a>
-      </div>
+      <section class="roommates">
+<!--         <div class="label">Roommate Dashboard</div> -->
+        <div class="mdl-grid">
+     <!--      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"></div> -->
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+            <img src="assets/default_user.png" alt="user photo">
+            <span class="roommateName">current user</span>
+          </div>
+
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+            <img src="assets/default_user_gray.png" alt="user photo">
+            <span class="roommateName">invite a roomate</span>
+          </div>
+
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+            <img src="assets/default_user_gray.png" alt="user photo">
+            <span class="roommateName">invite a roommate</span>
+          </div>
+
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+            <img src="assets/default_user_gray.png" alt="user photo">
+            <span class="roommateName">invite a roommate</span>
+          </div>
+        </section>  
+       </div>
+      <div>
     </div>
   </div>
-</div>
-
-<section class="roommates">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">current user</span>
-    </div>
-
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">roommate Name</span>
-    </div>
-
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">roommate Name</span>
-    </div>
-
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">roommate Name</span>
-    </div>
-    
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">roommate Name</span> 
-    </div>
-
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <img src="assets/default_user.png" alt="user photo">
-      <span class="roommateName">roommate Name</span>
-    </div>
-	</section>  
- </div>
-<div>
+  
