@@ -28,21 +28,17 @@
 
   <div class="center-content" style="margin-bottom: 55px"ui-view></div> <!-- SubViews Inserted Here -->
 
-  <section>
-    <a ui-sref="dash.default">Default</a>
-    <a ui-sref="newHouse">New House</a>
-  </section>
-
-  <footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px; z-index: -1">
+  <footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px;">
     <div class="footer-nav">
       <ul>
-        <li><a ui-sref="dash.default" target="_blank">Home</a></li>
-        <li><a ui-sref="dash.tasks" target="_blank">Tasks</a></li>
-        <li><a ui-sref="dash.expenses" target="_blank">Expenses</a><li>
-        <li><a ui-sref="dash.issues" target="_blank">Issues</a></li>
+        <li><a ui-sref="dash.default">Dashboard |</a></li>
+        <li><a ui-sref="newHouse">Create a House |</a></li>
+        <li><a ui-sref="dash.tasks">Tasks |</a></li>
+        <li><a ui-sref="dash.expenses">Expenses |</a><li>
+        <li><a ui-sref="dash.issues">Issues</a></li>
       </ul>
     </div>
-    <div>
+    <div class="footer-nav">
       <ul>
         <li>© 2015 Designed and Developed By</li>
         <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu |</a></li>

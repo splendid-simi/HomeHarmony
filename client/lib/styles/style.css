@@ -260,8 +260,9 @@ h1 {
   color:#d3d3d3;
 }
 
-.footer .footer-nav ul {
+.footer .footer-nav {
   display: block;
+  width:100%;
 }
 
 /* Tasks */
