@@ -18,7 +18,7 @@
           <h1>New User Registration</h1>
           <hr>
           <form name="newUserForm" ng-submit='addUser()'>
-            <input type='email' name="userEmail" ng-model='email' required>
+            <input type='email' name="userEmail" ng-model='email' placeholder="email" required>
             <div role="alert">
               <span class="error" ng-show="loginForm.userEmail.$error.required">
                 Please enter your e-mail address</span>
@@ -28,7 +28,7 @@
             <input id="newPasswordField" type="password" ng-model='password' placeholder="password" required>
             <input id="newFirstNameField" type='text' ng-model='firstname' placeholder="first name" required>
             <input id="newLastNameField" type='text' ng-model='lastname' placeholder="last name" required>
-            <input id="newHouseID" type='text' ng-model='houseId'>
+            <input id="newHouseID" type='text' ng-model='houseId' placeholder="House ID (if applicable)">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Register</button>
           </form>
           <a href="#/login">Already have an account? <strong>Signin</strong> ...</a>
