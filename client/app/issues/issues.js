@@ -9,6 +9,7 @@ angular.module('homeHarmony.issues',['firebase'])
   
 
   $scope.addIssue = function(){
+    $('#issueField').val('');
     var now = new Date();
     newIssue = {
       date: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
