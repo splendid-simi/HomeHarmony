@@ -16,12 +16,14 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   var taskDb = {};
 
   $scope.tasks.addTask = function() {
+    var now = new Date();
+    var due = $scope.newTaskDueDate;
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
       // date must be string to be stored in database
-      dueDate: new Date($scope.newTaskDueDate).toString(),
-      dateCreated: new Date(),
+      dueDate: (due.getMonth() + 1) + '/' + due.getDate() + '/' +  due.getFullYear(),
+      dateCreated: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
       completed: false,
       repeating: -1
     }
