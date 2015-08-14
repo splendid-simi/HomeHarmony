@@ -12,7 +12,10 @@
         <div class="mdl-card__supporting-text hh-card-text">
           <span class="mdl-typography--font-light mdl-typography--subhead">
             <ul class="dash-recentTaskList">
-              <li ng-repeat="task in tasksArr | limitTo:5">
+              <li ng-if="tasksCount === 0">
+                <span>No tasks currently due</span>
+              </li>
+              <li ng-repeat="task in tasksArr | limitTo:5" ng-if="!task.completed">
                 <img src="assets/list.png" class="list-icon" alt="task icon">
                 <span>{{task.dueDate}} - {{task.description}}</span>
               </li>
@@ -33,7 +36,9 @@
         </div>
         <div class="mdl-card__supporting-text">
           <div ng-controller="defaultCtrl">
-            <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto"></div>
+            <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto">
+              <span>No expenses currently due</span>
+            </div>
           </div>
         </div>
         <div class="mdl-card__actions">
@@ -51,6 +56,9 @@
         </div>
         <div class="mdl-card__supporting-text issuesListContainer  hh-card-text">
           <ul>
+            <li ng-if="issuesArr.length === 0">
+              <span>No current issues</span>
+            </li>
             <li ng-repeat="issue in issuesArr | limitTo:5">
               <img src="assets/default_user.png" class="list-icon" alt="task icon">
               <span>{{issue.date}} - {{issue.text}}</span>
