@@ -86,7 +86,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   }
 
   $scope.tasks.sortByDate = function(arr) {
-    if (arr.length > 1) {
+    if (arr.length > 0) {
       var sortedArr = arr.sort(function(a,b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
       return $scope.tasks.parseDate(sortedArr);
     } else {
