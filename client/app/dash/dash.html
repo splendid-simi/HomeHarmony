@@ -2,7 +2,7 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo">
+      <a ui-sref="dash.default"><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img></a>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
@@ -14,7 +14,7 @@
 
   <div class="mdl-layout__drawer">
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="/dash"><img src="assets/home.png" class="nav-icon" alt="home icon">Home</a>
+      <a class="mdl-navigation__link" ui-sref="dash.default"><img src="assets/home.png" class="nav-icon" alt="home icon">Home</a>
       <a class="mdl-navigation__link" ui-sref="dash.tasks"><img src="assets/list.png" class="nav-icon" alt="list icon">Tasks</a>
       <a class="mdl-navigation__link" ui-sref="dash.expenses"><img src="assets/expense.png" class="nav-icon" alt="expense icon">Expenses</a>
       <a class="mdl-navigation__link" ui-sref="dash.issues"><img src="assets/chat.png" class="nav-icon" alt="chat icon">Issues</a>

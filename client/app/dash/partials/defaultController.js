@@ -4,6 +4,7 @@ angular.module('homeHarmony.default', ['firebase'])
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
+  $scope.currentUserName = localStorage.getItem("currentUserName");
   $scope.currentDate = new Date();
   var expensesDb;
   var expensesArr;
