@@ -1,6 +1,6 @@
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie){
+.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil){ 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
@@ -32,14 +32,33 @@ angular.module('homeHarmony.expenses', ['firebase'])
     $('#expenseName').val('');
     $('#expenseCost').val('');
     $('#expenseDate').val('');
-    db.child('houses').child(currentHouseId).child('expenses')
-    .push({
+    var expenseObj = {
       expenseName: $scope.expenseName,
       dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
       cost: $scope.expenseCost,
       paid: false
-    });
+    };
+    db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
+    $scope.splitExpense(expenseObj);
   };
+
+  $scope.splitExpense = function(expense){
+    db.once("value", function(snapshot) {
+      var houseMembers = snapshot.val().houses[currentHouseId].houseMembers;
+      var houseSize = Object.keys(houseMembers).length;
+      for (memberId in houseMembers){
+        DButil.getUserIdFromEmail(houseMembers[memberId], function(userId){
+          db.child('users').child(userId).child('userExpenses').push({
+            name: expense.expenseName,
+            splitCost: expense.cost/houseSize,
+            paid: false
+          });
+        });
+      }
+    });
+
+  };
+
 })
 .factory('DrawPie', function() {
   return {
