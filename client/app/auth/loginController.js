@@ -1,4 +1,4 @@
-angular.module('homeHarmony.login',['firebase'])
+angular.module('homeHarmony.login',['firebase', 'ui.router'])
 
 .controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state) {
 
@@ -7,7 +7,7 @@ angular.module('homeHarmony.login',['firebase'])
   $scope.logInUser = function(){
     $('#loginEmailField').val('');
     $('#loginPasswordField').val('');
-    UserAuth.login($scope.email, $scope.password, function (userEmail){
+    UserAuth.login($scope.email, $scope.password, function (/*$state, */userEmail){
 
       //try to factor this out as a separate named function "later"
 
@@ -24,8 +24,9 @@ angular.module('homeHarmony.login',['firebase'])
             if (userDb[prop].house) {
               currentHouseId = userDb[prop].house;
               localStorage.setItem("currentHouseId", currentHouseId);
+              $state.go('dash.default');
             } else {
-              $state.go('dash.newHouse')
+              $state.go('newHouse');
             }
             console.log('CHID ', currentHouseId);
           }
