@@ -66,6 +66,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
         'house': currentHouseId
       });
       console.log(currentHouseId, 'currentHouse')
+      $state.go('dash.default');
     })
 
   };
