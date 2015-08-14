@@ -1,6 +1,6 @@
 angular.module('homeHarmony.newHouse',['firebase'])
 
-.controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil) {
+.controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil, $state) {
 
   currentUserId = localStorage.getItem("currentUserId");
 
@@ -28,6 +28,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
               memberList[currentUserId] = localStorage.getItem("currentUserEmail");
               db.child('houses').child(prop).child('houseMembers').set(memberList);
             }
+            $state.go('dash.default');
           }
         }
       }, function (errorObject) {

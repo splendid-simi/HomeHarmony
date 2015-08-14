@@ -80,26 +80,13 @@
 
       <section class="roommates">
 <!--         <div class="label">Roommate Dashboard</div> -->
-        <div class="mdl-grid">
+        <div>
      <!--      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"></div> -->
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+          <div ng-repeat="user in usersArr | limitTo:6"  style="float:left">
             <img src="assets/default_user.png" alt="user photo">
-            <span class="roommateName">current user</span>
+            <span class="roommateName">{{user}}</span>
           </div>
 
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-            <img src="assets/default_user_gray.png" alt="user photo">
-            <span class="roommateName">invite a roomate</span>
-          </div>
-
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-            <img src="assets/default_user_gray.png" alt="user photo">
-            <span class="roommateName">invite a roommate</span>
-          </div>
-
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-            <img src="assets/default_user_gray.png" alt="user photo">
-            <span class="roommateName">invite a roommate</span>
           </div>
         </section>  
        </div>

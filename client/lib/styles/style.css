@@ -215,7 +215,7 @@ h1 {
 }
 
 .roommates {
-  display: block;
+  display: inline;
   width:100%;
 	margin:-20px auto 0 auto;
 }
