@@ -14,13 +14,11 @@
             </div>
 
             <div>
-              <label for="newTaskDoer">Assignee:</label>
-              <input type='text' name="taskDoer" ng-model='newTaskDoer' ng-minlength='3' ng-maxlength='10' placeholder='Enter the task assignee' required>
-            </div>
-
-            <div ng-messages="tasksForm.taskDoer.$error" role="alert" class="form-error-active">
-              <div ng-message="required">assign the task to someone</div>
-              <div ng-message-exp="['minlength', 'maxlength']"> The assignee's name must be between 3 and 10 characters</div>
+              <label for="selectRoommate">Assignee:</label>
+              <select name="selectRoommate"  value='Select Roommate' ng-model='newTaskDoer' required>
+                <option selected disabled>Select Roommate</option>
+                <option name="taskDoer" ng-repeat="roommate in houseMemberArr">{{roommate}}</option>
+              </select>
             </div>
 
             <div>
