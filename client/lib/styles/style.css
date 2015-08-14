@@ -143,6 +143,10 @@ h1 {
   margin: 3px;
 }
 
+.registration {
+  height: 100%;
+}
+
 .form-error-active {
   font-size:12px;
   font-weight: 400;
@@ -201,9 +205,12 @@ h1 {
 .newHouse {
   display: inline-block;
   min-width:200px;
-  height:250px;
   vertical-align: top;
   margin:20px;
+}
+
+.newHouse .hh-add {
+  display: block;
 }
 
 .dash-recentTaskList li {
@@ -272,7 +279,7 @@ h1 {
 
 .tasksList-container,
 .tasksForm-container {
-  max-height:400px;
+  max-height:450px;
   overflow:auto;
 }
 
@@ -359,6 +366,7 @@ input[type=checkbox] {
 
 .hh-expense-small-box {
   min-width: 250px;
+  overflow:auto;
 }
 
 /* helper classes */ 

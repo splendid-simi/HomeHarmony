@@ -1,4 +1,26 @@
-  
+ 
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <a ui-sref="dash.default"><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img><span style="color:white">ome Harmony</span></a>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" ng-click="logOut()" href>Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="mdl-layout__drawer">
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" ui-sref="dash.default"><img src="assets/home.png" class="nav-icon" alt="home icon">Home</a>
+      <a class="mdl-navigation__link" ui-sref="dash.tasks"><img src="assets/list.png" class="nav-icon" alt="list icon">Tasks</a>
+      <a class="mdl-navigation__link" ui-sref="dash.expenses"><img src="assets/expense.png" class="nav-icon" alt="expense icon">Expenses</a>
+      <a class="mdl-navigation__link" ui-sref="dash.issues"><img src="assets/chat.png" class="nav-icon" alt="chat icon">Issues</a>
+    </nav>
+  </div>
+
  <main class="mdl-layout__content hh-houseRegistration">
   <div class="mdl-grid">
 <!--     <div class="mdl-cell mdl-cell--1-col"></div> -->
@@ -7,8 +29,7 @@
         <h1>Create a House</h1>
         <hr>
         <form name="newHouseForm" ng-submit='newHouseReg()'>
-          <input id="newEmail1" type='text'ng-model='email1' placeholder="enter roommate's email" required>
-          <input id="newEmail2" type='text'ng-model='email2' placeholder="enter roommate's email" required>
+          <input id="newEmail1" type='text'ng-model='email' placeholder="enter roommate's email" required>
           <!-- Colored mini FAB button -->
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create House</button>
         </form>
@@ -26,7 +47,6 @@
       </div>
     </div>
 
-<!--     <div class="mdl-cell mdl-cell--1-col"></div> -->
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
       <div class="newHouse hh-form">
         <h1>Add Roommate to House</h1>
@@ -34,8 +54,30 @@
         <form name="newHouseForm" ng-submit='addRoommate()'>
           <input id="newEmail3" type='text'ng-model='roommateEmail' placeholder="enter roommate's email" required>
           <!-- Colored mini FAB button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored hh-add">Add</button>
         </form>
       </div>
     </div>
   </main>
+
+  <footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px;">
+    <div class="footer-nav">
+      <ul>
+        <li><a ui-sref="dash.default">Dashboard |</a></li>
+        <li><a ui-sref="newHouse">Create a House |</a></li>
+        <li><a ui-sref="dash.tasks">Tasks |</a></li>
+        <li><a ui-sref="dash.expenses">Expenses |</a><li>
+        <li><a ui-sref="dash.issues">Issues</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <ul>
+        <li>© 2015 Designed and Developed By</li>
+        <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu |</a></li>
+        <li><a href="https://github.com/MetaEvan" target="_blank">Evan Mencke |</a></li>
+        <li><a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh |</a><li>
+        <li><a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki Bernardo</a></li>
+      </ul>
+    </div>
+  </footer>
+</main> 
