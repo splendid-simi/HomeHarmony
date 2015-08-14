@@ -10,7 +10,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   var sortCompTaskByDateArr;
   var sortByDateArr;
   $scope.tasks.currentDate = new Date();
-
+  $scope.houseMemberArr = JSON.parse(localStorage.getItem('currentUsersArr'))
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
   var taskDb = {};
