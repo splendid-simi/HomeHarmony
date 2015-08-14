@@ -14,6 +14,7 @@ var needsHouseFor = [
 angular.module('homeHarmony', [
   'ui.router',
   'ngMessages',
+  'homeHarmony.util',
   'homeHarmony.auth',
   'homeHarmony.newUser',
   'homeHarmony.login',

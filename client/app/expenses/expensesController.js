@@ -1,6 +1,6 @@
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie){
+.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil){ 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
@@ -43,10 +43,18 @@ angular.module('homeHarmony.expenses', ['firebase'])
   };
 
   $scope.splitExpense = function(expense){
-    console.log(expense);
     db.once("value", function(snapshot) {
       var houseMembers = snapshot.val().houses[currentHouseId].houseMembers;
-      // Still under construction
+      var houseSize = Object.keys(houseMembers).length;
+      for (memberId in houseMembers){
+        DButil.getUserIdFromEmail(houseMembers[memberId], function(userId){
+          db.child('users').child(userId).child('userExpenses').push({
+            name: expense.expenseName,
+            splitCost: expense.cost/houseSize,
+            paid: false
+          });
+        });
+      }
     });
 
   };
