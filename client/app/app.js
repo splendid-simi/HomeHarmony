@@ -46,6 +46,19 @@ angular.module('homeHarmony', [
       controller: 'NewUserCtrl',
       controllerAs: 'newUser'
     })
+    .state('newHouse', {
+      url: "/newHouse",
+      templateUrl: "./app/dash/partials/newHouse.html",
+      controller: "newHouseCtrl",
+      resolve: {
+        // controller will not be loaded until $waitForAuth resolves
+        // Auth refers to our $firebaseAuth wrapper in the example above
+        "currentAuth": ["Auth", function(Auth) {
+          // $waitForAuth returns a promise so the resolve waits for it to complete
+          return Auth.$requireAuth();
+        }]
+      }
+    })
     .state('dash', {
       url: "/dash",
       templateUrl: "./app/dash/dash.html",
@@ -64,19 +77,6 @@ angular.module('homeHarmony', [
       url: "/:default",
       templateUrl: "./app/dash/partials/default.html",
       controller: "defaultCtrl",
-      resolve: {
-        // controller will not be loaded until $waitForAuth resolves
-        // Auth refers to our $firebaseAuth wrapper in the example above
-        "currentAuth": ["Auth", function(Auth) {
-          // $waitForAuth returns a promise so the resolve waits for it to complete
-          return Auth.$requireAuth();
-        }]
-      }
-    })
-    .state('dash.newHouse', {
-      url: "/:newHouse",
-      templateUrl: "./app/dash/partials/newHouse.html",
-      controller: "newHouseCtrl",
       resolve: {
         // controller will not be loaded until $waitForAuth resolves
         // Auth refers to our $firebaseAuth wrapper in the example above
@@ -111,6 +111,7 @@ angular.module('homeHarmony', [
   //   if (currentHouseId === 'DEFAULT_HOUSE_ID'){
   //     if (needsHouseFor.indexOf(toState.name) >= 0){
   //       $state.go('dash.newHouse');
+  //       $state.go('newHouse');
   //     }
   //   }
   // });

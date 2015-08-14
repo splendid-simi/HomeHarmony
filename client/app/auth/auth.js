@@ -20,7 +20,7 @@ angular.module('homeHarmony.auth',[])
         }).then(function(authData){
           console.log('newuser func ', userEmail)
           cb(userEmail);
-          $state.go('dash');
+          // $state.go('dash');
         }).catch(function(error){
           console.error("Error:",error);
         });
@@ -30,7 +30,7 @@ angular.module('homeHarmony.auth',[])
           email    : userEmail,
           password : attemptedPassword
         }).then(function(authData){
-          $state.go('dash');
+          // $state.go('dash');
           cb(authData.password.email);
         }).catch(function(error){
           console.error("Error:",error);
