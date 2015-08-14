@@ -40,15 +40,15 @@
         <ul>
           <li ng-repeat="task in tasks.taskArr">
             <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
-            <span class="assignee">{{task.doer}}</span> 
+            <span class="assignee">{{task.doer}}</span>
             <span class="description">{{task.description}} </span>
-            <span class="dueDate">{{task.dueDateFormat}} </span> 
+            <span class="dueDate">{{task.dueDateFormat}} </span>
           </li>
         </ul>
       <h3>Completed Tasks:</h3>
       <ul>
-        <li ng-repeat="task in tasks.compTaskArr" class="strike">
-          {{task.doer}} {{task.description}} {{task.dueDateFormat}}
+        <li ng-repeat="task in tasks.compTaskArr">
+            <span class="strike">{{task.doer}} {{task.description}}</span>
         </li>
         <li ng-if="taskArr.length == 0">
           <strong>No current tasks</strong>
