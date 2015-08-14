@@ -66,19 +66,9 @@
         </div>
         <div class="mdl-card__supporting-text issuesListContainer  hh-card-text">
           <ul>
-            <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
-              <span>Please label your food in the fridge</span>
-            </li>
-            <li>
-              <img src="assets/default_user.png" class="list-icon" alt="expense icon">
-              <span>Thanks for taking out the trash, Maura!</span>
-            </li>
-            <li><img src="assets/default_user.png" class="list-icon" alt="task icon">
-              <span>Let's keep it down after 11:00pm</span>
-            </li>
-            <li>
-              <img src="assets/default_user.png" class="list-icon" alt="expense icon">
-              <span>Just wanted to let you guys know my mom will be visiting saturday.</span>
+            <li ng-repeat="issue in issuesArr | limitTo:5">
+              <img src="assets/default_user.png" class="list-icon" alt="task icon">
+              <span>{{issue.date}} - {{issue.text}}</span>
             </li>
           </ul>
         </div>
