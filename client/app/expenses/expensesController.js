@@ -7,12 +7,17 @@ angular.module('homeHarmony.expenses', ['firebase'])
   $scope.currentDate = new Date();
   var expensesDb;
   var expensesArr;
+  var userExpensesArr;
   var dataObj;
+  var uDataObj;
 
 
   db.once("value", function(snapshot) {
     expensesArr = [];
+    userExpensesArr = [];
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
+    userExpensesDb = snapshot.val().users[currentUserId].userExpenses;
+    console.log(userExpensesDb);
     for (expense in expensesDb){
       dataObj = {};
       dataObj.name = expensesDb[expense].expenseName;
@@ -22,6 +27,17 @@ angular.module('homeHarmony.expenses', ['firebase'])
     $q.all(expensesArr).then(function(){
       $scope.expensesArr = expensesArr;
       DrawPie.drawPie($scope, "Expense Analysis", true);
+    });
+
+    for (uExpense in userExpensesDb){
+      uDataObj = {};
+      uDataObj.name = userExpensesDb[uExpense].name;
+      uDataObj.y = userExpensesDb[uExpense].splitCost;
+      uDataObj.paid = userExpensesDb[uExpense].paid;
+      userExpensesArr.push(uDataObj);
+    }
+    $q.all(userExpensesArr).then(function(){
+      $scope.userExpensesArr = userExpensesArr;
     });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
@@ -40,25 +56,38 @@ angular.module('homeHarmony.expenses', ['firebase'])
     };
     db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
     $scope.splitExpense(expenseObj);
+
   };
 
   $scope.splitExpense = function(expense){
     db.once("value", function(snapshot) {
       var houseMembers = snapshot.val().houses[currentHouseId].houseMembers;
-      var houseSize = Object.keys(houseMembers).length;
+      $scope.houseSize = Object.keys(houseMembers).length;
       for (memberId in houseMembers){
         DButil.getUserIdFromEmail(houseMembers[memberId], function(userId){
           db.child('users').child(userId).child('userExpenses').push({
             name: expense.expenseName,
-            splitCost: expense.cost/houseSize,
+            splitCost: expense.cost/$scope.houseSize,
             paid: false
           });
         });
       }
     });
-
   };
 
+  $scope.payExpense = function(expenseName){
+    db.on('value', function(snapshot){
+      uExpenseDb = snapshot.val().users[currentUserId].userExpenses;
+      for (expense in uExpenseDb){
+        if (uExpenseDb[expense].name === expenseName){
+          console.log('paying ', expenseName);
+          db.child('users').child(currentUserId).child('userExpenses').child(expense).update({
+            paid: true
+          });
+        }
+      }
+    });
+  }
 })
 .factory('DrawPie', function() {
   return {

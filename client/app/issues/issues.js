@@ -44,7 +44,6 @@ angular.module('homeHarmony.issues',['firebase'])
           db.child('houses').child(currentHouseId).child('issues').child(issue).remove();
         }
       }
-      
     });
   };
 
