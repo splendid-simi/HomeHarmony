@@ -259,7 +259,6 @@ h1 {
   color:#d3d3d3;
 }
 
-
 /* Tasks */
 
 .tasksForm-container,
@@ -321,6 +320,18 @@ input[type=checkbox] {
   width:35px;
   height:35px;
 }
+
+/* issues */
+
+.hh-form .issuesForm input {
+  display: inline-block; !important
+
+}
+
+.hh-form button {
+  display: inline-block;
+}
+
 
 /* helper classes */ 
 
