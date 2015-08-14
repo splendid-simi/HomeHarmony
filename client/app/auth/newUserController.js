@@ -18,11 +18,12 @@ angular.module('homeHarmony.newUser', ['firebase'])
     };
     UserAuth.newUser(userObj.email, $scope.password, function(userEmail){
       db.child('users').once('value', function(snapshot){
-        var temp = snapshot.val();
-        for (var prop in temp){
-          if(temp[prop].email === userEmail) {
+        var userDb = snapshot.val();
+        for (var prop in userDb){
+          if(userDb[prop].email === userEmail) {
             currentUserId = prop;
             localStorage.setItem("currentUserEmail", userEmail);
+            localStorage.setItem("currentUserName", userDb[prop].firstname);
             localStorage.setItem("currentUserId", currentUserId);
           }
         }

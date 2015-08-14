@@ -40,6 +40,7 @@ angular.module('homeHarmony.auth',[])
         Auth.$unauth();
         localStorage.setItem('currentUserId', 'DEFAULT_USER_ID');
         localStorage.setItem('currentHouseId', 'DEFAULT_HOUSE_ID');
+        localStorage.setItem("currentUserName", 'DEFAULT_USER_NAME');
         localStorage.setItem("currentUserEmail", 'DEFAULT_USER_EMAIL');
         $state.go('landing');
       }
