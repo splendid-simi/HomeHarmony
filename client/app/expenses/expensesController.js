@@ -11,7 +11,6 @@ angular.module('homeHarmony.expenses', ['firebase'])
   var dataObj;
   var uDataObj;
 
-
   $scope.showExpenses = function(){
     db.once("value", function(snapshot) {
       expensesArr = [];
@@ -45,6 +44,10 @@ angular.module('homeHarmony.expenses', ['firebase'])
     });
   };
 
+  db.child('houses').child(currentHouseId).child('expenses').on('child_added', function(){
+    $scope.showExpenses();
+  });
+
   $scope.newExpense = function(){
     var date = $scope.expenseDate;
     $('#expenseName').val('');
@@ -73,6 +76,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
             splitCost: expense.cost/$scope.houseSize,
             paid: false
           });
+
         });
       }
     });
