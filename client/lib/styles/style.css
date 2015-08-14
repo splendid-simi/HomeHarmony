@@ -117,7 +117,8 @@ h1 {
   width:620px;
 }
 
-.hh-form input {
+.hh-form input,
+.hh-form selec {
   display: block;
   width:200px;
   height:20px;
@@ -257,6 +258,10 @@ h1 {
 
 .footer a {
   color:#d3d3d3;
+}
+
+.footer .footer-nav ul {
+  display: block;
 }
 
 /* Tasks */
