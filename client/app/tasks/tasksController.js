@@ -1,14 +1,14 @@
 angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
-.controller('tasksCtrl', function($scope, $firebaseObject){
+.controller('tasksCtrl', function($scope, $firebaseObject, $q){
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
   $scope.tasks = {};
   $scope.tasks.taskArr;
   $scope.tasks.compTaskArr;
-  $scope.tasks.sortCompTaskByDateArr;
-  $scope.tasks.sortByDateArr;
+  var sortCompTaskByDateArr;
+  var sortByDateArr;
   $scope.tasks.currentDate = new Date();
 
   currentHouseId = localStorage.getItem('currentHouseId');
@@ -52,19 +52,23 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
       // overrides current tasks in the array
       $scope.tasks.taskArr = [];
       $scope.tasks.compTaskArr = [];
-      $scope.tasks.sortCompTaskByDateArr = [];
-      $scope.tasks.sortByDateArr = [];
+      sortCompTaskByDateArr = [];
+      sortByDateArr = [];
 
       for (prop in taskDb) {
         taskDb[prop].id = prop;
         if (taskDb[prop].completed) {
-          $scope.tasks.sortCompTaskByDateArr.push(taskDb[prop]);
-          // displays 12 most recently completed tasks in descending order
-          $scope.tasks.compTaskArr = $scope.tasks.sortByDate($scope.tasks.sortCompTaskByDateArr);
+          sortCompTaskByDateArr.push(taskDb[prop]);
+          $q.all(sortCompTaskByDateArr).then(function(){
+            // displays 12 most recently completed tasks in descending order
+            $scope.tasks.compTaskArr = $scope.tasks.sortByDate(sortCompTaskByDateArr);
+          });
         } else if (!taskDb[prop].completed) {
-          $scope.tasks.sortByDateArr.push(taskDb[prop]);
-          // sorts and displays date in descending order
-          $scope.tasks.taskArr = $scope.tasks.sortByDate($scope.tasks.sortByDateArr);
+          sortByDateArr.push(taskDb[prop])
+          $q.all(sortByDateArr).then(function(){
+            // sorts and displays date in descending order
+            $scope.tasks.taskArr = $scope.tasks.sortByDate(sortByDateArr);
+          });
         }
       }
         console.log('gotten tasks ', $scope.tasks.taskArr);
