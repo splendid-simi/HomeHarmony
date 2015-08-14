@@ -3,23 +3,6 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--middle hh-form-overlay">
       <div class="newHouse hh-form">
-        <h1>Create a house</h1>
-        <hr>
-        <form name="newHouseForm" ng-submit='newHouseReg()'>
-          <input id="newEmail1" type='text'ng-model='email1' placeholder="enter roommate's email" required>
-          <!-- Colored mini FAB button -->
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" id="hhform-AddRoommatebtn">
-            <i class="material-icons">add</i>
-          </button>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create House</button>
-        </form>
-      </div>
-    </div>
-  <div>
-
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--middle hh-form-overlay">
-      <div class="newHouse hh-form">
         <h1>Join a House</h1>
         <hr>
         <form name="joinHouseForm" ng-submit='joinHouse()'>
@@ -28,8 +11,31 @@
         </form>
       </div>
     </div>
-  <div>
-</main>
+  </div>
 
-
-
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--middle hh-form-overlay">
+      <div class="newHouse hh-form">
+        <h1>Create a House</h1>
+        <hr>
+        <form name="newHouseForm" ng-submit='newHouseReg()'>
+          <input id="newEmail1" type='text'ng-model='email1' placeholder="enter roommate's email" required>
+          <input id="newEmail2" type='text'ng-model='email2' placeholder="enter roommate's email" required>
+          <!-- Colored mini FAB button -->
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create House</button>
+        </form>
+      </div>
+    </div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--middle hh-form-overlay">
+      <div class="newHouse hh-form">
+        <h1>Add a Roommate</h1>
+        <hr>
+        <form name="newHouseForm" ng-submit='addRoommate()'>
+          <input id="newEmail3" type='text'ng-model='roommateEmail' placeholder="enter roommate's email" required>
+          <!-- Colored mini FAB button -->
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </main>

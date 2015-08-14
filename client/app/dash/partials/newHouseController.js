@@ -1,6 +1,6 @@
 angular.module('homeHarmony.newHouse',['firebase'])
 
-.controller('newHouseCtrl', function ($scope, $location, $firebaseObject) {
+.controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil) {
 
   currentUserId = localStorage.getItem("currentUserId");
 
@@ -25,7 +25,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
-  }
+  };
 
   $scope.newHouseReg = function(){
     $('#newEmail1').val('');
@@ -59,6 +59,23 @@ angular.module('homeHarmony.newHouse',['firebase'])
       console.log(currentHouseId, 'currentHouse')
     })
 
-  }
+  };
+
+  $scope.addRoommate = function(){
+    $('#newEmail3').val('');
+    DButil.getUserIdFromEmail($scope.roommateEmail, function(userId){
+      db.once("value", function(snapshot) {
+        var memberList = snapshot.val().houses[currentHouseId].houseMembers;
+        memberList[userId] = $scope.roommateEmail;
+        db.child('houses').child(currentHouseId).child('houseMembers').set(memberList);
+        db.child('users').child(userId).update({
+          house: currentHouseId
+        })
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    });
+  };
+
   console.log($scope);
 });
