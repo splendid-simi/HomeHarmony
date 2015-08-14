@@ -12,36 +12,38 @@ angular.module('homeHarmony.expenses', ['firebase'])
   var uDataObj;
 
 
-  db.once("value", function(snapshot) {
-    expensesArr = [];
-    userExpensesArr = [];
-    expensesDb = snapshot.val().houses[currentHouseId].expenses;
-    userExpensesDb = snapshot.val().users[currentUserId].userExpenses;
-    console.log(userExpensesDb);
-    for (expense in expensesDb){
-      dataObj = {};
-      dataObj.name = expensesDb[expense].expenseName;
-      dataObj.y = expensesDb[expense].cost;
-      expensesArr.push(dataObj);
-    }
-    $q.all(expensesArr).then(function(){
-      $scope.expensesArr = expensesArr;
-      DrawPie.drawPie($scope, "Expense Analysis", true);
-    });
+  $scope.showExpenses = function(){
+    db.once("value", function(snapshot) {
+      expensesArr = [];
+      userExpensesArr = [];
+      expensesDb = snapshot.val().houses[currentHouseId].expenses;
+      userExpensesDb = snapshot.val().users[currentUserId].userExpenses;
+      console.log(userExpensesDb);
+      for (expense in expensesDb){
+        dataObj = {};
+        dataObj.name = expensesDb[expense].expenseName;
+        dataObj.y = expensesDb[expense].cost;
+        expensesArr.push(dataObj);
+      }
+      $q.all(expensesArr).then(function(){
+        $scope.expensesArr = expensesArr;
+        DrawPie.drawPie($scope, "Expense Analysis", true);
+      });
 
-    for (uExpense in userExpensesDb){
-      uDataObj = {};
-      uDataObj.name = userExpensesDb[uExpense].name;
-      uDataObj.y = userExpensesDb[uExpense].splitCost;
-      uDataObj.paid = userExpensesDb[uExpense].paid;
-      userExpensesArr.push(uDataObj);
-    }
-    $q.all(userExpensesArr).then(function(){
-      $scope.userExpensesArr = userExpensesArr;
+      for (uExpense in userExpensesDb){
+        uDataObj = {};
+        uDataObj.name = userExpensesDb[uExpense].name;
+        uDataObj.y = userExpensesDb[uExpense].splitCost;
+        uDataObj.paid = userExpensesDb[uExpense].paid;
+        userExpensesArr.push(uDataObj);
+      }
+      $q.all(userExpensesArr).then(function(){
+        $scope.userExpensesArr = userExpensesArr;
+      });
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
     });
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
+  };
 
   $scope.newExpense = function(){
     var date = $scope.expenseDate;
@@ -56,6 +58,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
     };
     db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
     $scope.splitExpense(expenseObj);
+    $scope.showExpenses();
 
   };
 
@@ -87,7 +90,8 @@ angular.module('homeHarmony.expenses', ['firebase'])
         }
       }
     });
-  }
+  };
+  $scope.showExpenses();
 })
 .factory('DrawPie', function() {
   return {
