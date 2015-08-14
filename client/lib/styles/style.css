@@ -323,6 +323,21 @@ input[type=checkbox] {
 
 /* issues */
 
+.issues-container {
+  text-align: left;
+}
+
+.hh-issues-form-overlay {
+  margin-top: 60px;
+  background:rgba(255,255,255, 0.9);
+  border-radius: 5px;
+  padding:10px;
+}
+
+.issues-container li {
+  margin-left: -30px;
+}
+
 .hh-form .issuesForm input {
   display: inline-block; !important
 
@@ -332,6 +347,9 @@ input[type=checkbox] {
   display: inline-block;
 }
 
+.hh-expense-small-box {
+  min-width: 250px;
+}
 
 /* helper classes */ 
 
