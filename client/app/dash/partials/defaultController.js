@@ -14,15 +14,19 @@ angular.module('homeHarmony.default', ['firebase'])
   var issuesArr;
   var usersDb
   var usersArr;
+  var tasksDb;
+  var tasksArr;
 
 
   db.once("value", function(snapshot) {
     expensesArr = [];
     issuesArr = [];
     usersArr = [];
+    tasksArr = [];
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
     issuesDb = snapshot.val().houses[currentHouseId].issues;
     usersDb = snapshot.val().houses[currentHouseId].houseMembers;
+    tasksDb = snapshot.val().houses[currentHouseId].tasks;
     for (expense in expensesDb){
       dataObj = {};
       dataObj.name = expensesDb[expense].expenseName;
@@ -45,10 +49,15 @@ angular.module('homeHarmony.default', ['firebase'])
     for (user in usersDb){
       usersArr.push(usersDb[user]);
     }
-    $q.all(issuesArr).then(function(){
+    $q.all(usersArr).then(function(){
       $scope.usersArr = usersArr;
       localStorage.setItem("currentUsersArr", JSON.stringify(usersArr));
-
+    });
+    for (task in tasksDb){
+      tasksArr.push(tasksDb[task]);
+    }
+    $q.all(usersArr).then(function(){
+      $scope.tasksArr = tasksArr;
     });
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
