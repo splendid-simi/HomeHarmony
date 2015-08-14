@@ -17,9 +17,17 @@ angular.module('homeHarmony.newHouse',['firebase'])
         housesDb = totalDb.houses;
         for (var prop in housesDb){
           if (prop === $scope.chosenHouse) {
-            var memberList = housesDb[prop].houseMembers;
-            memberList[currentUserId] = localStorage.getItem("currentUserEmail");
-            db.child('houses').child(prop).child('houseMembers').set(memberList);
+            if (!housesDb[prop].houseMembers){
+              var members = {};
+              members[currentUserId] = localStorage.getItem("currentUserEmail");;
+              db.child('houses').child(prop).update({
+                houseMembers: members
+              });
+            } else {
+              var memberList = housesDb[prop].houseMembers;
+              memberList[currentUserId] = localStorage.getItem("currentUserEmail");
+              db.child('houses').child(prop).child('houseMembers').set(memberList);
+            }
           }
         }
       }, function (errorObject) {
