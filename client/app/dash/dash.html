@@ -2,7 +2,7 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <a ui-sref="dash.default"><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img></a>
+      <a ui-sref="dash.default"><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img><span style="color:white">ome Harmony</span></a>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
@@ -26,7 +26,7 @@
 
 <main class="mdl-layout__content">
 
-  <div class="center-content" ui-view></div> <!-- SubViews Inserted Here -->
+  <div class="center-content" style="margin-bottom: 55px"ui-view></div> <!-- SubViews Inserted Here -->
 
   <section>
     <a ui-sref="dash.default">Default</a>
@@ -34,7 +34,7 @@
   </section>
 
 
-  <footer class="mdl-mini-footer footer">
+  <footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px; z-index: -1">
     <ul>
       <li>© 2015 Designed and Developed By</li>
       <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu |</a></li>
