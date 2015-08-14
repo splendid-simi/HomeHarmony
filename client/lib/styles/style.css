@@ -113,10 +113,6 @@ h1 {
   margin-left:20px;
 }
 
-.tasksList-container {
-  width:620px;
-}
-
 .hh-form input,
 .hh-form selec {
   display: block;
@@ -296,8 +292,6 @@ input[type=checkbox] {
 
 .tasksList-container li {
   display: block;
-  margin:5px;
-  min-width:600px;
 }
 
 .tasksList-container .assignee {
@@ -314,7 +308,7 @@ input[type=checkbox] {
 
 .tasksList-container .description {
   display:inline-block;
-  width:300px;
+  width:150px;
 }
 
 .issuesListContainer li {
@@ -325,6 +319,13 @@ input[type=checkbox] {
 .list-icon {
   width:35px;
   height:35px;
+}
+
+.hh-tasks-form-overlay {
+  margin-top: 60px;
+  background:rgba(255,255,255, 0.9);
+  border-radius: 5px;
+  padding:10px;
 }
 
 /* issues */
