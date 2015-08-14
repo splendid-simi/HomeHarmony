@@ -12,24 +12,9 @@
         <div class="mdl-card__supporting-text hh-card-text">
           <span class="mdl-typography--font-light mdl-typography--subhead">
             <ul class="dash-recentTaskList">
-              <li>
+              <li ng-repeat="task in tasksArr | limitTo:5">
                 <img src="assets/list.png" class="list-icon" alt="task icon">
-                <span>Take out the trash</span>
-              </li>
-              <li>
-                <img src="assets/expense.png" class="list-icon" alt="expense icon">
-                <span>Pay the electricity bill</span>
-              </li>
-              <li><img src="assets/list.png" class="list-icon" alt="task icon">
-                <span>Mow the lawn</span>
-              </li>
-              <li>
-                <img src="assets/expense.png" class="list-icon" alt="expense icon">
-                <span>Pay the cable bill</span>
-              </li>
-              <li>
-                <img src="assets/list.png" class="list-icon" alt="expense icon">
-                <span>Buy more milk</span>
+                <span>{{task.dueDate}} - {{task.description}}</span>
               </li>
             </ul>
           </span>
