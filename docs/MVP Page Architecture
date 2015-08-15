@@ -1,12 +1,11 @@
 MVP Page Architecture
 
-
 Landing Page:
 -Details features of our product 
 -Allows user to login or register for service 
 -Customer satisfaction quotes 
 
-User Registration
+User Registration:
 -Create a new user 
 -Store username and password in database 
 -Redirect to the login page 
@@ -16,19 +15,15 @@ User Login:
 -Verify username and encrypted password 
 -Redirect to the landing page or signup up page 
 
-
-House Registration – what does it mean to sign up for a house? Can you login as a house? Is there an admin person? 
+House Registration:
 Create a new house 
 Add members to house 
 Request users to sign up for a house 
 
-
 Dashboard:
 Shows most recent chat messages
 Shows breakdown of expenditures from the month
-Shows bills that are due soon
-Shows user tasks 
-
+Shows recently added tasks  
 
 Features:
 
@@ -37,12 +32,7 @@ Shows who has paid bills
 Displays upcoming bills / amount due per roommate 
 Create a new bill
 View a bill 
-Display usage of service over time (graph?)
-
-
-
-
-
+Display bills on a graph
 
 Task List:
 -add item to list
@@ -53,14 +43,12 @@ Task List:
 
 Communication System 
 -have messages persist in the database 
--post messages to chat 
--have a username and time (??) associated with each message 
+-post messages to chat anonymously 
 -have auto message posted on task completion or bills due 
 
 Additional Features:
 
-Roommate Great/Roommate Hate for complaints and compliments for users 
 Email reminders for bills, tasks, etc
-Personal tasks
+User can click on a roommate under the dashboard see that roommates recent messages/tasks/bills
 
 

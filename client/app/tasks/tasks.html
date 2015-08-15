@@ -16,6 +16,7 @@
             <div>
               <label for="selectRoommate">Assignee:</label>
               <select name="selectRoommate"  value='Select Roommate' ng-model='newTaskDoer' required>
+                <!-- option selected disabled disables user from selection the option tag --> 
                 <option selected disabled>Select Roommate</option>
                 <option name="taskDoer" ng-repeat="roommate in houseMemberArr">{{roommate}}</option>
               </select>
@@ -23,6 +24,7 @@
 
             <div>
               <label for="newTaskDueDate">Due Date:</label>
+              <!-- min requires date to be greater than or equal to today's date --> 
               <input type="date" name="TaskDueDate" ng-model='newTaskDueDate' min='{{tasks.currentDate | date:"yyyy-MM-dd"}}' required>
             </div>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add Task</button>
@@ -36,6 +38,7 @@
       <h3>Current Tasks:</h3>
         <ul>
           <li ng-repeat="task in tasks.taskArr">
+            <!-- ng-click event is triggered when a task is checked off --> 
             <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
             <span class="assignee">{{task.doer}}</span>
             <span class="description">{{task.description}} </span>
@@ -45,6 +48,7 @@
       <h3>Completed Tasks:</h3>
       <ul>
         <li ng-repeat="task in tasks.compTaskArr">
+          <!-- task doer and description must be within the same element to apply strikethrough --> 
             <span class="strike">{{task.doer}} {{task.description}}</span>
         </li>
         <li ng-if="taskArr.length == 0">
