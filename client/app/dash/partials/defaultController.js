@@ -31,7 +31,7 @@ angular.module('homeHarmony.default', ['firebase'])
     tasksDb = snapshot.val().houses[currentHouseId].tasks;
 
     // Build expensesArr so we can graph the expenses
-    for (expense in expensesDb) {
+    for (var expense in expensesDb) {
       dataObj = {};
       dataObj.name = expensesDb[expense].expenseName;
       dataObj.y = expensesDb[expense].cost;
@@ -47,7 +47,7 @@ angular.module('homeHarmony.default', ['firebase'])
       }
     });
 
-    for (issue in issuesDb) {
+    for (var issue in issuesDb) {
       issuesArr.push(issuesDb[issue]);
     }
     $q.all(issuesArr).then(function() {
@@ -55,7 +55,7 @@ angular.module('homeHarmony.default', ['firebase'])
       console.log($scope.issuesArr);
     });
 
-    for (user in usersDb) {
+    for (var user in usersDb) {
       usersArr.push(usersDb[user]);
     }
     $q.all(usersArr).then(function() {
@@ -63,7 +63,7 @@ angular.module('homeHarmony.default', ['firebase'])
       localStorage.setItem("currentUsersArr", JSON.stringify(usersArr));
     });
     // See how many tasks are not yet completed
-    for (task in tasksDb) {
+    for (var task in tasksDb) {
       if (!tasksDb[task].completed) {
         tasksArr.push(tasksDb[task]);
         tasksNotCompletedCount++;

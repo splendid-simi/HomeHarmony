@@ -52,7 +52,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
       sortCompTaskByDateArr = [];
       sortByDateArr = [];
 
-      for (prop in taskDb) {
+      for (var prop in taskDb) {
         taskDb[prop].id = prop;
         if (taskDb[prop].completed) {
           sortCompTaskByDateArr.push(taskDb[prop]);
@@ -75,7 +75,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
   // Creates readable format for dates to display in view
   $scope.tasks.parseDate = function(taskObj) {
-    for (task in taskObj) {
+    for (var task in taskObj) {
       taskObj[task].dueDateFormat = new Date(taskObj[task].dueDate).toLocaleDateString();
     }
     return taskObj;
