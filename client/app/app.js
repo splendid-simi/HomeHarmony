@@ -3,6 +3,7 @@ var userDb = {};
 var currentUser = 'DEFAULT_USER';
 var currentUserId = 'DEFAULT_USER_ID';
 var currentHouseId = 'DEFAULT_HOUSE_ID';
+// This is an array of routes not allowed if the user doesn't have a house
 var needsHouseFor = [
   'dash',
   'dash.default',
@@ -70,7 +71,7 @@ angular.module('homeHarmony', [
         }]
       }
     })
-    // nested views for dash
+    // Nested views for dash
     .state('dash.default', {
       url: "/:default",
       templateUrl: "./app/dash/partials/default.html",
@@ -100,14 +101,16 @@ angular.module('homeHarmony', [
       controller: "expensesCtrl"
     })
 
-  // For any unmatched url, redirect to /
+  // For any unmatched url, redirect to /landing
   $urlRouterProvider.otherwise("/landing");
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
   
+  // If the user is logged in and doesn't have a house, not allowed to visit the routes in 
+  // the array needsHouseFor 
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
-    if (currentHouseId === 'DEFAULT_HOUSE_ID'){
-      if (needsHouseFor.indexOf(toState.name) >= 0){
+    if (currentHouseId === 'DEFAULT_HOUSE_ID') {
+      if (needsHouseFor.indexOf(toState.name) >= 0) {
         $state.go('newHouse');
       }
     }
@@ -120,4 +123,3 @@ angular.module('homeHarmony', [
     }
   });
 }]);
-
