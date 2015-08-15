@@ -7,12 +7,15 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   $scope.tasks = {};
   $scope.tasks.taskArr;
   $scope.tasks.compTaskArr;
-  var sortCompTaskByDateArr;
-  var sortByDateArr;
   $scope.tasks.currentDate = new Date();
+
+  // populates select element on tasks form with house member names
   $scope.houseMemberArr = JSON.parse(localStorage.getItem('currentUsersArr'))
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
+  
+  var sortCompTaskByDateArr;
+  var sortByDateArr;
   var taskDb = {};
 
   $scope.tasks.addTask = function() {
@@ -21,9 +24,9 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
-      // date must be string to be stored in database
       dueDate: (due.getMonth() + 1) + '/' + due.getDate() + '/' +  due.getFullYear(),
       dateCreated: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
+      // a task is completed when the user checks its checkbox 
       completed: false,
       repeating: -1
     }
@@ -31,12 +34,9 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
     db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
-      taskId = snapshot.key();
-      console.log(taskId);
-      $scope.tasks.taskArr = [];
+      var taskId = snapshot.key();
 
       // updates view with new tasks
-      $scope.tasks.taskArr.push(snapshot.val());
       $scope.tasks.getTasks();
     })
     $scope.tasks.clearTasksForm();
@@ -46,12 +46,10 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     // listen for a task to be added
     db.once('value', function(snapshot){
       var temp = snapshot.val();
-      console.log(temp, 'temp');
-      console.log(currentHouseId, 'CHID in getTasks');
       var temp2 = temp.houses[currentHouseId];
       taskDb = temp2.tasks;
 
-      // overrides current tasks in the array
+      // overrides current tasks in arrays
       $scope.tasks.taskArr = [];
       $scope.tasks.compTaskArr = [];
       sortCompTaskByDateArr = [];
@@ -62,7 +60,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
         if (taskDb[prop].completed) {
           sortCompTaskByDateArr.push(taskDb[prop]);
           $q.all(sortCompTaskByDateArr).then(function(){
-            // displays 12 most recently completed tasks in descending order
+            // displays the 12 most recently completed tasks in descending order
             $scope.tasks.compTaskArr = $scope.tasks.sortByDate(sortCompTaskByDateArr);
           });
         } else if (!taskDb[prop].completed) {
@@ -73,7 +71,6 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
           });
         }
       }
-        console.log('gotten tasks ', $scope.tasks.taskArr);
     }, function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     })
@@ -110,11 +107,10 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   };
 
   $scope.tasks.clearTasksForm = function() {
-    console.log("clear tasks fn called");
     $scope.newTask = '';
     $scope.newTaskDoer = '';
     $scope.newTaskDueDate = '';
-    // resets form to not trigger error validation after form has been submitted
+    // resets form to not trigger validation error after form has been submitted
     $scope.tasksForm.$setPristine();
   };
 
