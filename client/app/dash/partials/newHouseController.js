@@ -28,6 +28,7 @@ angular.module('homeHarmony.newHouse',['firebase'])
               memberList[currentUserId] = localStorage.getItem("currentUserEmail");
               db.child('houses').child(prop).child('houseMembers').set(memberList);
             }
+            console.log("REDIRECTING!!!");
             $state.go('dash.default');
           }
         }

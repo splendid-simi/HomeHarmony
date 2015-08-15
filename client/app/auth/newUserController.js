@@ -1,6 +1,6 @@
 angular.module('homeHarmony.newUser', ['firebase'])
 
-.controller('NewUserCtrl', function ($scope, $location, $firebaseObject, UserAuth) {
+.controller('NewUserCtrl', function ($scope, $location, $firebaseObject, UserAuth, $state) {
 
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
@@ -34,6 +34,7 @@ angular.module('homeHarmony.newUser', ['firebase'])
       console.log(userObj);
       db.child('users').push(userObj);
     });
+    $state.go('dash.newHouse');
   };
   console.log($scope)
 });
