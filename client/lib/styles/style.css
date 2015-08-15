@@ -380,7 +380,23 @@ input[type=checkbox] {
   text-align: left;
 }
 
-/* Dash.html styling */
+
+
+/* Landing styling */
+
+.landing {
+  background: url('../../assets/landingDark.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  color: white;
+  text-align: center;
+}
+.headr {
+  position: fixed;
+}
 
 .layout-transparent {
   background: url('assets/header.jpg') center / cover;
