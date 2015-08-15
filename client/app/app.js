@@ -37,8 +37,6 @@ angular.module('homeHarmony', [
     .state('landing', {
       url: "/landing",
       templateUrl: "./app/landing/landing.html",
-      // controller: 'LandingCtrl',
-      // controllerAs: 'landing',
     })
     .state('newUser', {
       url: "/newUser",
@@ -122,6 +120,5 @@ angular.module('homeHarmony', [
       $state.go("login");
     }
   });
-
 }]);
 
