@@ -6,8 +6,8 @@ var currentHouseId = 'DEFAULT_HOUSE_ID';
 var needsHouseFor = [
   'dash',
   'dash.default',
-  'issues',
-  'expenses',
+  'dash.issues',
+  'dash.expenses',
   'dash.tasks'
 ];
 
@@ -107,14 +107,13 @@ angular.module('homeHarmony', [
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
   
-  // $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
-  //   if (currentHouseId === 'DEFAULT_HOUSE_ID'){
-  //     if (needsHouseFor.indexOf(toState.name) >= 0){
-  //       $state.go('dash.newHouse');
-  //       $state.go('newHouse');
-  //     }
-  //   }
-  // });
+  $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
+    if (currentHouseId === 'DEFAULT_HOUSE_ID'){
+      if (needsHouseFor.indexOf(toState.name) >= 0){
+        $state.go('newHouse');
+      }
+    }
+  });
 
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     event.preventDefault();
