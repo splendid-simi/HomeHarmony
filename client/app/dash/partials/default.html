@@ -1,87 +1,88 @@
-
 <div class="hh-dashboard-container">
-    <h1 class="greeting">Welcome home, <span>{{currentUserName}}.</span></h1>
-    <div class="hh-card-container mdl-grid featurebox-margin">
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-        <div class="mdl-card__media">
-          <div class="color-tip">&nbsp;</div>
-        </div>
-        <div class="mdl-card__title">
-           <h4 class="mdl-card__title-text">Recent Events</h4>
-        </div>
-        <div class="mdl-card__supporting-text hh-card-text">
-          <span class="mdl-typography--font-light mdl-typography--subhead">
-            <ul class="dash-recentTaskList">
-              <li ng-if="tasksCount === 0">
-                <span>No tasks currently due</span>
-              </li>
-              <li ng-repeat="task in tasksArr | limitTo:5" ng-if="!task.completed">
-                <img src="assets/list.png" class="list-icon" alt="task icon">
-                <span>{{task.dueDate}} - {{task.description}}</span>
-              </li>
-            </ul>
-          </span>
-        </div>
-        <div class="mdl-card__actions">
-           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.tasks"> See more Tasks<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
-        </div>
+  <h1 class="greeting">Welcome home, <span>{{currentUserName}}.</span></h1>
+  <div class="hh-card-container mdl-grid featurebox-margin">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <div class="color-tip">&nbsp;</div>
       </div>
-      
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-        <div class="mdl-card__media">
-          <div class="color-tip">&nbsp;</div>
-        </div>
-        <div class="mdl-card__title">
-           <h4 class="mdl-card__title-text">Monthly Expenses</h4>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <div ng-controller="defaultCtrl">
-            <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto">
-              <span>No expenses currently due</span>
-            </div>
-          </div>
-        </div>
-        <div class="mdl-card__actions">
-           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.expenses">See expenses due<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
-        </div>
+      <div class="mdl-card__title">
+        <h4 class="mdl-card__title-text">Recent Events</h4>
       </div>
-
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3diimg">
-        <div class="mdl-card__media">
-          <div class="color-tip">&nbsp;</div>
-          <!-- <img src="images/more-from-2.png"> -->
-        </div>
-        <div class="mdl-card__title">
-           <h4 class="mdl-card__title-text">Current House Issues</h4>
-        </div>
-        <div class="mdl-card__supporting-text issuesListContainer  hh-card-text">
-          <ul>
-            <li ng-if="issuesArr.length === 0">
-              <span>No current issues</span>
+      <div class="mdl-card__supporting-text hh-card-text">
+        <span class="mdl-typography--font-light mdl-typography--subhead">
+          <ul class="dash-recentTaskList">
+          <!-- Show no tasks due or a list of the tasks to be completed -->
+            <li ng-if="tasksCount === 0">
+              <span>No tasks currently due</span>
             </li>
-            <li ng-repeat="issue in issuesArr | limitTo:5">
-              <img src="assets/default_user.png" class="list-icon" alt="task icon">
-              <span>{{issue.date}} - {{issue.text}}</span>
+            <!-- Only show the tasks that are not completed -->
+            <li ng-repeat="task in tasksArr | limitTo:5" ng-if="!task.completed">
+              <img src="assets/list.png" class="list-icon" alt="task icon">
+              <span>{{task.dueDate}} - {{task.description}}</span>
             </li>
           </ul>
-        </div>
-        <div class="mdl-card__actions">
-           <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.issues">View all issues<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+        </span>
+      </div>
+      <div class="mdl-card__actions">
+        <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.tasks"> See more Tasks<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+      <div class="mdl-card__media">
+        <div class="color-tip">&nbsp;</div>
+      </div>
+      <div class="mdl-card__title">
+        <h4 class="mdl-card__title-text">Monthly Expenses</h4>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <div ng-controller="defaultCtrl">
+          <!-- Default to "No expenses" if there are expenses, is overwritten by DrawPie -->
+          <div id="expGraph" style="min-width: 216px; height: 216px; max-width: 216px; margin: 0 auto">
+            <span>No expenses currently due</span>
+          </div>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--1-col"></div>
-
-      <section class="roommates">
-        <div>
-          <div ng-repeat="user in usersArr | limitTo:6"  style="float:left">
-            <img src="assets/default_user.png" alt="user photo">
-            <span class="roommateName">{{user}}</span>
-          </div>
-
-          </div>
-        </section>  
-       </div>
-      <div>
+      <div class="mdl-card__actions">
+        <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.expenses">See expenses due<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+      </div>
     </div>
+
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3diimg">
+      <div class="mdl-card__media">
+        <div class="color-tip">&nbsp;</div>
+          <!-- <img src="images/more-from-2.png"> -->
+      </div>
+      <div class="mdl-card__title">
+        <h4 class="mdl-card__title-text">Current House Issues</h4>
+      </div>
+      <div class="mdl-card__supporting-text issuesListContainer  hh-card-text">
+        <ul>
+          <li ng-if="issuesArr.length === 0">
+            <span>No current issues</span>
+          </li>
+          <li ng-repeat="issue in issuesArr | limitTo:5">
+           <img src="assets/default_user.png" class="list-icon" alt="task icon">
+            <span>{{issue.date}} - {{issue.text}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="mdl-card__actions">
+        <a class="hh-link mdl-button mdl-js-button mdl-typography--text-uppercase" ui-sref="dash.issues">View all issues<i class="material-icons" style="vertical-align:middle">chevron_right</i></a>
+      </div>
+    </div>
+    <div class="mdl-cell mdl-cell--1-col"></div>
+
+    <section class="roommates">
+      <div>
+        <div ng-repeat="user in usersArr | limitTo:6"  style="float:left">
+          <img src="assets/default_user.png" alt="user photo">
+          <span class="roommateName">{{user}}</span>
+        </div>
+
+      </div>
+    </section>  
   </div>
-  
+  <div>
+  </div>
+</div>

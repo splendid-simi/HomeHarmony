@@ -1,10 +1,9 @@
 angular.module('homeHarmony.newUser', ['firebase'])
 
 .controller('NewUserCtrl', function ($scope, $location, $firebaseObject, UserAuth, $state) {
-
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
-  $scope.addUser = function(){
+  $scope.addUser = function() {
     $('#newPasswordField').val('');
     $('#newFirstNameField').val('');
     $('#newLastNameField').val('');
@@ -16,10 +15,11 @@ angular.module('homeHarmony.newUser', ['firebase'])
       // dateJoined: new Date()
       // house: houseId
     };
-    UserAuth.newUser(userObj.email, $scope.password, function(userEmail){
-      db.child('users').once('value', function(snapshot){
+    
+    UserAuth.newUser(userObj.email, $scope.password, function(userEmail) {
+      db.child('users').once('value', function(snapshot) {
         var userDb = snapshot.val();
-        for (var prop in userDb){
+        for (var prop in userDb) {
           if(userDb[prop].email === userEmail) {
             currentUserId = prop;
             localStorage.setItem("currentUserEmail", userEmail);

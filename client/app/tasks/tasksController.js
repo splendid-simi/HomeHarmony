@@ -1,22 +1,19 @@
 angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
-.controller('tasksCtrl', function($scope, $firebaseObject, $q){
-
+.controller('tasksCtrl', function($scope, $firebaseObject, $q) {
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-
+  var sortCompTaskByDateArr;
+  var sortByDateArr;
+  var taskDb = {};
   $scope.tasks = {};
   $scope.tasks.taskArr;
   $scope.tasks.compTaskArr;
   $scope.tasks.currentDate = new Date();
 
-  // populates select element on tasks form with house member names
+  // Populates select element on tasks form with house member names
   $scope.houseMemberArr = JSON.parse(localStorage.getItem('currentUsersArr'))
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
-  
-  var sortCompTaskByDateArr;
-  var sortByDateArr;
-  var taskDb = {};
 
   $scope.tasks.addTask = function() {
     var now = new Date();
@@ -26,30 +23,30 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
       doer: $scope.newTaskDoer,
       dueDate: (due.getMonth() + 1) + '/' + due.getDate() + '/' +  due.getFullYear(),
       dateCreated: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
-      // a task is completed when the user checks its checkbox 
+      // A task is completed when the user checks its checkbox 
       completed: false,
       repeating: -1
     }
-    // pushes task into database
+    // Pushes task into database
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
-    db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot){
+    db.child('houses').child(currentHouseId).child('tasks').once('child_added', function(snapshot) {
       var taskId = snapshot.key();
 
-      // updates view with new tasks
+      // Updates view with new tasks
       $scope.tasks.getTasks();
     })
     $scope.tasks.clearTasksForm();
   };
 
   $scope.tasks.getTasks = function() {
-    // listen for a task to be added
-    db.once('value', function(snapshot){
+    // Listen for a task to be added
+    db.once('value', function(snapshot) {
       var temp = snapshot.val();
       var temp2 = temp.houses[currentHouseId];
       taskDb = temp2.tasks;
 
-      // overrides current tasks in arrays
+      // Overrides current tasks in arrays
       $scope.tasks.taskArr = [];
       $scope.tasks.compTaskArr = [];
       sortCompTaskByDateArr = [];
@@ -59,14 +56,14 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
         taskDb[prop].id = prop;
         if (taskDb[prop].completed) {
           sortCompTaskByDateArr.push(taskDb[prop]);
-          $q.all(sortCompTaskByDateArr).then(function(){
-            // displays the 12 most recently completed tasks in descending order
+          $q.all(sortCompTaskByDateArr).then(function() {
+            // Displays the 12 most recently completed tasks in descending order
             $scope.tasks.compTaskArr = $scope.tasks.sortByDate(sortCompTaskByDateArr);
           });
         } else if (!taskDb[prop].completed) {
           sortByDateArr.push(taskDb[prop])
-          $q.all(sortByDateArr).then(function(){
-            // sorts and displays date in descending order
+          $q.all(sortByDateArr).then(function() {
+            // Sorts and displays date in descending order
             $scope.tasks.taskArr = $scope.tasks.sortByDate(sortByDateArr);
           });
         }
@@ -76,7 +73,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     })
   };
 
-  // creates readable format for dates to display in view
+  // Creates readable format for dates to display in view
   $scope.tasks.parseDate = function(taskObj) {
     for (task in taskObj) {
       taskObj[task].dueDateFormat = new Date(taskObj[task].dueDate).toLocaleDateString();
@@ -86,7 +83,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
   $scope.tasks.sortByDate = function(arr) {
     if (arr.length > 0) {
-      var sortedArr = arr.sort(function(a,b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
+      var sortedArr = arr.sort(function(a, b) { return Date.parse(a.dueDate) > Date.parse(b.dueDate) });
       return $scope.tasks.parseDate(sortedArr);
     } else {
       return arr[0];
@@ -102,7 +99,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     } else {
       db.child('houses').child(currentHouseId).child('tasks').child(task.id).update({'completed': false});
     }
-    // re-render tasks so completed task will go to the bottom of the list
+    // Re-render tasks so completed task will go to the bottom of the list
     $scope.tasks.getTasks();
   };
 
@@ -110,9 +107,8 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
     $scope.newTask = '';
     $scope.newTaskDoer = '';
     $scope.newTaskDueDate = '';
-    // resets form to not trigger validation error after form has been submitted
+    // Resets form to not trigger validation error after form has been submitted
     $scope.tasksForm.$setPristine();
   };
-
   $scope.tasks.getTasks();
 })

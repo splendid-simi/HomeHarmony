@@ -1,22 +1,20 @@
-angular.module('homeHarmony.login',['firebase', 'ui.router'])
+angular.module('homeHarmony.login', ['firebase', 'ui.router'])
 
 .controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state) {
-
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
-  $scope.logInUser = function(){
+  $scope.logInUser = function() {
     $('#loginEmailField').val('');
     $('#loginPasswordField').val('');
-    UserAuth.login($scope.email, $scope.password, function (/*$state, */userEmail){
+    UserAuth.login($scope.email, $scope.password, function (userEmail) {
 
       //try to factor this out as a separate named function "later"
-
       db.once("value", function(snapshot) {
         totalDb = snapshot.val();
         userDb = totalDb.users;
         console.log(userDb)
         console.log('uemail', userEmail)
-        for (var prop in userDb){
+        for (var prop in userDb) {
           if (userDb[prop].email === userEmail) {
             currentUserId = prop;
             localStorage.setItem("currentUserEmail", userEmail);
@@ -33,11 +31,10 @@ angular.module('homeHarmony.login',['firebase', 'ui.router'])
           }
         }
         console.log(currentUserId, 'CUID')
-
-      }, function (errorObject) {
+      },
+      function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
-
     });
   };
 });
