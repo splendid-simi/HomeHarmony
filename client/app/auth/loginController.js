@@ -1,4 +1,8 @@
-angular.module('homeHarmony.login', ['firebase', 'ui.router'])
+/**
+ * Home Harmony Login
+ * 
+ */
+angular.module('homeHarmony.login',['firebase', 'ui.router'])
 
 .controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state) {
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
