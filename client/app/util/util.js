@@ -8,7 +8,7 @@ angular.module('homeHarmony.util', ['firebase'])
       db.once("value", function(snapshot) {
         usersDb = snapshot.val().users;
         resultId = 'DEFAULT_USER_ID';
-        for (uid in usersDb) {
+        for (var uid in usersDb) {
           if (usersDb[uid].email === userEmail) {
             resultId = uid;
           }

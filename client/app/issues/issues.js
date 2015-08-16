@@ -23,7 +23,7 @@ angular.module('homeHarmony.issues', ['firebase'])
       var thisHouse = dbValues.houses[currentHouseId];
       issuesDb = thisHouse.issues;
       allIssues = [];
-      for (issue in issuesDb) {
+      for (var issue in issuesDb) {
         allIssues.push(issuesDb[issue]);
       }
       $q.all(allIssues).then(function() {
@@ -37,7 +37,7 @@ angular.module('homeHarmony.issues', ['firebase'])
     // console.log("issue index ",index);
     db.on('value', function(snapshot) {
       issuesDb = snapshot.val().houses[currentHouseId].issues;
-      for (issue in issuesDb) {
+      for (var issue in issuesDb) {
         if (issuesDb[issue].text === issueText) {
           console.log('deleting issues with ', issueText);
           db.child('houses').child(currentHouseId).child('issues').child(issue).remove();
