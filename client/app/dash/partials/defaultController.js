@@ -1,23 +1,27 @@
+/**
+ * Home Harmony Default
+ * Controller for dashboard
+ */
 angular.module('homeHarmony.default', ['firebase'])
 
 .controller('defaultCtrl', function($scope, $firebaseObject, $q, DrawPie) {
+  // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  // updates global variables
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
+  // Capitalizes users first name which is displayed on dash
   $scope.currentUserName = localStorage.getItem("currentUserName").charAt(0).toUpperCase() + 
     localStorage.getItem("currentUserName").slice(1);
-  $scope.currentDate = new Date();
-  var expensesDb;
-  var expensesArr;
-  var dataObj;
-  var issuesDb;
-  var issuesArr;
-  var usersDb;
-  var usersArr;
-  var tasksDb;
-  var tasksArr;
-  var tasksNotCompletedCount;
 
+  
+  $scope.currentDate = new Date();
+
+  // Initialize variables
+  var expensesDb, expensesArr, dataObj, issuesDb, issuesArr;
+  var usersDb, usersArr, tasksDb, tasksArr, tasksNotCompletedCount;
+
+  // query database
   db.once("value", function(snapshot) {
     tasksNotCompletedCount = 0;
     expensesArr = [];
@@ -37,7 +41,9 @@ angular.module('homeHarmony.default', ['firebase'])
       dataObj.y = expensesDb[expense].cost;
       expensesArr.push(dataObj);
     }
+    // Execute only after expensesArr is ready
     $q.all(expensesArr).then(function() {
+      // Place on scope to be displayed
       $scope.expensesArr = expensesArr;
       // If we have expenses, show the pie chart on dash.expenses subview
       if (expensesArr.length > 0) {
@@ -50,15 +56,18 @@ angular.module('homeHarmony.default', ['firebase'])
     for (var issue in issuesDb) {
       issuesArr.push(issuesDb[issue]);
     }
+    // Execute only after issuesArr is ready
     $q.all(issuesArr).then(function() {
+      // Place on scope to be displayed
       $scope.issuesArr = issuesArr;
-      console.log($scope.issuesArr);
     });
 
     for (var user in usersDb) {
       usersArr.push(usersDb[user]);
     }
+    // Execute only after userssArr is ready
     $q.all(usersArr).then(function() {
+      // Place on scope to be displayed
       $scope.usersArr = usersArr;
       localStorage.setItem("currentUsersArr", JSON.stringify(usersArr));
     });
@@ -69,8 +78,9 @@ angular.module('homeHarmony.default', ['firebase'])
         tasksNotCompletedCount++;
       }
     }
-    console.log("tasksArr", tasksArr);
-    $q.all(usersArr).then(function() {
+    // Execute only after tasksArr is ready
+    $q.all(tasksArr).then(function() {
+      // Place on scope to be displayed
       $scope.tasksArr = tasksArr;
       $scope.tasksNotCompletedCount = tasksNotCompletedCount;
     });

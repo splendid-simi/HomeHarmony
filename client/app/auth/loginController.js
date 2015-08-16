@@ -1,40 +1,39 @@
 /**
  * Home Harmony Login
- * 
+ * Controller for login page
  */
 angular.module('homeHarmony.login',['firebase', 'ui.router'])
 
-.controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state) {
+.controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state, DButil) {
+  // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
 
   $scope.logInUser = function() {
+    // clear input fields
     $('#loginEmailField').val('');
     $('#loginPasswordField').val('');
     UserAuth.login($scope.email, $scope.password, function (userEmail) {
-
-      //try to factor this out as a separate named function "later"
+      // Query database for user info
       db.once("value", function(snapshot) {
-        totalDb = snapshot.val();
-        userDb = totalDb.users;
-        console.log(userDb)
-        console.log('uemail', userEmail)
-        for (var prop in userDb) {
-          if (userDb[prop].email === userEmail) {
-            currentUserId = prop;
+        var userDb = snapshot.val().users;
+        for (var uid in userDb) {
+          if (userDb[uid].email === userEmail) {
+            // Save id from database into local storage
+            currentUserId = uid;
             localStorage.setItem("currentUserEmail", userEmail);
-            localStorage.setItem("currentUserName", userDb[prop].firstname);
+            localStorage.setItem("currentUserName", userDb[uid].firstname);
             localStorage.setItem("currentUserId", currentUserId);
-            if (userDb[prop].house) {
-              currentHouseId = userDb[prop].house;
+            if (userDb[uid].house) {
+              // Save house info and redirect to dashboard if user has a house
+              currentHouseId = userDb[uid].house;
               localStorage.setItem("currentHouseId", currentHouseId);
               $state.go('dash.default');
             } else {
+              // redirect to newHouse if user doesnt have a house yet
               $state.go('newHouse');
             }
-            console.log('CHID ', currentHouseId);
           }
         }
-        console.log(currentUserId, 'CUID')
       },
       function (errorObject) {
         console.log("The read failed: " + errorObject.code);

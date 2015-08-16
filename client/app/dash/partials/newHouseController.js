@@ -1,33 +1,42 @@
+/**
+ * Home Harmony New House
+ * Controller for new house page
+ */
 angular.module('homeHarmony.newHouse', ['firebase'])
 
 .controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil, $state) {
+  // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
-  
   currentUserId = localStorage.getItem("currentUserId");
+
   $scope.joinHouse = function() {
     $('#joinHouseID').val('');
     localStorage.setItem("currentHouseId", $scope.chosenHouse);
+    // add house property to user in database
     db.child('users').child(currentUserId).update({
       'house': $scope.chosenHouse
     });
 
+    // query database to find desired house
     db.once("value", function(snapshot) {
-      totalDb = snapshot.val();
-      housesDb = totalDb.houses;
-      for (var prop in housesDb) {
-        if (prop === $scope.chosenHouse) {
-          if (!housesDb[prop].houseMembers) {
+      housesDb = snapshot.val().houses;
+      for (var hid in housesDb) {
+        if (hid === $scope.chosenHouse) {
+          if (!housesDb[hid].houseMembers) {
+            // if there are no members, create a member list with current user
             var members = {};
-            members[currentUserId] = localStorage.getItem("currentUserEmail");;
-            db.child('houses').child(prop).update({
+            members[currentUserId] = localStorage.getItem("currentUserEmail");
+            // push list to database
+            db.child('houses').child(hid).update({
               houseMembers: members
             });
           } else {
-            var memberList = housesDb[prop].houseMembers;
+            // else add user to member list and push to database
+            var memberList = housesDb[hid].houseMembers;
             memberList[currentUserId] = localStorage.getItem("currentUserEmail");
-            db.child('houses').child(prop).child('houseMembers').set(memberList);
+            db.child('houses').child(hid).child('houseMembers').set(memberList);
           }
-          console.log("REDIRECTING!!!");
+          // redirect to dashboard
           $state.go('dash.default');
         }
       }
@@ -40,21 +49,21 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   $scope.newHouseReg = function() {
     $('#newEmail1').val('');
     $('#newEmail2').val('');
+
+    // create a list of house members
     var houseMembers = [
       currentUser,
       $scope.email1,
       $scope.email2
     ];
+    // add member list to new house object
     var houseObj = {
-      houseMembers: houseMembers,
-
-      // tasks: [{}],
-      // issues: [{}],          these to be added elsewhere
-      // expenses: [{}]
-
+      houseMembers: houseMembers
     }
+    // add house to database
     db.child('houses').push(houseObj);
 
+    
     db.child('houses').once('child_added', function(snapshot) {
       currentHouseId = snapshot.key();
       localStorage.setItem("currentHouseId", currentHouseId);

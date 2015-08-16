@@ -4,6 +4,7 @@
  */
 angular.module('homeHarmony.auth',[])
 
+// Factory for basic authentication purposes
 .factory("Auth", ["$firebaseAuth",
   // Returns reference to the Firebase 
   function($firebaseAuth) {
@@ -11,6 +12,8 @@ angular.module('homeHarmony.auth',[])
     return $firebaseAuth(ref);
   }
 ])
+
+// Factory with more detailed authentication functions
 .factory('UserAuth', ['$state', 'Auth',
   function ($state, Auth) {
     return {
