@@ -2,13 +2,6 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <a ui-sref="dash.default"><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img><span style="color:white">ome Harmony</span></a>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation -->
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" ng-click="logOut()" href>Logout</a>
-      </nav>
-    </div>
   </header>
 
   <div class="mdl-layout__drawer">
@@ -23,37 +16,25 @@
  <main class="mdl-layout__content hh-houseRegistration">
   <div class="mdl-grid">
 <!--     <div class="mdl-cell mdl-cell--1-col"></div> -->
-    <div class="mdl-cell mdl-cell--4-col  mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
       <div class="newHouse hh-form">
-        <h1>Create a House</h1>
+        <h1>Create a New House</h1>
         <hr>
+         <p>Create a new house for you and your roommates:</p>
         <form name="newHouseForm" ng-submit='newHouseReg()'>
-          <input id="newEmail1" type='text'ng-model='email' placeholder="enter roommate's email" required>
           <!-- Colored mini FAB button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Create House</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="create-house-button" ng-disabled="uniqueHouseIdExists()">Create House</button>
         </form>
       </div>
     </div>
 
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
       <div class="newHouse hh-form">
-        <h1>Join a House</h1>
-        <hr>
-        <form name="joinHouseForm" ng-submit='joinHouse()'>
-          <input id="joinHouseID" type='text'ng-model='chosenHouse' placeholder='enter house key' required>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Join House</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
-      <div class="newHouse hh-form">
-        <h1>Add Roommate to House</h1>
+        <h1>Invite Roommate to House</h1>
         <hr>
         <form name="newHouseForm" ng-submit='addRoommate()'>
-          <input id="newEmail3" type='text'ng-model='roommateEmail' placeholder="enter roommate's email" required>
-          <!-- Colored mini FAB button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored hh-add">Add</button>
+          <p>Have roommates register with House ID:</p>
+          <div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="houseID"><span>{{currentHouseId || "No House Exists"}}</span></div>
         </form>
       </div>
     </div>
