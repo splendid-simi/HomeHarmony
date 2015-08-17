@@ -8,7 +8,9 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentUserId = localStorage.getItem("currentUserId");
-
+  $scope.currentHouseId = localStorage.getItem("currentHouseId");
+  console.log($scope.currentHouseId);
+  
   $scope.joinHouse = function() {
     $('#joinHouseID').val('');
     localStorage.setItem("currentHouseId", $scope.chosenHouse);
@@ -47,13 +49,13 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   };
 
   $scope.newHouseReg = function() {
-    $('#newEmail1').val('');
-    $('#newEmail2').val('');
+    // $('#newEmail1').val('');
+    // $('#newEmail2').val('');
 
     // create a list of house members
     var houseMembers = [
-      currentUser,
-      $scope.email
+      currentUser
+      // $scope.email1
     ];
     // add member list to new house object
     var houseObj = {
@@ -66,9 +68,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     db.child('houses').once('child_added', function(snapshot) {
       currentHouseId = snapshot.key();
       localStorage.setItem("currentHouseId", currentHouseId);
-
-    //email users
-
+      //email users
       console.log(currentUserId, ' user, house ', currentHouseId)
       var userRef = db.child('users').child(currentUserId);
       userRef.update({
@@ -96,5 +96,11 @@ angular.module('homeHarmony.newHouse', ['firebase'])
       });
     });
   };
+  
+  // function for ng-disable on create house button to disable creating a
+  // new house if a user is aready part of a house that is not the default house
+  $scope.uniqueHouseIdExists = function() {
+    return localStorage.getItem("currentHouseId") !== null; 
+  }
   console.log($scope);
 });

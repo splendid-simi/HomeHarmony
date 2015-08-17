@@ -148,6 +148,15 @@ h1 {
   margin: 3px;
 }
 
+.register-form {
+  width:100%;
+  padding:20px;
+}
+
+.register-form h1 {
+  color:#000;
+}
+
 .registration {
   height: 100%;
 }
@@ -209,13 +218,34 @@ h1 {
 .joinHouse, 
 .newHouse {
   display: inline-block;
-  min-width:200px;
   vertical-align: top;
   margin:20px;
+  width:300px;
+  height:225px;
 }
 
 .newHouse .hh-add {
   display: block;
+}
+
+.newHouse p {
+  font-style:italic; 
+  font-size:13px; 
+  color:gray;
+  margin:20px auto
+}
+
+.newHouse span {
+  color:#fff;
+  cursor:auto;
+}
+
+.newHouse #houseID {
+  cursor:auto;
+}
+
+.newHouse #create-house-button {
+  margin-top:0;
 }
 
 .dash-recentTaskList li {
