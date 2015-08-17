@@ -15,8 +15,7 @@
 
  <main class="mdl-layout__content hh-houseRegistration">
   <div class="mdl-grid">
-<!--     <div class="mdl-cell mdl-cell--1-col"></div> -->
-    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
       <div class="newHouse hh-form">
         <h1>Create a New House</h1>
         <hr>
@@ -28,7 +27,19 @@
       </div>
     </div>
 
-    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+      <div class="newHouse hh-form">
+        <h1>Join a House</h1>
+        <hr>
+        <form name="joinHouseForm" ng-submit='joinHouse()'>
+          <input id="joinHouseID" type='text' ng-model='chosenHouse' placeholder='enter house key' required>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Join House</button>
+        </form>
+      </div>
+    </div>
+ 
+
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
       <div class="newHouse hh-form">
         <h1>Invite Roommate to House</h1>
         <hr>

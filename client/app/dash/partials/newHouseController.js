@@ -38,9 +38,9 @@ angular.module('homeHarmony.newHouse', ['firebase'])
             memberList[currentUserId] = localStorage.getItem("currentUserEmail");
             db.child('houses').child(houseId).child('houseMembers').set(memberList);
           }
-          // redirect to dashboard
-          $state.go('dash.default');
         }
+      // redirect to dashboard
+      $state.go('dash.default');
       }
     },
     function (errorObject) {
