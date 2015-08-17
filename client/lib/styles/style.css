@@ -415,8 +415,6 @@ input[type=checkbox] {
   text-align: left;
 }
 
-
-
 /* Landing styling */
 
 .landing {
@@ -429,10 +427,40 @@ input[type=checkbox] {
   position: fixed;
 }
 
-.layout-transparent {
+.user-quotes-container {
+  margin-top: 300px;
+  background-color:#fff;
+}
+
+.user-quotes {
+  color:#000;
+}
+
+.user-quotes img {
+  display: inline-block;
+  width:50%;
+  height:50%;
+}
+
+.user-quotes p {
+  display: inline-block;
+  width:40%;
+  height:inherit;
+  font-size: 24px;
+  vertical-align: middle;
+  font-style: italic;
+}
+
+.user-quotes span {
+  display: block;
+  margin:10px;
+}
+
+/*.layout-transparent {
   background: url('assets/header.jpg') center / cover;
 }
 
+*/
 .layout-transparent .mdl-layout__header,
 .layout-transparent .mdl-layout__drawer-button {
   /* This background is dark, so we set text to white. Use 87% black instead if
