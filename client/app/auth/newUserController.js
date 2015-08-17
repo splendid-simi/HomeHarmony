@@ -40,6 +40,6 @@ angular.module('homeHarmony.newUser', ['firebase'])
       db.child('users').push(userObj);
     });
     // redirect to new house page
-    $state.go('dash.newHouse');
+    $state.go('newHouse');
   };
 });
