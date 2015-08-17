@@ -6,7 +6,7 @@ angular.module('homeHarmony.auth',[])
 
 // Factory for basic authentication purposes
 .factory("Auth", ["$firebaseAuth",
-  // Returns reference to the Firebase 
+  // Returns reference to the Firebase
   function($firebaseAuth) {
     var ref = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
     return $firebaseAuth(ref);
@@ -43,6 +43,7 @@ angular.module('homeHarmony.auth',[])
           cb(authData.password.email); // callback function
         }).catch(function(error) {
           console.error("Error:",error);
+          alert("This email and password combination doesn't match our records. Try again or click on Signup to make a new account.");
         });
       },
       logout: function () {
