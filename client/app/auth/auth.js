@@ -48,11 +48,14 @@ angular.module('homeHarmony.auth',[])
       },
       logout: function () {
         Auth.$unauth();
-        // "Clears" local storage
-        localStorage.setItem('currentUserId', 'DEFAULT_USER_ID');
-        localStorage.setItem('currentHouseId', 'DEFAULT_HOUSE_ID');
-        localStorage.setItem('currentUserName', 'DEFAULT_USER_NAME');
-        localStorage.setItem('currentUserEmail', 'DEFAULT_USER_EMAIL');
+        // Clears local storage
+        localStorage.clear();
+
+        //below kept in case defaults prove useful later instead of .clear():
+        // localStorage.setItem('currentUserId', 'DEFAULT_USER_ID');
+        // localStorage.setItem('currentHouseId', 'DEFAULT_HOUSE_ID');
+        // localStorage.setItem('currentUserName', 'DEFAULT_USER_NAME');
+        // localStorage.setItem('currentUserEmail', 'DEFAULT_USER_EMAIL');
         // Redirects to landing page
         $state.go('landing');
       }
