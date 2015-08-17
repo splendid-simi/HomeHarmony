@@ -15,6 +15,7 @@ angular.module('homeHarmony.newUser', ['firebase'])
     $('#newLastNameField').val('');
     $('#newHouseID').val('');
     // Object that will be added to database
+    localStorage.clear();
     var userObj = {
       firstname: $scope.firstname,
       lastname: $scope.lastname,
