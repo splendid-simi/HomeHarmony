@@ -4,7 +4,7 @@
  */
 angular.module('homeHarmony.newHouse', ['firebase'])
 
-.controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil, $state) {
+.controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil, $state, UserAuth) {
   // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   currentUserId = localStorage.getItem("currentUserId");
@@ -95,6 +95,11 @@ angular.module('homeHarmony.newHouse', ['firebase'])
         console.log("The read failed: " + errorObject.code);
       });
     });
+  };
+
+  $scope.logOut = function() {
+    console.log('Logging out.');
+    UserAuth.logout();
   };
   
   // function for ng-disable on create house button to disable creating a
