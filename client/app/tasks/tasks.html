@@ -18,7 +18,7 @@
               <select name="selectRoommate"  value='Select Roommate' ng-model='newTaskDoer' required>
                 <!-- option selected disabled disables user from selection the option tag --> 
                 <option selected disabled>Select Roommate</option>
-                <option name="taskDoer" ng-repeat="roommate in houseMemberArr">{{roommate}}</option>
+                <option name="taskDoer" ng-repeat="roommate in houseMemberArr track by $index ">{{roommate}}</option>
               </select>
             </div>
 
