@@ -1,6 +1,11 @@
+/**
+ * Home Harmony Tasks
+ * Controller for tasks page
+ */
 angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
 .controller('tasksCtrl', function($scope, $firebaseObject, $q) {
+  // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   var sortCompTaskByDateArr;
   var sortByDateArr;
@@ -18,6 +23,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   $scope.tasks.addTask = function() {
     var now = new Date();
     var due = $scope.newTaskDueDate;
+    // Task object to be added to database
     taskObj = {
       description: $scope.newTask,
       doer: $scope.newTaskDoer,
