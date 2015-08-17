@@ -1,3 +1,7 @@
+/**
+ * Home Harmony
+ * Central module for application
+ */
 var totalDb = {};
 var userDb = {};
 var currentUser = 'DEFAULT_USER';
@@ -12,6 +16,7 @@ var needsHouseFor = [
   'dash.tasks'
 ];
 
+// Module and dependency injections
 angular.module('homeHarmony', [
   'ui.router',
   'ngMessages',
@@ -50,10 +55,9 @@ angular.module('homeHarmony', [
       templateUrl: "./app/dash/partials/newHouse.html",
       controller: "newHouseCtrl",
       resolve: {
-        // controller will not be loaded until $waitForAuth resolves
-        // Auth refers to our $firebaseAuth wrapper in the example above
+        // controller will not be loaded until $requireAuth resolves
         "currentAuth": ["Auth", function(Auth) {
-          // $waitForAuth returns a promise so the resolve waits for it to complete
+          // $requireAuth returns a promise so the resolve waits for it to complete
           return Auth.$requireAuth();
         }]
       }
@@ -63,10 +67,9 @@ angular.module('homeHarmony', [
       templateUrl: "./app/dash/dash.html",
       controller: "dashCtrl",
       resolve: {
-        // controller will not be loaded until $waitForAuth resolves
-        // Auth refers to our $firebaseAuth wrapper in the example above
+        // controller will not be loaded until $requireAuth resolves
         "currentAuth": ["Auth", function(Auth) {
-          // $waitForAuth returns a promise so the resolve waits for it to complete
+          // $requireAuth returns a promise so the resolve waits for it to complete
           return Auth.$requireAuth();
         }]
       }
@@ -77,10 +80,9 @@ angular.module('homeHarmony', [
       templateUrl: "./app/dash/partials/default.html",
       controller: "defaultCtrl",
       resolve: {
-        // controller will not be loaded until $waitForAuth resolves
-        // Auth refers to our $firebaseAuth wrapper in the example above
+        // controller will not be loaded until $requireAuth resolves
         "currentAuth": ["Auth", function(Auth) {
-          // $waitForAuth returns a promise so the resolve waits for it to complete
+          // $requireAuth returns a promise so the resolve waits for it to complete
           return Auth.$requireAuth();
         }]
       }
@@ -116,6 +118,8 @@ angular.module('homeHarmony', [
     }
   });
 
+  // if any of the resolve properties above throw an error
+  // due to authentication, reroute to login screen
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     event.preventDefault();
     if (error === "AUTH_REQUIRED") {
