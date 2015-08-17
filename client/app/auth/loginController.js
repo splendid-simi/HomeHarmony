@@ -27,6 +27,7 @@ angular.module('homeHarmony.login',['firebase', 'ui.router'])
               // Save house info and redirect to dashboard if user has a house
               currentHouseId = userDb[uid].house;
               localStorage.setItem("currentHouseId", currentHouseId);
+              
               $state.go('dash.default');
             } else {
               // redirect to newHouse if user doesnt have a house yet

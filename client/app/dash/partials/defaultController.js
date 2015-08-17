@@ -4,7 +4,7 @@
  */
 angular.module('homeHarmony.default', ['firebase'])
 
-.controller('defaultCtrl', function($scope, $firebaseObject, $q, DrawPie) {
+.controller('defaultCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil) {
   // database reference
   var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
   // updates global variables
@@ -19,7 +19,7 @@ angular.module('homeHarmony.default', ['firebase'])
 
   // Initialize variables
   var expensesDb, expensesArr, dataObj, issuesDb, issuesArr;
-  var usersDb, usersArr, tasksDb, tasksArr, tasksNotCompletedCount;
+  var usersDb, usersArr, usersEmailArr, tasksDb, tasksArr, tasksNotCompletedCount;
 
   // query database
   db.once("value", function(snapshot) {
@@ -28,11 +28,13 @@ angular.module('homeHarmony.default', ['firebase'])
     issuesArr = [];
     usersArr = [];
     tasksArr = [];
+    usersEmailArr = [];
     // Retrieve data from the database for the current house
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
     issuesDb = snapshot.val().houses[currentHouseId].issues;
-    usersDb = snapshot.val().houses[currentHouseId].houseMembers;
+    usersInHouse = snapshot.val().houses[currentHouseId].houseMembers;
     tasksDb = snapshot.val().houses[currentHouseId].tasks;
+    usersDb = snapshot.val().users;
 
     // Build expensesArr so we can graph the expenses
     for (var expense in expensesDb) {
@@ -61,11 +63,19 @@ angular.module('homeHarmony.default', ['firebase'])
       // Place on scope to be displayed
       $scope.issuesArr = issuesArr;
     });
-
-    for (var user in usersDb) {
-      usersArr.push(usersDb[user]);
+    for (var user in usersInHouse) {
+      usersEmailArr.push(usersInHouse[user]);
     }
-    // Execute only after userssArr is ready
+    
+    for (var i=0; i<usersEmailArr.length; i++) {
+      DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId){
+        userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
+        userLastInit = userObj.lastname[0].toUpperCase();
+        usersArr.push(userFirst+' '+userLastInit);
+      }, usersDb);
+    }
+
+    // Execute only after usersArr is ready
     $q.all(usersArr).then(function() {
       // Place on scope to be displayed
       $scope.usersArr = usersArr;

@@ -75,7 +75,7 @@
 
     <section class="roommates">
       <div>
-        <div ng-repeat="user in usersArr | limitTo:6"  style="float:left">
+        <div ng-repeat="user in usersArr track by $index | limitTo:6 "  style="float:left">
           <img src="assets/default_user.png" alt="user photo">
           <span class="roommateName">{{user}}</span>
         </div>

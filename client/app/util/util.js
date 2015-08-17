@@ -11,20 +11,81 @@ angular.module('homeHarmony.util', ['firebase'])
   return {
     // returns the unique id for the user with the given email
     // returns 'DEFAULT_USER_ID' if invalid user
-    getUserIdFromEmail: function(userEmail, cb) {
-      db.once("value", function(snapshot) {
-        usersDb = snapshot.val().users;
-        resultId = 'DEFAULT_USER_ID';
-        for (var uid in usersDb) {
-          if (usersDb[uid].email === userEmail) {
-            resultId = uid;
+    getUserIdFromEmail: function(userEmail, cb, userDatabase) {
+      var resultId = 'DEFAULT_USER_ID';
+      if (!userDatabase) {
+        db.once("value", function(snapshot) {
+          usersDb = snapshot.val().users;
+          for (var userId in usersDb) {
+            if (usersDb[userId].email === userEmail) {
+              resultId = userId;
+            }
+          }
+          cb(resultId); // callback function
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+      } else {
+        for (var userId in userDatabase) {
+          if (userDatabase[userId].email === userEmail) {
+            resultId = userId;
           }
         }
         cb(resultId); // callback function
-      },
-      function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
+      }
+      
+    },
+
+    getUserInfoFromEmail: function(userEmail, cb, userDatabase) {
+      var result = {
+            email: 'user@email.com',
+            firstname: 'user',
+            lastname: 'user',
+          };
+      if (!userDatabase){
+        db.once("value", function(snapshot) {
+          usersDb = snapshot.val().users;
+          for (var userId in usersDb) {
+            if (usersDb[userId].email === userEmail) {
+              result = usersDb[userId];
+            }
+          }
+          cb(result, userId); // callback function
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+      } else {
+        for (var userId in userDatabase) {
+          if (userDatabase[userId].email === userEmail) {
+            result = userDatabase[userId];
+          }
+        }
+        cb(result, userId); // callback function
+      }
+      
+    },
+
+    getUserNameFromId: function(userId, cb, userDatabase) {
+      var result = 'User';
+      if (!userDatabase){
+        db.once("value", function(snapshot) {
+          userObj = snapshot.val().users[userId];
+          userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
+          userLastInit = userObj.lastname[0].toUpperCase();
+          cb(userFirst+' '+userLastInit); // callback function
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+      } else {
+        userObj = userDatabase[userId];
+        userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
+        userLastInit = userObj.lastname[0].toUpperCase();
+        cb(userFirst+' '+userLastInit); // callback function
+      }
+      
     },
 
     populateEmailDb: function(){
