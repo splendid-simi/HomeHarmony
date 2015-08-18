@@ -6,7 +6,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
 .controller('tasksCtrl', function($scope, $firebaseObject, $q) {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
   var sortCompTaskByDateArr;
   var sortByDateArr;
   var taskDb = {};
@@ -16,7 +16,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
   $scope.tasks.currentDate = new Date();
 
   // Populates select element on tasks form with house member names
-  $scope.houseMemberArr = JSON.parse(localStorage.getItem('currentUsersArr'))
+  $scope.houseMemberArr = JSON.parse(localStorage.getItem('currentUsersArr'));
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
 
@@ -29,10 +29,10 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
       doer: $scope.newTaskDoer,
       dueDate: (due.getMonth() + 1) + '/' + due.getDate() + '/' +  due.getFullYear(),
       dateCreated: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
-      // A task is completed when the user checks its checkbox 
+      // A task is completed when the user checks its checkbox
       completed: false,
       repeating: -1
-    }
+    };
     // Pushes task into database
     db.child('houses').child(currentHouseId).child('tasks').push(taskObj);
 
