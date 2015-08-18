@@ -10,8 +10,12 @@ angular.module('homeHarmony.login',['firebase', 'ui.router'])
 
   $scope.logInUser = function() {
     // clear input fields
-    $('#loginEmailField').val('');
-    $('#loginPasswordField').val('');
+
+    //loading animation here
+
+    //$('#loginEmailField').val('');
+    //$('#loginPasswordField').val('');
+    
     UserAuth.login($scope.email, $scope.password, function (userEmail) {
       // Query database for user info
       db.once("value", function(snapshot) {

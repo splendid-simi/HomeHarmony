@@ -7,6 +7,7 @@ var userDb = {};
 var currentUser = 'DEFAULT_USER';
 var currentUserId = 'DEFAULT_USER_ID';
 var currentHouseId = 'DEFAULT_HOUSE_ID';
+
 // This is an array of routes not allowed if the user doesn't have a house
 var needsHouseFor = [
   'dash',
