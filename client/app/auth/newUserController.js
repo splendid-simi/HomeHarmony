@@ -6,7 +6,7 @@ angular.module('homeHarmony.newUser', ['firebase'])
 
 .controller('NewUserCtrl', function ($scope, $location, $firebaseObject, UserAuth, $state) {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
 
   // Adds user info to database
   $scope.addUser = function() {
