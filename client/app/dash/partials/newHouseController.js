@@ -2,15 +2,17 @@
  * Home Harmony New House
  * Controller for new house page
  */
+
+
 angular.module('homeHarmony.newHouse', ['firebase'])
 
 .controller('newHouseCtrl', function ($scope, $location, $firebaseObject, DButil, $state, UserAuth) {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
   currentUserId = localStorage.getItem("currentUserId");
   $scope.currentHouseId = localStorage.getItem("currentHouseId");
   console.log($scope.currentHouseId);
-  
+
   $scope.joinHouse = function() {
     $('#joinHouseID').val('');
     localStorage.setItem("currentHouseId", $scope.chosenHouse);
@@ -60,7 +62,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     // add member list to new house object
     var houseObj = {
       houseMembers: houseMembers
-    }
+    };
     // add house to database
     db.child('houses').push(houseObj);
 
@@ -69,14 +71,14 @@ angular.module('homeHarmony.newHouse', ['firebase'])
       currentHouseId = snapshot.key();
       localStorage.setItem("currentHouseId", currentHouseId);
       //email users
-      console.log(currentUserId, ' user, house ', currentHouseId)
+      console.log(currentUserId, ' user, house ', currentHouseId);
       var userRef = db.child('users').child(currentUserId);
       userRef.update({
         'house': currentHouseId
       });
-      console.log(currentHouseId, 'currentHouse')
+      console.log(currentHouseId, 'currentHouse');
       $state.go('dash.default');
-    })
+    });
 
   };
 
@@ -89,7 +91,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
         db.child('houses').child(currentHouseId).child('houseMembers').set(memberList);
         db.child('users').child(userId).update({
           house: currentHouseId
-        })
+        });
       },
       function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -101,11 +103,11 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     console.log('Logging out.');
     UserAuth.logout();
   };
-  
+
   // function for ng-disable on create house button to disable creating a
   // new house if a user is aready part of a house that is not the default house
   $scope.uniqueHouseIdExists = function() {
-    return localStorage.getItem("currentHouseId") !== null; 
-  }
+    return localStorage.getItem("currentHouseId") !== null;
+  };
   console.log($scope);
 });

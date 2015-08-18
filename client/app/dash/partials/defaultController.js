@@ -2,19 +2,20 @@
  * Home Harmony Default
  * Controller for dashboard
  */
+
 angular.module('homeHarmony.default', ['firebase'])
 
 .controller('defaultCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil) {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
   // updates global variables
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
   // Capitalizes users first name which is displayed on dash
-  $scope.currentUserName = localStorage.getItem("currentUserName").charAt(0).toUpperCase() + 
+  $scope.currentUserName = localStorage.getItem("currentUserName").charAt(0).toUpperCase() +
     localStorage.getItem("currentUserName").slice(1);
 
-  
+
   $scope.currentDate = new Date();
 
   // Initialize variables
@@ -66,7 +67,7 @@ angular.module('homeHarmony.default', ['firebase'])
     for (var user in usersInHouse) {
       usersEmailArr.push(usersInHouse[user]);
     }
-    
+
     for (var i=0; i<usersEmailArr.length; i++) {
       DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId){
         userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);

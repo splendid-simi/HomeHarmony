@@ -6,7 +6,7 @@ angular.module('homeHarmony.util', ['firebase'])
 
 .factory('DButil', function() {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
 
   return {
     // returns the unique id for the user with the given email
@@ -34,7 +34,7 @@ angular.module('homeHarmony.util', ['firebase'])
         }
         cb(resultId); // callback function
       }
-      
+
     },
 
     getUserInfoFromEmail: function(userEmail, cb, userDatabase) {
@@ -64,7 +64,7 @@ angular.module('homeHarmony.util', ['firebase'])
         }
         cb(result, userId); // callback function
       }
-      
+
     },
 
     getUserNameFromId: function(userId, cb, userDatabase) {
@@ -85,7 +85,7 @@ angular.module('homeHarmony.util', ['firebase'])
         userLastInit = userObj.lastname[0].toUpperCase();
         cb(userFirst+' '+userLastInit); // callback function
       }
-      
+
     },
 
     populateEmailDb: function(){

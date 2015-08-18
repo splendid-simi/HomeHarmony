@@ -8,7 +8,7 @@ angular.module('homeHarmony.auth',[])
 .factory("Auth", ["$firebaseAuth",
   // Returns reference to the Firebase
   function($firebaseAuth) {
-    var ref = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+    var ref = new Firebase(DB.url);
     return $firebaseAuth(ref);
   }
 ])

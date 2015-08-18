@@ -4,9 +4,9 @@
  */
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil) { 
+.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil) {
   // database reference
-  var db = new Firebase("https://dazzling-inferno-3592.firebaseio.com");
+  var db = new Firebase(DB.url);
   var expensesDb;
   var expensesArr;
   var userExpensesArr;
