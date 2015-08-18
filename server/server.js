@@ -1,7 +1,9 @@
 var express = require('express');
+var app = express();
+var middleware = require('./util/middleware.js');
 
-var app = express;
+middleware(app, express);
 
-require('./util/middleware.js');
+app.set('port', process.env.PORT || 8080);
 
 module.exports = app;
