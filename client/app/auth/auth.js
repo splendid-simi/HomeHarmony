@@ -40,9 +40,10 @@ angular.module('homeHarmony.auth',[])
           email    : userEmail,
           password : attemptedPassword
         }).then(function(authData) {
-          cb(authData.password.email); // callback function
+          cb(authData.password.email, true); // callback function
         }).catch(function(error) {
-          console.error("Error:",error);
+          console.log("Error:",error);
+          cb('dummyemail', false); // callback function
           alert("This email and password combination doesn't match our records. Try again or click on Signup to make a new account.");
         });
       },
