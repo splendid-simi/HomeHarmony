@@ -14,8 +14,6 @@ angular.module('homeHarmony.default', ['firebase'])
   // Capitalizes users first name which is displayed on dash
   $scope.currentUserName = localStorage.getItem("currentUserName").charAt(0).toUpperCase() +
     localStorage.getItem("currentUserName").slice(1);
-
-
   $scope.currentDate = new Date();
 
   // Initialize variables
