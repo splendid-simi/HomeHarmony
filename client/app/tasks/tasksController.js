@@ -29,6 +29,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
       doer: $scope.newTaskDoer,
       dueDate: (due.getMonth() + 1) + '/' + due.getDate() + '/' +  due.getFullYear(),
       dateCreated: (now.getMonth() + 1) + '/' + now.getDate() + '/' +  now.getFullYear(),
+      assignedBy: localStorage.getItem("currentUserName"),
       // A task is completed when the user checks its checkbox
       completed: false,
       repeating: -1
@@ -41,7 +42,7 @@ angular.module('homeHarmony.tasks', ['firebase', 'ngMessages'])
 
       // Updates view with new tasks
       $scope.tasks.getTasks();
-    })
+    });
     $scope.tasks.clearTasksForm();
   };
 

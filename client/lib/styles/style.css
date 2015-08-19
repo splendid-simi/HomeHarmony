@@ -344,19 +344,30 @@ input[type=checkbox] {
 
 .tasksList-container .assignee {
   display:inline-block;
-  width:120px;
   font-weight: bold;
+}
+
+.tasksList-container .assignedBy {
+  display:inline-block;
+  font-size: 75%;
 }
 
 .tasksList-container .dueDate {
   display:inline-block;
-  width:100px;
   font-style: italic;
 }
 
 .tasksList-container .description {
   display:inline-block;
-  width:150px;
+}
+
+.tasksList-container .taskHeader{
+  display:inline-block;
+  font-weight: bold;
+}
+
+.tasksList-container li {
+  display: block;
 }
 
 .issuesListContainer li {
