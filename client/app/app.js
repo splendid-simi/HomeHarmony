@@ -4,9 +4,9 @@
  */
 var totalDb = {};
 var userDb = {};
-var currentUser = 'DEFAULT_USER';
-var currentUserId = 'DEFAULT_USER_ID';
-var currentHouseId = 'DEFAULT_HOUSE_ID';
+var currentUser = localStorage.getItem('currentUserName') || 'DEFAULT_USER';
+var currentUserId = localStorage.getItem('currentUserId') || 'DEFAULT_USER_ID';
+var currentHouseId = localStorage.getItem('currentHouseId') || 'DEFAULT_HOUSE_ID';
 
 // This is an array of routes not allowed if the user doesn't have a house
 var needsHouseFor = [
@@ -113,10 +113,8 @@ angular.module('homeHarmony', [
   // If the user is logged in and doesn't have a house, not allowed to visit the routes in 
   // the array needsHouseFor 
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
-    if (currentHouseId === 'DEFAULT_HOUSE_ID') {
-      if (needsHouseFor.indexOf(toState.name) >= 0) {
-        $state.go('newHouse');
-      }
+    if ( currentHouseId === 'DEFAULT_HOUSE_ID' && needsHouseFor.indexOf(toState.name) >= 0 ) {
+      $state.go('newHouse');
     }
   });
 

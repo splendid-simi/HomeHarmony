@@ -40,6 +40,8 @@ angular.module('homeHarmony.auth',[])
           email    : userEmail,
           password : attemptedPassword
         }).then(function(authData) {
+          console.log('Login Successful.');
+          console.log('Login Credentials:',authData);
           cb(authData.password.email, true); // callback function
         }).catch(function(error) {
           console.log("Error:",error);
@@ -60,6 +62,11 @@ angular.module('homeHarmony.auth',[])
         // localStorage.setItem('currentUserEmail', 'DEFAULT_USER_EMAIL');
         // Redirects to landing page
         $state.go('landing');
+      },
+      removeUser: function (userEmail, password) {
+        // Auth.$removeUser({
+
+        // });
       }
     };
   }
