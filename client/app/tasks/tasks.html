@@ -37,13 +37,18 @@
       <hr style="width:250px">
       <h3>Current Tasks:</h3>
         <ul>
-          <li ng-repeat="task in tasks.taskArr">
-            <!-- ng-click event is triggered when a task is checked off -->
-            <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
-            <span class="assignee">{{task.doer}}</span>
-            <span class="description">{{task.description}} </span>
-            <span class="dueDate">{{task.dueDateFormat}} </span>
-          </li>
+          <ul>
+            <li ng-repeat="task in tasks.taskArr">
+              <!-- ng-click event is triggered when a task is checked off -->
+              <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
+              <span class="assignee">{{task.doer}}</span>
+              <span class="dueDate">{{task.dueDateFormat}}</span>
+              <span class="assignedBy">(Assigned by: {{task.assignedBy}})</span>
+              <p></p>
+              <span class="description">{{task.description}}</span>
+              <hr>
+            </li>
+          </ul>
         </ul>
       <h3>Completed Tasks:</h3>
       <ul>
