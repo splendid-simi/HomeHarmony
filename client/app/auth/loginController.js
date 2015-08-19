@@ -5,7 +5,7 @@
 
 angular.module('homeHarmony.login',['firebase', 'ui.router'])
 
-.controller('LoginCtrl', function ($scope, $location, UserAuth, $firebaseObject, $state, DButil) {
+.controller('LoginCtrl', function ($rootScope, $scope, $location, UserAuth, $firebaseObject, $state, DButil) {
   // database reference
   var db = new Firebase(DB.url);
 
@@ -33,6 +33,9 @@ angular.module('homeHarmony.login',['firebase', 'ui.router'])
               localStorage.setItem("currentUserEmail", userEmail);
               localStorage.setItem("currentUserName", userDb[uid].firstname);
               localStorage.setItem("currentUserId", currentUserId);
+
+              $rootScope.currentUser = localStorage.getItem('currentUserName');
+
               if (userDb[uid].house) {
                 // Save house info and redirect to dashboard if user has a house
                 currentHouseId = userDb[uid].house;

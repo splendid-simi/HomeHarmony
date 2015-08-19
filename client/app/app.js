@@ -107,7 +107,7 @@ angular.module('homeHarmony', [
   // For any unmatched url, redirect to /landing
   $urlRouterProvider.otherwise("/landing");
 })
-.run(["$rootScope", "$state", function($rootScope, $state) {
+.run(["$rootScope", "$state", function($rootScope, $state, $timeout) {
   
   // If the user is logged in and doesn't have a house, not allowed to visit the routes in 
   // the array needsHouseFor 
@@ -119,6 +119,7 @@ angular.module('homeHarmony', [
     }
   });
 
+
   // if any of the resolve properties above throw an error
   // due to authentication, reroute to login screen
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
@@ -127,4 +128,11 @@ angular.module('homeHarmony', [
       $state.go("login");
     }
   });
+
+  $rootScope.currentUser = localStorage.getItem('currentUserName');
+
+  $rootScope.$on('$viewContentLoaded', function() {
+      componentHandler.upgradeAllRegistered();
+  });
+
 }]);

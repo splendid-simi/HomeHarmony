@@ -477,10 +477,9 @@ input[type=checkbox] {
   display: flex;
     -webkit-flex-direction: column;
   flex-direction: column;
-
+}
 
 .mdl-textfield--expandable {
   width: auto;
 }
 
-}
