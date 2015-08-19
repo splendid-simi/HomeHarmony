@@ -26,7 +26,10 @@
                   That is not a valid email</span>
               </div>
               <input id="loginPasswordField" type="password" ng-model='password' name="userPassword" placeholder="password"required />
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Login</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                <span ng-if='showlogin'><img src="../../assets/loadingCircle.gif">
+                </span>
+                  Login</button>
             </form>
             <a href="#/newUser">Don't have an account? <strong>Signup</strong>...</a>
           </div>
