@@ -1,4 +1,4 @@
-<div class="mdl-grid" style='width:80%'>
+<div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet hh-issues-form-overlay hh-expense-small-box"> 
     <div class="hh-form" ng-controller="expensesCtrl">
       <h1>Expenses</h1>
@@ -14,7 +14,22 @@
     </div>
   </div>
 
-  <div class="issues-container hh-issues-form-overlay hh-expense-small-box mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet">
+  <!-- Month Selector -->
+  <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet">
+    <h1> Select a month to view the expense summary </h1>
+    <select ng-model="selectedYear" ng-options="year for year in years">
+    </select>
+
+    <button ng-repeat="month in months" ng-click="monthChange(month)">{{month}}</button>
+  </div>
+
+
+</div>  <!-- end of grid div -->
+
+
+<div class="mdl-grid">
+
+  <div class="issues-container hh-issues-form-overlay hh-expense-small-box mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
     <h1>Current Bills</h1>
     <hr>
     <!-- read from the database to populate expenses -->
@@ -41,7 +56,10 @@
      </ul>
   </div>
 
-  <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--5-col mdl-cell--8-col-tablet">
+  <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+    <h1> Expense Chart </h1>
     <!-- chart container -->
     <div id="expGraph" style="margin: 0 auto"></div>
  </div>
+
+</div> <!-- end of grid div -->

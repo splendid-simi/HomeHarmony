@@ -16,6 +16,16 @@ angular.module('homeHarmony.expenses', ['firebase'])
   currentUserId = localStorage.getItem("currentUserId");
   $scope.currentDate = new Date();
 
+
+  $scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  $scope.years = ['2015','2014','2013'];
+  $scope.selectedYear = $scope.years[0];
+  $scope.selectedMonth;
+
+  $scope.monthChange = function(month) {
+    console.log(month);
+  };
+
   $scope.showExpenses = function() {
     // query database
     db.once("value", function(snapshot) {
@@ -118,6 +128,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
     // showLabels true means each section has an arrow and description,
     // false means the key is under the graph
     drawPie : function($scope, title, showLabels) {
+      
       $('#expGraph').highcharts( {
       chart: {
         plotBackgroundColor: null,
