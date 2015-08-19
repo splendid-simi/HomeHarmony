@@ -21,6 +21,7 @@ var needsHouseFor = [
 angular.module('homeHarmony', [
   'ui.router',
   'ngMessages',
+  'homeHarmony.nav',
   'homeHarmony.util',
   'homeHarmony.auth',
   'homeHarmony.newUser',
@@ -77,7 +78,7 @@ angular.module('homeHarmony', [
     })
     // Nested views for dash
     .state('dash.default', {
-      url: "/:default",
+      url: "/default",
       templateUrl: "./app/dash/partials/default.html",
       controller: "defaultCtrl",
       resolve: {
@@ -89,17 +90,17 @@ angular.module('homeHarmony', [
       }
     })
     .state('dash.tasks', {
-      url: "/:tasks",
+      url: "/tasks",
       templateUrl: "./app/tasks/tasks.html",
       controller: "tasksCtrl"
     })
     .state('dash.issues', {
-      url: "/:issues",
+      url: "/issues",
       templateUrl: "./app/issues/issues.html",
       controller: "issuesCtrl"
     })
     .state('dash.expenses', {
-      url: "/:expenses",
+      url: "/expenses",
       templateUrl: "./app/expenses/expenses.html",
       controller: "expensesCtrl"
     })
@@ -107,7 +108,7 @@ angular.module('homeHarmony', [
   // For any unmatched url, redirect to /landing
   $urlRouterProvider.otherwise("/landing");
 })
-.run(["$rootScope", "$state", function($rootScope, $state, $timeout) {
+.run(["$rootScope", "$state", function($rootScope, $state) {
   
   // If the user is logged in and doesn't have a house, not allowed to visit the routes in 
   // the array needsHouseFor 
@@ -130,9 +131,5 @@ angular.module('homeHarmony', [
   });
 
   $rootScope.currentUser = localStorage.getItem('currentUserName');
-
-  $rootScope.$on('$viewContentLoaded', function() {
-      componentHandler.upgradeAllRegistered();
-  });
 
 }]);

@@ -89,6 +89,10 @@ h1 {
   text-align: left;
 }
 
+.landing-text {
+  color: #fff;
+}
+
 /* Forms */
 
 .hh-form-overlay {
@@ -239,13 +243,8 @@ h1 {
   margin:20px auto
 }
 
-.newHouse span {
-  color:#fff;
-  cursor:auto;
-}
-
-.newHouse #houseID {
-  cursor:auto;
+#houseID {
+  color: #4f9908;
 }
 
 .newHouse #create-house-button {

@@ -14,8 +14,8 @@ angular.module('homeHarmony.auth',[])
 ])
 
 // Factory with more detailed authentication functions
-.factory('UserAuth', ['$state', 'Auth',
-  function ($state, Auth) {
+.factory('UserAuth', ['$state', 'Auth', '$rootScope',
+  function ($state, Auth, $rootScope) {
     return {
       newUser: function (userEmail,userPassword, cb) {
         // Adds user information to the database
@@ -51,6 +51,7 @@ angular.module('homeHarmony.auth',[])
         Auth.$unauth();
         // Clears local storage
         localStorage.clear();
+        $rootScope.currentUser = null;
 
         //below kept in case defaults prove useful later instead of .clear():
         // localStorage.setItem('currentUserId', 'DEFAULT_USER_ID');
