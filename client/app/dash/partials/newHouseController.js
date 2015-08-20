@@ -52,38 +52,26 @@ angular.module('homeHarmony.newHouse', ['firebase'])
 
   $scope.leaveHouse = function() {
     $('#leaveHouseID');
-    localStorage.setItem("currentHouseId", null);
-    db.child('users').child(currentUserId).update({
-      'house': null
-    });
+    var leaveHouseKey = localStorage.getItem("currentHouseId");
 
-    // // query database to find desired house
-    // db.once("value", function(snapshot) {
-    //   var housesDb = snapshot.val().houses;
-    //   for (var houseId in housesDb) {
-    //     if (houseId === $scope.chosenHouse) {
-    //       if (!housesDb[houseId].houseMembers) {
-    //         // if there are no members, create a member list with current user
-    //         var members = {};
-    //         members[currentUserId] = localStorage.getItem("currentUserEmail");
-    //         // push list to database
-    //         db.child('houses').child(houseId).update({
-    //           houseMembers: members
-    //         });
-    //       } else {
-    //         // else add user to member list and push to database
-    //         var memberList = housesDb[houseId].houseMembers;
-    //         memberList[currentUserId] = localStorage.getItem("currentUserEmail");
-    //         db.child('houses').child(houseId).child('houseMembers').set(memberList);
-    //       }
-    //     }
-    //   // redirect to dashboard
-    //   $state.go('dash.default');
-    //   }
-    // },
-    // function (errorObject) {
-    //   console.log("The read failed: " + errorObject.code);
-    // });
+    // query database to find desired house
+    db.once("value", function(snapshot) {
+      var house = snapshot.val().houses[leaveHouseKey];
+      if(house.houseMembers.length === 1) {
+        db.child('houses').child(leaveHouseKey).remove();
+      }
+      
+      localStorage.getItem("currentHouseId");
+      localStorage.setItem("currentHouseId", null);
+      db.child('users').child(currentUserId).update({
+        'house': null
+      });
+      // redirect to dashboard
+      $state.go('dash.default');
+    },
+    function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
   };
 
   $scope.newHouseReg = function() {
