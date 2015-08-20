@@ -4,7 +4,7 @@
  */
 angular.module('homeHarmony.expenses', ['firebase'])
 
-.controller('expensesCtrl', function($scope, $firebaseObject, $q, DrawPie, DButil) {
+.controller('expensesCtrl', function(Roomies, $scope, $rootScope, $firebaseArray, $q, DrawPie, DButil) {
   // database reference
   var db = new Firebase(DB.url);
   var expensesDb;
@@ -12,29 +12,62 @@ angular.module('homeHarmony.expenses', ['firebase'])
   var userExpensesArr;
   var dataObj;
   var uDataObj;
+  $scope.currentYear = String(new Date().getFullYear());
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
   $scope.currentDate = new Date();
 
 
-  $scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  $scope.years = ['2015','2014','2013'];
-  $scope.selectedYear = $scope.years[0];
-  $scope.selectedMonth;
+  $scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'];
+  $scope.selectedYear = new Date().getFullYear();
+
+  //bound to the expense years under the house's expense
+  var expenseRef = $firebaseArray(new Firebase(DB.url + '/houses/' + currentHouseId + '/expenses'));
+
+  $scope.testData = expenseRef;
+
+  // expenseRef.$loaded().then(function(data) {
+  //   $scope.years = data.map(function(expense) {
+  //     return expense.$id;
+  //   });
+
+  //   $scope.years = $scope.years || [$scope.currentYear];
+
+  //   $scope.selectedYear = $scope.years[0];
+  // });
+  
+  $scope.selectedMonth = $scope.months[new Date().getMonth()];
+
+  $scope.memberPaid = null;
+  $scope.roomies = Roomies;
 
   $scope.monthChange = function(month) {
-    console.log(month);
+    //console.log('rootScope.roomies:', $rootScope.roomies);
+    // var year = $('#yearSelector').val().slice(7);
+    $scope.selectedMonth = month;
+    $scope.showExpenses($scope.selectedMonth, $scope.selectedYear);
   };
 
-  $scope.showExpenses = function() {
+  $scope.showExpenses = function(month, year) {    //add support for month and year
+    month = month || $scope.selectedMonth;
+    year = year || $scope.selectedYear;
+
+    console.log('SelectedMonth = ', month);
+    console.log('SelectedYear = ',year);
+
     // query database
     db.once("value", function(snapshot) {
       expensesArr = [];
       userExpensesArr = [];
-      expensesDb = snapshot.val().houses[currentHouseId].expenses;
+
+      // expensesDb = snapshot.val().houses[currentHouseId].expenses; //old schema
+      expensesDb = snapshot.val().houses[currentHouseId].expenses[year][month]; //new schema
       userExpensesDb = snapshot.val().users[currentUserId].userExpenses;
+
+      //Display a summary of the expenses for the
+
       // create an array of expense data to be displayed in expense view
-      for (var expense in expensesDb) {
+      for (var expense in expensesDb) {           //ensure that dataObj is contructed properly with the new schema
         dataObj = {};
         dataObj.name = expensesDb[expense].expenseName;
         dataObj.y = expensesDb[expense].cost;
@@ -67,24 +100,44 @@ angular.module('homeHarmony.expenses', ['firebase'])
   };
 
   // Redraw page whenever a new expense is created
-  db.child('houses').child(currentHouseId).child('expenses').on('child_added', function() {
+  db.child('houses').child(currentHouseId).child('expenses').on('value', function() {
+    console.log('called');
     $scope.showExpenses();
   });
 
   $scope.newExpense = function() {
     var date = $scope.expenseDate;
+    var memberPaid = $scope.memberPaid;  
+    var expenseDate = {
+      month: $scope.months[date.getMonth()],
+      year: date.getFullYear()
+    };
+    
     $('#expenseName').val('');
     $('#expenseCost').val('');
     $('#expenseDate').val('');
+    $('#memberPaid')[0].selectedIndex = 0;
+
+    console.log('expensesController.js says: new Expense Added! Particulars:');
+    console.log('memberPaidID:',$scope.memberPaid);
+    console.log('expenseDate:',expenseDate);
+
+
     // Create expense object to be added to database
     var expenseObj = {
       expenseName: $scope.expenseName,
-      dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
+      // dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
       cost: $scope.expenseCost,
-      paid: false
+      // paid: false,
+      memberPaid: memberPaid
     };
-    // push to database
-    db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
+    
+    // push to database (old schema)
+    //db.child('houses').child(currentHouseId).child('expenses').push(expenseObj);
+    
+    //new schema
+    db.child('houses').child(currentHouseId).child('expenses').child(expenseDate.year).child(expenseDate.month).push(expenseObj);
+
     // Split expense and add to each user in database
     $scope.splitExpense(expenseObj);
   };
