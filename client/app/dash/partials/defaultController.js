@@ -17,23 +17,26 @@ angular.module('homeHarmony.default', ['firebase'])
   $scope.currentDate = new Date();
 
   // Initialize variables
-  var expensesDb, expensesArr, dataObj, issuesDb, issuesArr;
-  var usersDb, usersArr, usersEmailArr, tasksDb, tasksArr, tasksNotCompletedCount;
+  var expensesDb, expensesArr, dataObj, issuesDb, issuesArr, shoppingDb;
+  var usersDb, usersArr, usersEmailArr, tasksDb, tasksArr, tasksNotCompletedCount, itemsNotBoughtCount, shoppingArr;
 
   // query database
   db.once("value", function(snapshot) {
     tasksNotCompletedCount = 0;
+    itemsNotBoughtCount = 0;
     expensesArr = [];
     issuesArr = [];
     usersArr = [];
     tasksArr = [];
     usersEmailArr = [];
+    shoppingArr = [];
     // Retrieve data from the database for the current house
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
     issuesDb = snapshot.val().houses[currentHouseId].issues;
     usersInHouse = snapshot.val().houses[currentHouseId].houseMembers;
     tasksDb = snapshot.val().houses[currentHouseId].tasks;
     usersDb = snapshot.val().users;
+    shoppingDb = snapshot.val().houses[currentHouseId].shoppingList;
 
     // Build expensesArr so we can graph the expenses
     for (var expense in expensesDb) {
@@ -57,6 +60,7 @@ angular.module('homeHarmony.default', ['firebase'])
     for (var issue in issuesDb) {
       issuesArr.push(issuesDb[issue]);
     }
+
     // Execute only after issuesArr is ready
     $q.all(issuesArr).then(function() {
       // Place on scope to be displayed
@@ -93,6 +97,23 @@ angular.module('homeHarmony.default', ['firebase'])
       $scope.tasksArr = tasksArr;
       $scope.tasksNotCompletedCount = tasksNotCompletedCount;
     });
+
+    //
+
+    for (var item in shoppingDb) {
+      console.log(shoppingDb[item]);
+      if (!shoppingDb[item].completed) {
+        shoppingArr.push(shoppingDb[item]);
+        itemsNotBoughtCount++;
+      }
+    }
+    // Execute only after tasksArr is ready
+    $q.all(shoppingArr).then(function() {
+      // Place on scope to be displayed
+      $scope.shoppingArr = shoppingArr;
+      $scope.itemsNotBoughtCount = itemsNotBoughtCount;
+    });
+
   },
   function (errorObject) {
     console.log("The read failed: " + errorObject.code);

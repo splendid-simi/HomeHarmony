@@ -14,7 +14,8 @@ var needsHouseFor = [
   'dash.default',
   'dash.issues',
   'dash.expenses',
-  'dash.tasks'
+  'dash.tasks',
+  'dash.shopping'
 ];
 
 // Module and dependency injections
@@ -31,7 +32,8 @@ angular.module('homeHarmony', [
   'homeHarmony.dash',
   'homeHarmony.expenses',
   'homeHarmony.tasks',
-  'homeHarmony.issues'
+  'homeHarmony.issues',
+  'homeHarmony.shopping'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
@@ -104,14 +106,19 @@ angular.module('homeHarmony', [
       templateUrl: "./app/expenses/expenses.html",
       controller: "expensesCtrl"
     })
+    .state('dash.shopping', {
+      url: "/shopping",
+      templateUrl: "./app/shopping/shopping.html",
+      controller: "shoppingCtrl"
+    });
 
   // For any unmatched url, redirect to /landing
   $urlRouterProvider.otherwise("/landing");
 })
 .run(["$rootScope", "$state", function($rootScope, $state) {
-  
-  // If the user is logged in and doesn't have a house, not allowed to visit the routes in 
-  // the array needsHouseFor 
+
+  // If the user is logged in and doesn't have a house, not allowed to visit the routes in
+  // the array needsHouseFor
   $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams) {
     if ( currentHouseId === 'DEFAULT_HOUSE_ID' && needsHouseFor.indexOf(toState.name) >= 0 ) {
       $state.go('newHouse');
