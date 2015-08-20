@@ -50,6 +50,30 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     });
   };
 
+  $scope.leaveHouse = function() {
+    $('#leaveHouseID');
+    var leaveHouseKey = localStorage.getItem("currentHouseId");
+
+    // query database to find desired house
+    db.once("value", function(snapshot) {
+      var house = snapshot.val().houses[leaveHouseKey];
+      if(house.houseMembers.length === 1) {
+        db.child('houses').child(leaveHouseKey).remove();
+      }
+      
+      localStorage.getItem("currentHouseId");
+      localStorage.setItem("currentHouseId", null);
+      db.child('users').child(currentUserId).update({
+        'house': null
+      });
+      // redirect to dashboard
+      $state.go('dash.default');
+    },
+    function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  };
+
   $scope.newHouseReg = function() {
     // $('#newEmail1').val('');
     // $('#newEmail2').val('');
@@ -109,5 +133,10 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   $scope.uniqueHouseIdExists = function() {
     return localStorage.getItem("currentHouseId") !== null;
   };
+
+  $scope.uniqueHouseIdDoesNotExist = function() {
+    return localStorage.getItem("currentHouseId") === null;
+  };
+
   console.log($scope);
 });
