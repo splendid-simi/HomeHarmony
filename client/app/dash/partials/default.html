@@ -110,8 +110,8 @@
     <section class="roommates">
       <div>
         <div ng-repeat="user in usersArr track by $index | limitTo:3 "  style="float:left">
-          <img src="assets/default_user.png" alt="user photo">
-          <span class="roommateName">{{user}}</span>
+          <img gravatar-src="'{{user.email}}'" gravatar-size="100">
+          <span class="roommateName">{{user.name}}</span>
         </div>
 
       </div>

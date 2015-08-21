@@ -21,6 +21,7 @@ var needsHouseFor = [
 // Module and dependency injections
 angular.module('homeHarmony', [
   'ui.router',
+  'ui.gravatar',
   'ngMessages',
   'homeHarmony.nav',
   'homeHarmony.util',
