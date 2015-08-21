@@ -71,22 +71,19 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     var currentHouseKey = localStorage.getItem("currentHouseId");
 
     db.once("value", function(snapshot) {
-      // If the user belongs to a house
         var house = snapshot.val().houses[currentHouseKey];
         var houseMembers = snapshot.val().houses[currentHouseKey].houseMembers;
 
         if(Object.keys(houseMembers).length === 1) {
           db.child('houses').child(currentHouseKey).remove();
         } else {          
-          db.child('houses').child(currentHouseKey).remove();
+          db.child('houses').child(currentHouseKey).child('houseMembers').child(currentUserId).remove();
           db.child('users').child(currentUserId).update({
             'house': null
           });
         }
 
         localStorage.removeItem("currentHouseId");
-        console.log($rootScope.usersArr, 'rootscope');
-        console.log(currentUserName);
         $rootScope.usersArr.splice($rootScope.usersArr.indexOf(currentUserName), 1);
         $state.reload();
     });
