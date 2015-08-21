@@ -9,7 +9,6 @@
           <input type='text' id="newTask" name="task" ng-model='newTask' ng-minlength='4' ng-maxlength='140' placeholder='Enter the new task' required>
 
             <div ng-messages="tasksForm.task.$error" role="alert" class="form-error-active">
-              <div ng-message="required">enter a task</div>
               <div ng-message-exp="['minlength', 'maxlength']">Your task must be between 4 and 140 characters</div>
             </div>
 
