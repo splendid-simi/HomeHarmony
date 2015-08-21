@@ -4,6 +4,8 @@ html {
 	color: #000;
 	font-size: 1em;
 	line-height: 1.4;
+  font-family: 'helvetica neue' !important;
+
   background-color: #f5f5f5
 }
 
@@ -158,6 +160,16 @@ h4 {
   /*padding: 0px 10px;*/
 }
 
+.table tr, .circleButton {
+  transition: 0.5s ease-in background-color;
+}
+
+.table tr:hover , .circleButton:not(:disabled):hover{
+  
+  background-color: #CEDFCF;
+
+}
+
 .tasksList-container h3 {
   display: inline;
   font-size: 16px;
@@ -190,6 +202,11 @@ h4 {
   height:80%;
 }
 
+.main_title {
+  margin-top: 5px;
+  display: inline-block;
+}
+
 .hh-form,
 .tasksForm-container,
 .tasksList-container {
@@ -206,7 +223,7 @@ h4 {
   width: 100%;
   display: block;
   padding:2px;
-  margin:5px;
+  margin:5px 0px;
 }
 
 /* to allow add roommate input and button to be on the same line on the form */
@@ -335,7 +352,7 @@ h4 {
 }
 
 .month-btn {
-  margin: 0 15px 10px 0;
+  margin: 15px 15px 10px 0;
 }
 
 .roommates {
