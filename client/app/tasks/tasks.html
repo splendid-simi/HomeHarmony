@@ -17,7 +17,7 @@
               <select name="selectRoommate"  value='Select Roommate' ng-model='newTaskDoer' required>
                 <!-- option selected disabled disables user from selection the option tag -->
                 <option selected disabled>Select Roommate</option>
-                <option name="taskDoer" ng-repeat="roommate in houseMemberArr track by $index ">{{roommate}}</option>
+                <option name="taskDoer" ng-repeat="roommate in houseMemberArr track by $index ">{{roommate.name}}</option>
               </select>
             </div>
 
@@ -40,7 +40,7 @@
             <li ng-repeat="task in tasks.taskArr">
               <!-- ng-click event is triggered when a task is checked off -->
               <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
-              <span class="assignee">{{task.doer}}</span>
+              <span class="assignee">{{task.doer.name}}</span>
               <span class="dueDate">{{task.dueDateFormat}}</span>
               <span class="assignedBy">(Assigned by: {{task.assignedBy}})</span>
               <p></p>
