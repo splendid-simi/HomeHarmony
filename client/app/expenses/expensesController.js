@@ -91,7 +91,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
         dataObj = {};
         dataObj.name = expensesDb[expense].expenseName;
         dataObj.y = expensesDb[expense].cost;
-        dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
+        // dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
         expensesArr.push(dataObj);
       }
       // Execute when expensesArr is ready
