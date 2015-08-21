@@ -65,8 +65,6 @@ angular.module('homeHarmony.newHouse', ['firebase'])
         db.child('users').child(currentUserId).update({
           'house': null
         });
-      } else {
-        // alert('Please join a house.');
       }
     });
   };
@@ -128,7 +126,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   // function for ng-disable on create house button to disable creating a
   // new house if a user is aready part of a house that is not the default house
   $scope.uniqueHouseIdExists = function() {
-    $scope.inHouse = true;
+    return localStorage.getItem("currentHouseId") !== null;
   };
 
   $scope.uniqueHouseIdDoesNotExist = function() {

@@ -28,9 +28,10 @@
       <h1>Invite Roommate to House</h1>
       <hr>
       <form name="newHouseForm" ng-submit='addRoommate()'>
-        <p>Have roommates register with House ID:</p>
-        <span id="houseID">{{currentHouseId || "No House Exists"}}</span>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="leaveHouse()" ng-hide="uniqueHouseExists()">Leave House</button>
+        <p ng-hide="uniqueHouseIdDoesNotExist()">Have roommates register with House ID:</p>
+        <span id="houseID" ng-show="uniqueHouseIdExists()">{{currentHouseId}}</span>
+        <span id="houseID" ng-show="uniqueHouseIdDoesNotExist()">{{'Please join or create a house.'}}</span>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="leaveHouse()" ng-show="uniqueHouseIdExists()">Leave House</button>
       </form>
     </div>
   </div>
@@ -41,7 +42,7 @@
   <div class="footer-nav">
     <ul>
       <li><a ui-sref="dash.default" href>Dashboard |</a></li>
-      <li><a ui-sref="newHouse" href>Create a House |</a></li>
+      <li><a ui-sref="dash.newHouse" href>Create a House |</a></li>
       <li><a ui-sref="dash.tasks" href>Tasks |</a></li>
       <li><a ui-sref="dash.expenses" href>Expenses |</a><li>
       <li><a ui-sref="dash.issues" href>Issues</a></li>
