@@ -34,6 +34,7 @@ angular.module('homeHarmony', [
   'homeHarmony.tasks',
   'homeHarmony.issues',
   'homeHarmony.shopping'
+  'homeHarmony.roomies'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   // Set up the states
