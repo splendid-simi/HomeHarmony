@@ -1,5 +1,5 @@
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet hh-issues-form-overlay hh-expense-small-box"> 
+  <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet hh-issues-form-overlay hh-expense-small-box"> 
     <div class="hh-form">
       <h1>Expenses</h1>
       <hr>
@@ -12,27 +12,32 @@
         </select>
         <!-- {{currentDate | date:"yyyy-MM-dd"}} parses the date into a str so can be used for min -->
         <input id="expenseDate" type='date' name="userExpenseDueDate" ng-model='expenseDate' min='{{currentDate | date:"yyyy-MM-dd"}}' placeholder='enter due date' required>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored #hh-issue-btn">Submit</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored #hh-issue-btn">Add Expense</button>
       </form>
     </div>
   </div>
 
   <!-- Month Selector -->
-  <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet">
-    <h1> Select a month to view the expense summary </h1>
+  <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--9-col mdl-cell--8-col-tablet">
+    <h1> Select a month to view the expense summary</h1>
+    <hr>
+  <h4>  
     <select
       id="yearSelector"
       ng-model="selectedYear"
       ng-options="expense.$id as expense.$id for expense in expenseRef"
       ng-change="yearChange()">
     </select>
-    <button
-      class="month-btn mdl-button mdl-js-button"
-      ng-repeat="month in months"
-      ng-click="monthChange(month)"
-      ng-disabled="!enabledMonths[month]">
-      {{month}}
-    </button>
+  </h4>
+    <div class="month-btns">  
+      <button
+        class="month-btn circleButton"
+        ng-repeat="month in months"
+        ng-click="monthChange(month)"
+        ng-disabled="!enabledMonths[month]">
+        <h4>{{month}}</h4>
+      </button>
+    </div>
   </div>
 
 
@@ -45,33 +50,51 @@
   <div class="issues-container hh-issues-form-overlay hh-expense-small-box mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
     <h1>Current Bill Summary for {{selectedMonth}}, {{selectedYear}}</h1>
     <hr>
-    <!-- read from the database to populate expenses -->
-    <ul>
-      <li ng-repeat="expense in expensesArr">
-        {{expense.name}} {{expense.y | currency}} <!-- [{{expense.memberPaid}}] -->
-      </li>
-      <li ng-if="expensesArr.length === 0">
+    
+    <table class="issues-container hh-issues-form-overlay table">
+      <tr>
+        <th>    </th>
+        <th><h4>Expense</h4></th>
+        <th><h4>Amount</h4></th>
+        <th><h4>Paid By</h4></th>
+      </tr>
+   
+      <tr ng-repeat="expense in expensesArr">
+        <td>    </td>
+        <td> {{expense.name}} </td>
+        <td> {{expense.y | currency}} </td>
+        <td> {{expense.memberPaid}} </td>
+      </tr>
+    </table>
+
+      <!-- <li ng-if="expensesArr.length === 0">
         <strong>No Expenses</strong>
-      </li>
-    </ul>
+      </li> -->
+    <br>
+
     <h1>Roomie Dues for {{selectedMonth}}, {{selectedYear}}</h1>
     <hr>
-     <ul>
-       <li ng-repeat="userDue in userExpensesArr">
-        <!-- <form ng-if="expense.paid === false" name='payExpenseForm' ng-submit='payExpense(expense.name)'> -->
-          {{userDue.name}} - Due: {{userDue.y | currency}} <!--<button style="padding: 0 5px;">I paid</button>-->
-        <!-- </form> -->
-       </li>
-       
-     <!--  <li ng-if="userExpensesArr.length === 0">
-         <strong>You don't owe any money</strong>
-       </li> -->
-     
-     </ul>
+
+    <table class="issues-container hh-issues-form-overlay table">
+      <tr>
+        <th>    </th>
+        <th><h4>Roomie</h4></th>
+        <th><h4>Balance</h4></th>
+      </tr>
+    
+      <tr ng-repeat="userDue in userExpensesArr">
+        <td>    </td>
+        <td> {{userDue.name}} </td>
+        <td> {{userDue.y | currency}} </td>
+      </tr>
+
+    </table>
+    <br>
   </div>
 
   <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
     <h1> Expense Chart for {{selectedMonth}}, {{selectedYear}}</h1>
+    <hr>
     <!-- chart container -->
     <div id="expGraph" style="margin: 0 auto"></div>
  </div>

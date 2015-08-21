@@ -33,6 +33,10 @@ body {
   text-shadow: none;
 }
 
+.logged-out .mdl-layout__drawer-button {
+  display: none;
+}
+
 hr {
   display: block;
   height: 1px;
@@ -80,13 +84,78 @@ li {
 }
 
 h1, h2, h3, h4, h5, h6 {
- font-family: 'Open Sans Condensed', sans-serif;
- font-weight: 300;
+ font-weight: 100;
 }
 
 h1 {
-  font-size: 30px;
   margin: 0;
+}
+
+h4 {
+  font-weight: 300;
+}
+
+.circleButton {
+  font-color:solid green;
+  outline: 0;
+  width: 70px;
+  height: 70px;
+  border: 1px solid green;
+  background: none;
+  border-radius: 50%;
+  padding : 20px;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+}
+
+#yearSelector {
+  width: 200px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.month-btns {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.circleButton:disabled {
+  border-color: grey;
+}
+
+.circleButton h4 {
+  margin: 0;
+}
+
+.table {
+  font-family: 'helvetica neue';
+  margin: 0px auto;
+  max-width: 90%;
+  /*padding: 0px 10px;*/
 }
 
 .tasksList-container h3 {
@@ -97,6 +166,10 @@ h1 {
 
 .landing-text {
   color: #fff;
+}
+
+.mdl-navigation__link {
+  cursor: pointer;
 }
 
 /* Forms */
@@ -120,7 +193,6 @@ h1 {
 .hh-form,
 .tasksForm-container,
 .tasksList-container {
-  padding-left: 20px;
   text-align: left;
 }
 
@@ -130,10 +202,9 @@ h1 {
 }
 
 .hh-form input,
-.hh-form selec {
+.hh-form select {
+  width: 100%;
   display: block;
-  width:200px;
-  height:20px;
   padding:2px;
   margin:5px;
 }
@@ -264,7 +335,7 @@ h1 {
 }
 
 .month-btn {
-  margin: 0 10px 0 0;
+  margin: 0 15px 10px 0;
 }
 
 .roommates {
@@ -403,6 +474,7 @@ input[type=checkbox] {
 /* issues */
 
 .issues-container {
+  position: relative;
   text-align: left;
 }
 

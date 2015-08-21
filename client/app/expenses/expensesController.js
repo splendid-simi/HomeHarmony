@@ -77,13 +77,11 @@ angular.module('homeHarmony.expenses', ['firebase'])
     month = month || $scope.selectedMonth;
     year = year || $scope.selectedYear;
 
-    //remove
-    console.log('Roomies:',Roomies);
-
     // query database
     db.once("value", function(snapshot) {
       expensesArr = [];
       userExpensesArr = [];
+
 
       expensesDb = snapshot.val().houses[currentHouseId].expenses[year][month]; //new schema
       houseMembersDb = snapshot.val().houses[currentHouseId].houseMembers;  //new schema
@@ -94,7 +92,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
         dataObj = {};
         dataObj.name = expensesDb[expense].expenseName;
         dataObj.y = expensesDb[expense].cost;
-        // dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
+        dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
         expensesArr.push(dataObj);
       }
       // Execute when expensesArr is ready
@@ -153,10 +151,10 @@ angular.module('homeHarmony.expenses', ['firebase'])
     $('#expenseDate').val('');
     $('#memberPaid')[0].selectedIndex = 0;
 
-    console.log('expensesController.js says: new Expense Added! Particulars:');
-    console.log('memberPaidID:',$scope.memberPaid);
-    console.log('expenseDate:',expenseDate);
-    console.log('No. of roomies:',Roomies.length);
+    // console.log('expensesController.js says: new Expense Added! Particulars:');
+    // console.log('memberPaidID:',$scope.memberPaid);
+    // console.log('expenseDate:',expenseDate);
+    // console.log('No. of roomies:',Roomies.length);
 
     //calculate the share
     var sharedDue = $scope.expenseCost / Roomies.length;
@@ -178,7 +176,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
     //new schema
     var expenseMonthRef = db.child('houses').child(currentHouseId).child('expenses').child(expenseDate.year).child(expenseDate.month);
     var expenseId = expenseMonthRef.push(expenseObj);
-    console.log('testing',expenseId.key());
+    //console.log('testing',expenseId.key());
 
     //use the expense Id to push dues for each roomie
     houseMembersRef.once('value', function (snapshot) {
@@ -186,7 +184,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
       var year = expenseDate.year + '';
       var month = expenseDate.month + '';
 
-      console.log('Updating dues for each roomie. houseMembers:',houseMembersObj);
+      //console.log('Updating dues for each roomie. houseMembers:',houseMembersObj);
       for(var roomieId in houseMembersObj) {
         var due = (roomieId === $scope.memberPaid) ? $scope.expenseCost - sharedDue : -sharedDue;
         houseMembersRef.child(roomieId+'').child('dues').child(year).child(month).child(expenseId.key()).set({

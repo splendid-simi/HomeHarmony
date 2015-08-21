@@ -1,9 +1,15 @@
-<header class="mdl-layout__header">
+<header 
+  ng-class="{
+  'logged-out': !currentUser
+  }"
+  class="mdl-layout__header">
   <div class="mdl-layout__header-row">
     <span class="mdl-layout-title">
       <a ui-sref="dash.default">
-        <img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo" />
-        <span style="color:white">ome Harmony</span>
+        <h4>
+          <img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo" />
+          <span style="color:white">ome Harmony</span>
+        </h4>
       </a>
     </span>
     <div class="mdl-layout-spacer"></div>
