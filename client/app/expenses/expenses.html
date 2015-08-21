@@ -48,7 +48,7 @@
     <!-- read from the database to populate expenses -->
     <ul>
       <li ng-repeat="expense in expensesArr">
-        {{expense.name}} {{expense.y | currency}} [{{expense.memberPaid}}]
+        {{expense.name}} {{expense.y | currency}} <!-- [{{expense.memberPaid}}] -->
       </li>
       <li ng-if="expensesArr.length === 0">
         <strong>No Expenses</strong>
