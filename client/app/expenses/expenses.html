@@ -20,9 +20,18 @@
   <!-- Month Selector -->
   <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet">
     <h1> Select a month to view the expense summary </h1>
-    <select id="yearSelector" ng-model="selectedYear" ng-options="expense.$id as expense.$id for expense in testData">
+    <select
+      id="yearSelector"
+      ng-model="selectedYear"
+      ng-options="expense.$id as expense.$id for expense in expenseRef"
+      ng-change="yearChange()">
     </select>
-    <button ng-repeat="month in months" ng-click="monthChange(month)">{{month}}</button>
+    <button
+      ng-repeat="month in months"
+      ng-click="monthChange(month)"
+      ng-disabled="!enabledMonths[month]">
+      {{month}}
+    </button>
   </div>
 
 
@@ -47,15 +56,16 @@
     <h1>User Expenses</h1>
     <hr>
      <ul>
-       <li ng-repeat="expense in userExpensesArr">
-        <form ng-if="expense.paid === false" name='payExpenseForm' ng-submit='payExpense(expense.name)'>
-          {{expense.name}} - You owe: {{expense.y | currency}} <button style="padding: 0 5px;">I paid</button>
-          </form>
+       <li ng-repeat="userDue in userExpensesArr">
+        <!-- <form ng-if="expense.paid === false" name='payExpenseForm' ng-submit='payExpense(expense.name)'> -->
+          {{userDue.name}} - Due: {{userDue.y}} <!--<button style="padding: 0 5px;">I paid</button>-->
+        <!-- </form> -->
        </li>
        
-       <li ng-if="userExpensesArr.length === 0">
+     <!--  <li ng-if="userExpensesArr.length === 0">
          <strong>You don't owe any money</strong>
-       </li>
+       </li> -->
+     
      </ul>
   </div>
 

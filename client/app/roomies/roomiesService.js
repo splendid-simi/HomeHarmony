@@ -10,3 +10,4 @@ factory('Roomies', ['$firebaseArray', function($firebaseArray) {
 
   return syncArray;
 }]);
+

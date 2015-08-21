@@ -34,6 +34,8 @@ angular.module('homeHarmony.login',['firebase', 'ui.router'])
               localStorage.setItem("currentUserFirstName", userDb[uid].firstname);
               localStorage.setItem("currentUserLastName", userDb[uid].lastname);
               localStorage.setItem("currentUserId", currentUserId);
+              localStorage.setItem("currentUserName", userDb[uid].firstname + ' ' + userDb[uid].lastname);
+
 
               $rootScope.currentUser = localStorage.getItem('currentUserName');
 
