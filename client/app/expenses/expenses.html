@@ -27,6 +27,7 @@
       ng-change="yearChange()">
     </select>
     <button
+      class="month-btn mdl-button mdl-js-button"
       ng-repeat="month in months"
       ng-click="monthChange(month)"
       ng-disabled="!enabledMonths[month]">
@@ -42,18 +43,18 @@
 <div class="mdl-grid">
 
   <div class="issues-container hh-issues-form-overlay hh-expense-small-box mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
-    <h1>Current Bills</h1>
+    <h1>Current Bill Summary for {{selectedMonth}}, {{selectedYear}}</h1>
     <hr>
     <!-- read from the database to populate expenses -->
     <ul>
       <li ng-repeat="expense in expensesArr">
-        {{expense.name}} {{expense.y | currency}}
+        {{expense.name}} {{expense.y | currency}} [{{expense.memberPaid}}]
       </li>
       <li ng-if="expensesArr.length === 0">
         <strong>No Expenses</strong>
       </li>
     </ul>
-    <h1>User Expenses</h1>
+    <h1>Roomie Dues for {{selectedMonth}}, {{selectedYear}}</h1>
     <hr>
      <ul>
        <li ng-repeat="userDue in userExpensesArr">
@@ -70,7 +71,7 @@
   </div>
 
   <div class="issues-container hh-issues-form-overlay  current-expense-chart-container mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-    <h1> Expense Chart for {{selectedMonth}},{{selectedYear}}</h1>
+    <h1> Expense Chart for {{selectedMonth}}, {{selectedYear}}</h1>
     <!-- chart container -->
     <div id="expGraph" style="margin: 0 auto"></div>
  </div>

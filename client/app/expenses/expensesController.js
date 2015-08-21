@@ -74,28 +74,24 @@ angular.module('homeHarmony.expenses', ['firebase'])
     month = month || $scope.selectedMonth;
     year = year || $scope.selectedYear;
 
-    // console.log('SelectedMonth = ', month);
-    // console.log('SelectedYear = ',year);
+    //remove
+    console.log('Roomies:',Roomies);
 
     // query database
     db.once("value", function(snapshot) {
       expensesArr = [];
       userExpensesArr = [];
 
-      // expensesDb = snapshot.val().houses[currentHouseId].expenses; //old schema
       expensesDb = snapshot.val().houses[currentHouseId].expenses[year][month]; //new schema
-      
-      //userExpensesDb = snapshot.val().users[currentUserId].userExpenses;  //old schema
-      houseMembersDb = snapshot.val().houses[currentHouseId].houseMembers;  //old schema
-
-
-      //Display a summary of the expenses for the
+      houseMembersDb = snapshot.val().houses[currentHouseId].houseMembers;  //new schema
+      usersDb = snapshot.val().users;
 
       // create an array of expense data to be displayed in expense view
       for (var expense in expensesDb) {           //ensure that dataObj is contructed properly with the new schema
         dataObj = {};
         dataObj.name = expensesDb[expense].expenseName;
         dataObj.y = expensesDb[expense].cost;
+        dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
         expensesArr.push(dataObj);
       }
       // Execute when expensesArr is ready
@@ -109,7 +105,13 @@ angular.module('homeHarmony.expenses', ['firebase'])
       for (var roomie in houseMembersDb) {
         uDataObj = {};
         uDataObj.name = houseMembersDb[roomie].firstname + ' ' + houseMembersDb[roomie].lastname;
-        uDataObj.y = houseMembersDb[roomie].dues;
+        
+        var monthlyDuesObj = houseMembersDb[roomie].dues[year][month];
+        var monthlyDue = 0;
+        for(var expense in monthlyDuesObj) {
+          monthlyDue += monthlyDuesObj[expense].due;
+        }        
+        uDataObj.y = monthlyDue;
         // uDataObj.paid = houseMembersDb[roomie].paid;
         userExpensesArr.push(uDataObj);
       }
@@ -125,11 +127,6 @@ angular.module('homeHarmony.expenses', ['firebase'])
       console.log("The read failed: " + errorObject.code);
     });
   };
-
-  // Redraw page whenever a new expense is created
-  db.child('houses').child(currentHouseId).child('expenses').on('value', function() {
-    $scope.showExpenses();
-  });
 
   $scope.newExpense = function() {
     var date = $scope.expenseDate;
@@ -174,7 +171,7 @@ angular.module('homeHarmony.expenses', ['firebase'])
       // dueDate: (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear(),
       cost: $scope.expenseCost,
       // paid: false,
-      memberPaid: memberPaid
+      memberPaid: memberPaid,
     };
     
     //new schema

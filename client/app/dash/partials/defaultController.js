@@ -74,7 +74,9 @@ angular.module('homeHarmony.default', ['firebase'])
     }
 
     for (var i=0; i<usersEmailArr.length; i++) {
-      DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId){
+      console.log('email',usersEmailArr[i]);
+      DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId) {
+        console.log('test',userObj);
         userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
         userLastInit = userObj.lastname[0].toUpperCase();
         //usersArr.push(userFirst+' '+userLastInit);
