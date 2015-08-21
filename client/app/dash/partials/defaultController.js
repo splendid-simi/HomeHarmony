@@ -101,7 +101,6 @@ angular.module('homeHarmony.default', ['firebase'])
     //
 
     for (var item in shoppingDb) {
-      console.log(shoppingDb[item]);
       if (!shoppingDb[item].completed) {
         shoppingArr.push(shoppingDb[item]);
         itemsNotBoughtCount++;

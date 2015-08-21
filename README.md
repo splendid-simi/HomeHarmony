@@ -1,12 +1,8 @@
-# Pleasant Puente
+# Home Harmony
 
-> your Home Page
-
-## Team
-
-  - __Product Owner__: Evan
-  - __Scrum Master__: Femi
-  - __Development Team Members__: Melinda, Thomas
+## Roommate Collaboration Application
+####Communication, organization and accountability between roommates with busy schedules is challenging.
+#### With Home Harmony you can effectively manages communication, tasks and expenditures between roommates.
 
 ## Table of Contents
 
@@ -22,13 +18,12 @@
 
 > Some usage instructions
 
-## Requirements
+## Tech Stack
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Angular
+- Firebase
+- Material Lite
+- Highcharts
 
 ## Development
 
@@ -37,7 +32,6 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
 bower install
 ```
@@ -46,7 +40,21 @@ bower install
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
+### Database
+
+IMPORTANT: You will need to link this app to your own Firebase database. To do this add a file: client/lib/firebaseLink.js and populate it with:
+
+DB = {
+  url: URL FOR YOUR DATABASE IN QUOTES
+};
+
 
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/unexpected-lion/ourglass/blob/master/contributing.md) for contribution guidelines.
+
+Expanded on the app located here:
+
+Additions done by:  [Rodo Yabut](https://github.com/rodocite), [Quinton Aiken](https://github.com/qaiken), [Raghav Abboy](https://github.com/RaghavAbboy), and [Kalisa Falzone](https://github.com/KalisaFalzone)
+
+

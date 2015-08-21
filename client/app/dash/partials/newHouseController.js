@@ -11,7 +11,6 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   var db = new Firebase(DB.url);
   currentUserId = localStorage.getItem("currentUserId");
   $scope.currentHouseId = localStorage.getItem("currentHouseId");
-  console.log($scope.currentHouseId);
 
   $scope.joinHouse = function() {
     $('#joinHouseID').val('');
@@ -60,7 +59,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
       if(house.houseMembers.length === 1) {
         db.child('houses').child(leaveHouseKey).remove();
       }
-      
+
       localStorage.getItem("currentHouseId");
       localStorage.setItem("currentHouseId", null);
       db.child('users').child(currentUserId).update({
@@ -95,12 +94,10 @@ angular.module('homeHarmony.newHouse', ['firebase'])
       currentHouseId = snapshot.key();
       localStorage.setItem("currentHouseId", currentHouseId);
       //email users
-      console.log(currentUserId, ' user, house ', currentHouseId);
       var userRef = db.child('users').child(currentUserId);
       userRef.update({
         'house': currentHouseId
       });
-      console.log(currentHouseId, 'currentHouse');
       $state.go('dash.default');
     });
 
@@ -138,5 +135,4 @@ angular.module('homeHarmony.newHouse', ['firebase'])
     return localStorage.getItem("currentHouseId") === null;
   };
 
-  console.log($scope);
 });
