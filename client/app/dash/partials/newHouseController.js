@@ -65,6 +65,8 @@ angular.module('homeHarmony.newHouse', ['firebase'])
         db.child('users').child(currentUserId).update({
           'house': null
         });
+
+        $state.reload();
       }
     });
   };
