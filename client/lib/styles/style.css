@@ -7,6 +7,12 @@ html {
   background-color: #f5f5f5
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -80,13 +86,17 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 30px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .tasksList-container h3 {
   display: inline;
   font-size: 16px;
   text-align: left;
+}
+
+.landing-text {
+  color: #fff;
 }
 
 /* Forms */
@@ -207,7 +217,7 @@ h1 {
 }
 
 .hh-dashboard-container .greeting span {
-  color:#ffab40;
+  color:#4f9908;
 }
 
 .hh-card-text {
@@ -239,13 +249,8 @@ h1 {
   margin:20px auto
 }
 
-.newHouse span {
-  color:#fff;
-  cursor:auto;
-}
-
-.newHouse #houseID {
-  cursor:auto;
+#houseID {
+  color: #4f9908;
 }
 
 .newHouse #create-house-button {
@@ -256,6 +261,10 @@ h1 {
   text-align: left;
   margin-left:-20px;
   font-style: italic;
+}
+
+.month-btn {
+  margin: 0 10px 0 0;
 }
 
 .roommates {
@@ -287,6 +296,7 @@ h1 {
   bottom:0;
   width:100%;
   margin:0 auto;
+  padding: 10px;
 }
 
 .footer ul {
@@ -345,19 +355,30 @@ input[type=checkbox] {
 
 .tasksList-container .assignee {
   display:inline-block;
-  width:120px;
   font-weight: bold;
+}
+
+.tasksList-container .assignedBy {
+  display:inline-block;
+  font-size: 75%;
 }
 
 .tasksList-container .dueDate {
   display:inline-block;
-  width:100px;
   font-style: italic;
 }
 
 .tasksList-container .description {
   display:inline-block;
-  width:150px;
+}
+
+.tasksList-container .taskHeader{
+  display:inline-block;
+  font-weight: bold;
+}
+
+.tasksList-container li {
+  display: block;
 }
 
 .issuesListContainer li {
@@ -385,7 +406,7 @@ input[type=checkbox] {
 }
 
 .hh-issues-form-overlay {
-  margin-top: 60px;
+  margin-top: 10px;
   background:rgba(255,255,255, 0.9);
   border-radius: 5px;
   padding:10px;
@@ -405,7 +426,6 @@ input[type=checkbox] {
 }
 
 .hh-expense-small-box {
-  min-width: 250px;
   overflow:auto;
 }
 
@@ -477,10 +497,9 @@ input[type=checkbox] {
   display: flex;
     -webkit-flex-direction: column;
   flex-direction: column;
-
+}
 
 .mdl-textfield--expandable {
   width: auto;
 }
 
-}
