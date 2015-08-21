@@ -1,0 +1,30 @@
+<div class="mdl-grid">
+  <div class="shoppingList-container mdl-cell mdl-cell--5-col hh-form-overlay">  <!-- mdl-cell--middle  -->
+    <div class="hh-form">
+      <h1>Household Items Needed</h1>
+      <hr>
+      <form class="itemForm" name="itemForm" ng-submit='addShoppingItem()'>
+        <input id="shoppingItemField" type='text' name="userShoppingItem" ng-model='shoppingText' placeholder='enter item to purchase' required>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored #hh-issue-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="tasksList-container hh-form-overlay mdl-cell mdl-cell--5-col">
+    <h1>Shopping List</h1>
+    <hr>
+      <ul>
+        <li ng-repeat="item in allShoppingItems track by $index">
+          {{item.date}} - {{item.text}}
+          <div><p>(Added by: {{item.addedBy}})</p></div>
+          <form name="removeButton" ng-submit='removeShoppingItem(item.text)'>
+            <button>Purchased</button>
+            <hr>
+          </form>
+        </li>
+        <li ng-if="allShoppingItems.length === 0">
+          <strong>Nothing to buy!</strong>
+        </li>
+      </ul>
+  </div>
+</div>

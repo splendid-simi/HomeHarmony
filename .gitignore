@@ -7,10 +7,13 @@
 ._*
 
 # firebase database information
-./client/lib/firebaseLink.js
+client/lib/firebaseLink.js
 
 # Dependencies
 client/bower_components/
 node_modules/
 spec/
 
+#floo
+.floo
+.flooignore

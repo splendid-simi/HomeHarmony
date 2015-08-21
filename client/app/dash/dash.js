@@ -4,12 +4,12 @@
  */
 angular.module('homeHarmony.dash', [])
 
-.controller('dashCtrl', function ($scope,UserAuth) {
+.controller('dashCtrl', function ($rootScope,UserAuth) {
   currentHouseId = localStorage.getItem('currentHouseId');
   currentUserId = localStorage.getItem("currentUserId");
 
   // Unauthorizes user
-  $scope.logOut = function() {
+  $rootScope.logOut = function() {
     console.log('Logging out.');
     UserAuth.logout();
   };

@@ -6,17 +6,16 @@
       <form name="tasksForm" class="hh-form" ng-submit='tasks.addTask()'>
         <div>
           <label>Task:</label>
-          <input type='text' id="newTask" name="task" ng-model='newTask' ng-minlength='4' ng-maxlength='20' placeholder='Enter the new task' required>
+          <input type='text' id="newTask" name="task" ng-model='newTask' ng-minlength='4' ng-maxlength='140' placeholder='Enter the new task' required>
 
             <div ng-messages="tasksForm.task.$error" role="alert" class="form-error-active">
-              <div ng-message="required">enter a task</div>
-              <div ng-message-exp="['minlength', 'maxlength']">Your task must be between 4 and 20 characters</div>
+              <div ng-message-exp="['minlength', 'maxlength']">Your task must be between 4 and 140 characters</div>
             </div>
 
             <div>
               <label for="selectRoommate">Assignee:</label>
               <select name="selectRoommate"  value='Select Roommate' ng-model='newTaskDoer' required>
-                <!-- option selected disabled disables user from selection the option tag --> 
+                <!-- option selected disabled disables user from selection the option tag -->
                 <option selected disabled>Select Roommate</option>
                 <option name="taskDoer" ng-repeat="roommate in houseMemberArr track by $index ">{{roommate}}</option>
               </select>
@@ -24,7 +23,7 @@
 
             <div>
               <label for="newTaskDueDate">Due Date:</label>
-              <!-- min requires date to be greater than or equal to today's date --> 
+              <!-- min requires date to be greater than or equal to today's date -->
               <input type="date" name="TaskDueDate" ng-model='newTaskDueDate' min='{{tasks.currentDate | date:"yyyy-MM-dd"}}' required>
             </div>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add Task</button>
@@ -37,18 +36,23 @@
       <hr style="width:250px">
       <h3>Current Tasks:</h3>
         <ul>
-          <li ng-repeat="task in tasks.taskArr">
-            <!-- ng-click event is triggered when a task is checked off --> 
-            <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
-            <span class="assignee">{{task.doer}}</span>
-            <span class="description">{{task.description}} </span>
-            <span class="dueDate">{{task.dueDateFormat}} </span>
-          </li>
+          <ul>
+            <li ng-repeat="task in tasks.taskArr">
+              <!-- ng-click event is triggered when a task is checked off -->
+              <input type="checkbox" name="checkTask" ng-click="tasks.checkTask(task)">
+              <span class="assignee">{{task.doer}}</span>
+              <span class="dueDate">{{task.dueDateFormat}}</span>
+              <span class="assignedBy">(Assigned by: {{task.assignedBy}})</span>
+              <p></p>
+              <span class="description">{{task.description}}</span>
+              <hr>
+            </li>
+          </ul>
         </ul>
       <h3>Completed Tasks:</h3>
       <ul>
         <li ng-repeat="task in tasks.compTaskArr">
-          <!-- task doer and description must be within the same element to apply strikethrough --> 
+          <!-- task doer and description must be within the same element to apply strikethrough -->
             <span class="strike">{{task.doer}} {{task.description}}</span>
         </li>
         <li ng-if="taskArr.length == 0">
