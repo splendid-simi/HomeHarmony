@@ -84,14 +84,6 @@ angular.module('homeHarmony.newHouse', ['firebase'])
 
         $state.reload();
       }
-
-      localStorage.getItem("currentHouseId");
-      localStorage.setItem("currentHouseId", null);
-      db.child('users').child(currentUserId).update({
-        'house': null
-      });
-      // redirect to dashboard
-      $state.go('dash.default');
     },
     function (errorObject) {
       console.log("The read failed: " + errorObject.code);
