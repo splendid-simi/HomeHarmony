@@ -42,7 +42,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
           }
         }
       // redirect to dashboard
-      $state.go('dash.default');
+        $state.go('dash.default');
       }
     },
     function (errorObject) {
@@ -51,26 +51,23 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   };
 
   $scope.leaveHouse = function() {
-    $('#leaveHouseID');
     var leaveHouseKey = localStorage.getItem("currentHouseId");
 
-    // query database to find desired house
     db.once("value", function(snapshot) {
-      var house = snapshot.val().houses[leaveHouseKey];
-      if(house.houseMembers.length === 1) {
-        db.child('houses').child(leaveHouseKey).remove();
+      if(snapshot.val().houses[leaveHouseKey]) {
+        var house = snapshot.val().houses[leaveHouseKey];
+
+        if(house.houseMembers.length === 1) {
+          db.child('houses').child(leaveHouseKey).remove();
+        }
+
+        localStorage.removeItem("currentHouseId");
+        db.child('users').child(currentUserId).update({
+          'house': null
+        });
+
+        $state.reload();
       }
-      
-      localStorage.getItem("currentHouseId");
-      localStorage.setItem("currentHouseId", null);
-      db.child('users').child(currentUserId).update({
-        'house': null
-      });
-      // redirect to dashboard
-      $state.go('dash.default');
-    },
-    function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
     });
   };
 
