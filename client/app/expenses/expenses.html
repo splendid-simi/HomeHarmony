@@ -59,7 +59,7 @@
      <ul>
        <li ng-repeat="userDue in userExpensesArr">
         <!-- <form ng-if="expense.paid === false" name='payExpenseForm' ng-submit='payExpense(expense.name)'> -->
-          {{userDue.name}} - Due: {{userDue.y}} <!--<button style="padding: 0 5px;">I paid</button>-->
+          {{userDue.name}} - Due: {{userDue.y | currency}} <!--<button style="padding: 0 5px;">I paid</button>-->
         <!-- </form> -->
        </li>
        
