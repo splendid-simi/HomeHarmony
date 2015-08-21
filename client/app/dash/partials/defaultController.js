@@ -34,7 +34,7 @@ angular.module('homeHarmony.default', ['firebase'])
     // Retrieve data from the database for the current house
     expensesDb = snapshot.val().houses[currentHouseId].expenses;
     issuesDb = snapshot.val().houses[currentHouseId].issues;
-    usersInHouse = snapshot.val().houses[currentHouseId].houseMembers;  //memberid: {dues:, email:}  
+    usersInHouse = snapshot.val().houses[currentHouseId].houseMembers;  //memberid: {dues:, email:}
     tasksDb = snapshot.val().houses[currentHouseId].tasks;
     usersDb = snapshot.val().users;
     shoppingDb = snapshot.val().houses[currentHouseId].shoppingList;
@@ -68,24 +68,24 @@ angular.module('homeHarmony.default', ['firebase'])
       $scope.issuesArr = issuesArr;
     });
     for (var user in usersInHouse) {
-      console.log(usersInHouse[user]);
       usersEmailArr.push(usersInHouse[user].email);
       usersKeysArr.push(user);
     }
 
     for (var i=0; i<usersEmailArr.length; i++) {
-      console.log('email',usersEmailArr[i]);
       DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId) {
-        console.log('test',userObj);
         userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
         userLastInit = userObj.lastname[0].toUpperCase();
         //usersArr.push(userFirst+' '+userLastInit);
       }, usersDb);
     }
 
-    for(var i=0; i<usersKeysArr.length; i++) {
-      usersArr.push(usersDb[usersKeysArr[i]].firstname + ' ' + usersDb[usersKeysArr[i]].lastname);
-    }
+    for (var i=0; i < usersKeysArr.length; i++) {
+      usersArr.push({
+        name: usersDb[usersKeysArr[i]].firstname + ' ' + usersDb[usersKeysArr[i]].lastname,
+        email: usersDb[usersKeysArr[i]].email
+      });
+    };
 
     // Execute only after usersArr is ready
     $q.all(usersArr).then(function() {
