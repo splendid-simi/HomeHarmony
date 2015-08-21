@@ -13,6 +13,7 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   currentUserFirstName = localStorage.getItem("currentUserFirstName");
   currentUserLastName = localStorage.getItem("currentUserLastName");
   currentUserEmail = localStorage.getItem("currentUserEmail");
+  currentUserName = localStorage.getItem("currentUserName");
   $scope.currentHouseId = localStorage.getItem("currentHouseId");
 
   $scope.joinHouse = function() {
@@ -67,26 +68,27 @@ angular.module('homeHarmony.newHouse', ['firebase'])
   };
 
   $scope.leaveHouse = function() {
-    var leaveHouseKey = localStorage.getItem("currentHouseId");
+    var currentHouseKey = localStorage.getItem("currentHouseId");
 
     db.once("value", function(snapshot) {
-      if(snapshot.val().houses[leaveHouseKey]) {
-        var house = snapshot.val().houses[leaveHouseKey];
+      // If the user belongs to a house
+        var house = snapshot.val().houses[currentHouseKey];
+        var houseMembers = snapshot.val().houses[currentHouseKey].houseMembers;
 
-        if(house.houseMembers.length === 1) {
-          db.child('houses').child(leaveHouseKey).remove();
+        if(Object.keys(houseMembers).length === 1) {
+          db.child('houses').child(currentHouseKey).remove();
+        } else {          
+          db.child('houses').child(currentHouseKey).remove();
+          db.child('users').child(currentUserId).update({
+            'house': null
+          });
         }
 
         localStorage.removeItem("currentHouseId");
-        db.child('users').child(currentUserId).update({
-          'house': null
-        });
-
+        console.log($rootScope.usersArr, 'rootscope');
+        console.log(currentUserName);
+        $rootScope.usersArr.splice($rootScope.usersArr.indexOf(currentUserName), 1);
         $state.reload();
-      }
-    },
-    function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
     });
   };
 
