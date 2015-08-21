@@ -40,7 +40,10 @@ angular.module('homeHarmony.expenses', ['firebase'])
     .then($scope.updateEnabledMonths);
 
     $scope.expensesForCurrentYear
-    .$watch($scope.updateEnabledMonths);
+    .$watch(function() {
+      $scope.updateEnabledMonths();
+      $scope.showExpenses();
+    });
   };
 
   $scope.monthChange = function(month) {
@@ -144,8 +147,6 @@ angular.module('homeHarmony.expenses', ['firebase'])
     if( $scope.selectedYear !== prevSelectedYear ) {
       $scope.yearChange();
     }
-
-    $scope.showExpenses($scope.selectedMonth, $scope.selectedYear);
 
     $('#expenseName').val('');
     $('#expenseCost').val('');
