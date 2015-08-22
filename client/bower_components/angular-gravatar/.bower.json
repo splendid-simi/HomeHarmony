@@ -40,6 +40,10 @@
   },
   "_source": "git://github.com/wallin/angular-gravatar.git",
   "_target": "~0.4.1",
+<<<<<<< HEAD
   "_originalSource": "angular-gravatar",
   "_direct": true
+=======
+  "_originalSource": "angular-gravatar"
+>>>>>>> deploy
 }
