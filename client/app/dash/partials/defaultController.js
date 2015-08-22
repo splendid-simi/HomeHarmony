@@ -16,7 +16,7 @@ angular.module('homeHarmony.default', ['firebase'])
   localStorage.getItem("currentUserName").slice(1);
   $scope.currentDate = new Date();
 
-  $scope.closeDrawer = function() {
+  $rootScope.closeDrawer = function() {
     $('.mdl-layout__drawer').removeClass('is-visible');
   };
 
