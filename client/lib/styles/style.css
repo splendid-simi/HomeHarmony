@@ -4,7 +4,15 @@ html {
 	color: #000;
 	font-size: 1em;
 	line-height: 1.4;
+  font-family: 'helvetica neue' !important;
+
   background-color: #f5f5f5
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 body {
@@ -25,6 +33,10 @@ body {
 ::selection {
   background: #b3d4fc;
   text-shadow: none;
+}
+
+.logged-out .mdl-layout__drawer-button {
+  display: none;
 }
 
 hr {
@@ -74,19 +86,102 @@ li {
 }
 
 h1, h2, h3, h4, h5, h6 {
- font-family: 'Open Sans Condensed', sans-serif;
- font-weight: 300;
+ font-weight: 100;
 }
 
 h1 {
-  font-size: 30px;
-  margin-bottom: 0;
+  margin: 0;
+}
+
+h4 {
+  font-weight: 300;
+}
+
+.circleButton {
+  font-color:solid green;
+  outline: 0;
+  width: 70px;
+  height: 70px;
+  border: 1px solid green;
+  background: none;
+  border-radius: 50%;
+  padding : 20px;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+}
+
+#yearSelector {
+  width: 200px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.month-btns {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.circleButton:disabled {
+  border-color: grey;
+}
+
+.circleButton h4 {
+  margin: 0;
+}
+
+.table {
+  font-family: 'helvetica neue';
+  margin: 0px auto;
+  max-width: 90%;
+  /*padding: 0px 10px;*/
+}
+
+.table tr, .circleButton {
+  transition: 0.5s ease-in background-color;
+}
+
+.table tr:hover , .circleButton:not(:disabled):hover{
+  
+  background-color: #CEDFCF;
+
 }
 
 .tasksList-container h3 {
   display: inline;
   font-size: 16px;
   text-align: left;
+}
+
+.landing-text {
+  color: #fff;
+}
+
+.mdl-navigation__link {
+  cursor: pointer;
 }
 
 /* Forms */
@@ -107,10 +202,20 @@ h1 {
   height:80%;
 }
 
+.main_title {
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.hh-issue-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .hh-form,
 .tasksForm-container,
 .tasksList-container {
-  padding-left: 20px;
   text-align: left;
 }
 
@@ -120,12 +225,11 @@ h1 {
 }
 
 .hh-form input,
-.hh-form selec {
+.hh-form select {
+  width: 100%;
   display: block;
-  width:200px;
-  height:20px;
   padding:2px;
-  margin:5px;
+  margin:5px 0px;
 }
 
 /* to allow add roommate input and button to be on the same line on the form */
@@ -207,7 +311,7 @@ h1 {
 }
 
 .hh-dashboard-container .greeting span {
-  color:#ffab40;
+  color:#4f9908;
 }
 
 .hh-card-text {
@@ -239,13 +343,8 @@ h1 {
   margin:20px auto
 }
 
-.newHouse span {
-  color:#fff;
-  cursor:auto;
-}
-
-.newHouse #houseID {
-  cursor:auto;
+#houseID {
+  color: #4f9908;
 }
 
 .newHouse #create-house-button {
@@ -256,6 +355,10 @@ h1 {
   text-align: left;
   margin-left:-20px;
   font-style: italic;
+}
+
+.month-btn {
+  margin: 15px 15px 10px 0;
 }
 
 .roommates {
@@ -287,6 +390,8 @@ h1 {
   bottom:0;
   width:100%;
   margin:0 auto;
+  padding: 10px;
+  z-index: 1000;
 }
 
 .footer ul {
@@ -345,19 +450,30 @@ input[type=checkbox] {
 
 .tasksList-container .assignee {
   display:inline-block;
-  width:120px;
   font-weight: bold;
+}
+
+.tasksList-container .assignedBy {
+  display:inline-block;
+  font-size: 75%;
 }
 
 .tasksList-container .dueDate {
   display:inline-block;
-  width:100px;
   font-style: italic;
 }
 
 .tasksList-container .description {
   display:inline-block;
-  width:150px;
+}
+
+.tasksList-container .taskHeader{
+  display:inline-block;
+  font-weight: bold;
+}
+
+.tasksList-container li {
+  display: block;
 }
 
 .issuesListContainer li {
@@ -381,11 +497,12 @@ input[type=checkbox] {
 /* issues */
 
 .issues-container {
+  position: relative;
   text-align: left;
 }
 
 .hh-issues-form-overlay {
-  margin-top: 60px;
+  margin-top: 10px;
   background:rgba(255,255,255, 0.9);
   border-radius: 5px;
   padding:10px;
@@ -393,6 +510,10 @@ input[type=checkbox] {
 
 .issues-container li {
   margin-left: -30px;
+}
+
+.hh-form {
+  position: relative;
 }
 
 .hh-form .issuesForm input {
@@ -405,7 +526,6 @@ input[type=checkbox] {
 }
 
 .hh-expense-small-box {
-  min-width: 250px;
   overflow:auto;
 }
 
@@ -477,10 +597,9 @@ input[type=checkbox] {
   display: flex;
     -webkit-flex-direction: column;
   flex-direction: column;
-
+}
 
 .mdl-textfield--expandable {
   width: auto;
 }
 
-}

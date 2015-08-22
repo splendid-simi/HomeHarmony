@@ -1,80 +1,60 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <a ui-sref="dash.default" href><img src="assets/HHlogoWhite.png" class="hh-logo" alt="Home Harmony Logo"></img><span style="color:white">ome Harmony</span></a>
-      <div class="mdl-layout-spacer"></div>
-        <!-- Navigation -->
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" ng-click="logOut()" href>Logout</a>
-        </nav>
-    </div>
-  </header>
+<div class="mdl-grid">
 
-  <div class="mdl-layout__drawer">
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" ui-sref="dash.default"><img src="assets/home.png" class="nav-icon" alt="home icon" href>Home</a>
-      <a class="mdl-navigation__link" ui-sref="dash.tasks"><img src="assets/list.png" class="nav-icon" alt="list icon" href>Tasks</a>
-      <a class="mdl-navigation__link" ui-sref="dash.expenses"><img src="assets/expense.png" class="nav-icon" alt="expense icon" href>Expenses</a>
-      <a class="mdl-navigation__link" ui-sref="dash.issues"><img src="assets/chat.png" class="nav-icon" alt="chat icon" href>Issues</a>
-    </nav>
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="newHouse hh-form">
+      <h1>Create a New House</h1>
+      <hr>
+       <p>Create a new house for you and your roommates:</p>
+      <form name="newHouseForm" ng-submit='newHouseReg()'>
+        <!-- Colored mini FAB button -->
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="create-house-button" ng-disabled="uniqueHouseIdExists()">Create House</button>
+      </form>
+    </div>
   </div>
 
- <main class="mdl-layout__content hh-houseRegistration">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
-      <div class="newHouse hh-form">
-        <h1>Create a New House</h1>
-        <hr>
-         <p>Create a new house for you and your roommates:</p>
-        <form name="newHouseForm" ng-submit='newHouseReg()'>
-          <!-- Colored mini FAB button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="create-house-button" ng-disabled="uniqueHouseIdExists()">Create House</button>
-        </form>
-      </div>
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="newHouse hh-form">
+      <h1>Join a House</h1>
+      <hr>
+      <form name="joinHouseForm" ng-submit='joinHouse()'>
+        <input id="joinHouseID" type='text' ng-model='chosenHouse' placeholder='enter house key' required>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Join House</button>
+      </form>
     </div>
+  </div>
 
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
-      <div class="newHouse hh-form">
-        <h1>Join a House</h1>
-        <hr>
-        <form name="joinHouseForm" ng-submit='joinHouse()'>
-          <input id="joinHouseID" type='text' ng-model='chosenHouse' placeholder='enter house key' required>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Join House</button>
-        </form>
-      </div>
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
+    <div class="newHouse hh-form">
+      <h1>Invite Roommate to House</h1>
+      <hr>
+      <form name="newHouseForm" ng-submit='addRoommate()'>
+        <p ng-hide="uniqueHouseIdDoesNotExist()">Have roommates register with House ID:</p>
+        <span id="houseID" ng-show="uniqueHouseIdExists()">{{currentHouseId}}</span>
+        <span id="houseID" ng-show="uniqueHouseIdDoesNotExist()">{{'Please join or create a house.'}}</span>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="leaveHouse()" ng-show="uniqueHouseIdExists()">Leave House</button>
+      </form>
     </div>
- 
+  </div>
 
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-tablet mdl-cell--6-phone hh-form-overlay">
-      <div class="newHouse hh-form">
-        <h1>Invite Roommate to House</h1>
-        <hr>
-        <form name="newHouseForm" ng-submit='addRoommate()'>
-          <p>Have roommates register with House ID:</p>
-          <div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="houseID"><span>{{currentHouseId || "No House Exists"}}</span></div>
-        </form>
-      </div>
-    </div>
-  </main>
+</div>
 
-  <footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px;">
-    <div class="footer-nav">
-      <ul>
-        <li><a ui-sref="dash.default" href>Dashboard |</a></li>
-        <li><a ui-sref="newHouse" href>Create a House |</a></li>
-        <li><a ui-sref="dash.tasks" href>Tasks |</a></li>
-        <li><a ui-sref="dash.expenses" href>Expenses |</a><li>
-        <li><a ui-sref="dash.issues" href>Issues</a></li>
-      </ul>
-    </div>
-    <div class="footer-nav">
-      <ul>
-        <li>© 2015 Designed and Developed By</li>
-        <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu |</a></li>
-        <li><a href="https://github.com/MetaEvan" target="_blank">Evan Mencke |</a></li>
-        <li><a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh |</a><li>
-        <li><a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki Bernardo</a></li>
-      </ul>
-    </div>
-  </footer>
-</main> 
+<footer class="mdl-mini-footer footer" style="position:fixed; bottom: 0px;">
+  <div class="footer-nav">
+    <ul>
+      <li><a ui-sref="dash.default" href>Dashboard |</a></li>
+      <li><a ui-sref="newHouse" href>Create a House |</a></li>
+      <li><a ui-sref="dash.tasks" href>Tasks |</a></li>
+      <li><a ui-sref="dash.expenses" href>Expenses |</a><li>
+      <li><a ui-sref="dash.issues" href>Issues</a></li>
+    </ul>
+  </div>
+  <div class="footer-nav">
+    <ul>
+      <li>© 2015 Designed and Developed By</li>
+      <li><a href="https://github.com/femi-saliu" target="_blank">Femi Saliu |</a></li>
+      <li><a href="https://github.com/MetaEvan" target="_blank">Evan Mencke |</a></li>
+      <li><a href="https://github.com/tgreenhalgh" target="_blank">Thomas Greenhalgh |</a><li>
+      <li><a href="https://github.com/msarnicki" target="_blank">Melinda Sarnicki Bernardo</a></li>
+    </ul>
+  </div>
+</footer>
