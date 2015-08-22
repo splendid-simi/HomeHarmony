@@ -16,6 +16,10 @@ angular.module('homeHarmony.default', ['firebase'])
   localStorage.getItem("currentUserName").slice(1);
   $scope.currentDate = new Date();
 
+  $rootScope.closeDrawer = function() {
+    $('.mdl-layout__drawer').removeClass('is-visible');
+  };
+
   // Initialize variables
   var expensesDb, expensesArr, dataObj, issuesDb, issuesArr, shoppingDb;
   var usersDb, usersArr, usersEmailArr, tasksDb, usersKeysArr, tasksArr, tasksNotCompletedCount, itemsNotBoughtCount, shoppingArr;
@@ -31,8 +35,14 @@ angular.module('homeHarmony.default', ['firebase'])
     usersEmailArr = [];
     shoppingArr = [];
     usersKeysArr = [];
+
+    var currentDate = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = String(currentDate.getFullYear());
+    var month = months[currentDate.getMonth()];
+
     // Retrieve data from the database for the current house
-    expensesDb = snapshot.val().houses[currentHouseId].expenses;
+    expensesDb = snapshot.val().houses[currentHouseId].expenses[year][month]; //new schema
     issuesDb = snapshot.val().houses[currentHouseId].issues;
     usersInHouse = snapshot.val().houses[currentHouseId].houseMembers;  //memberid: {dues:, email:}
     tasksDb = snapshot.val().houses[currentHouseId].tasks;
@@ -40,10 +50,11 @@ angular.module('homeHarmony.default', ['firebase'])
     shoppingDb = snapshot.val().houses[currentHouseId].shoppingList;
 
     // Build expensesArr so we can graph the expenses
-    for (var expense in expensesDb) {
+    for (var expense in expensesDb) {           //ensure that dataObj is contructed properly with the new schema
       dataObj = {};
       dataObj.name = expensesDb[expense].expenseName;
       dataObj.y = expensesDb[expense].cost;
+      dataObj.memberPaid = usersDb[expensesDb[expense].memberPaid].firstname + ' ' + usersDb[expensesDb[expense].memberPaid].lastname;
       expensesArr.push(dataObj);
     }
     // Execute only after expensesArr is ready
@@ -68,12 +79,14 @@ angular.module('homeHarmony.default', ['firebase'])
       $scope.issuesArr = issuesArr;
     });
     for (var user in usersInHouse) {
+
       usersEmailArr.push(usersInHouse[user].email);
       usersKeysArr.push(user);
     }
 
     for (var i=0; i<usersEmailArr.length; i++) {
       DButil.getUserInfoFromEmail(usersEmailArr[i], function(userObj, userId) {
+
         userFirst = userObj.firstname[0].toUpperCase() + userObj.firstname.slice(1);
         userLastInit = userObj.lastname[0].toUpperCase();
         //usersArr.push(userFirst+' '+userLastInit);
