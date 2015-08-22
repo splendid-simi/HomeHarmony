@@ -207,6 +207,12 @@ h4 {
   display: inline-block;
 }
 
+.hh-issue-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .hh-form,
 .tasksForm-container,
 .tasksList-container {
@@ -504,6 +510,10 @@ input[type=checkbox] {
 
 .issues-container li {
   margin-left: -30px;
+}
+
+.hh-form {
+  position: relative;
 }
 
 .hh-form .issuesForm input {
