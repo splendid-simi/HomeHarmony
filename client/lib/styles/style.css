@@ -165,7 +165,7 @@ h4 {
 }
 
 .table tr:hover , .circleButton:not(:disabled):hover{
-  
+
   background-color: #CEDFCF;
 
 }
@@ -425,6 +425,7 @@ h4 {
 .tasksForm-container {
   max-height:450px;
   overflow:auto;
+  padding: 20px;
 }
 
 .tasksForm div {
