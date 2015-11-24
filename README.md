@@ -53,7 +53,7 @@ DB = {
 
 See [CONTRIBUTING.md](https://github.com/unexpected-lion/ourglass/blob/master/contributing.md) for contribution guidelines.
 
-Expanded on the app located here:
+Expanded on the app located [here](https://github.com/pleasant-puente/pleasant-puente)
 
 Additions done by:  [Rodo Yabut](https://github.com/rodocite), [Quinton Aiken](https://github.com/qaiken), [Raghav Abboy](https://github.com/RaghavAbboy), and [Kalisa Falzone](https://github.com/KalisaFalzone)
 
